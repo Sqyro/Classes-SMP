@@ -3,7 +3,14 @@
 	"package": "sqyro.classessmp.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ServerPlayerClassAttachment"
+		"ServerPlayerClassAttachment",
+		"ServerPacketMixin",
+		"LivingEntityMixin",
+		"MobMixin",
+		"ClientInputAccessor",
+		"ClientPlayerMixin",
+		"KeyboardInputMixin",
+		"MouseHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

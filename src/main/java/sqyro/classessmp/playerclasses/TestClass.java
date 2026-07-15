@@ -26,4 +26,14 @@ public class TestClass extends PlayerClass {
     public void onAttack(Entity Target) {
 
     }
+
+    @Override
+    public void onKeybind1() {
+
+    }
+
+    @Override
+    public void onKeybind2() {
+
+    }
 }

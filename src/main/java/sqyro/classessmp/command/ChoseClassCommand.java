@@ -9,11 +9,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.PlayerClassHolder;
-import sqyro.classessmp.core.SavedData.ModSavedData;
+import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
 import sqyro.classessmp.playerclasses.PlayerClasses;
-
-import java.awt.*;
 
 public class ChoseClassCommand {
     public static void register(CommandDispatcher<CommandSourceStack> Dispatcher) {
@@ -36,7 +34,7 @@ public class ChoseClassCommand {
                     ((PlayerClassHolder) Player).setSavedClassID(ID);
                     ((PlayerClassHolder) Player).setPlayerClass(playerClass);
 
-                    PlayerClassSavedData savedData = ModSavedData.get(Player.level().getServer().overworld());
+                    PlayerClassSavedData savedData = PlayerClassSavedDataGetter.get(Player.level().getServer().overworld());
                     savedData.setClass(Player.getUUID(), ID);
 
                     return 1;

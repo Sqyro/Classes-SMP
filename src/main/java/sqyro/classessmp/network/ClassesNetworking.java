@@ -1,0 +1,36 @@
+package sqyro.classessmp.network;
+
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.level.ServerPlayer;
+import sqyro.classessmp.core.PlayerClass;
+import sqyro.classessmp.core.PlayerClassHolder;
+
+public class ClassesNetworking {
+    public static void registerServer() {
+        PayloadTypeRegistry.playC2S().register(Keybind1Packet.TYPE, Keybind1Packet.STREAM_CODEC);
+        PayloadTypeRegistry.playC2S().register(Keybind2Packet.TYPE, Keybind2Packet.STREAM_CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.TYPE, (payload, context) -> {
+            context.server().execute(() -> {
+                ServerPlayer Player = context.player();
+                PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
+
+                if (playerClass != null) {
+                    playerClass.onKeybind1();
+                }
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(Keybind2Packet.TYPE, (payload, context) -> {
+            context.server().execute(() -> {
+                ServerPlayer Player = context.player();
+                PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
+
+                if (playerClass != null) {
+                    playerClass.onKeybind2();
+                }
+            });
+        });
+    }
+}

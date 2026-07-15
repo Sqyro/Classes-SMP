@@ -11,8 +11,9 @@ import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.command.ChoseClassCommand;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.PlayerClassHolder;
-import sqyro.classessmp.core.SavedData.ModSavedData;
+import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
+import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 
 public class Events {
@@ -27,6 +28,13 @@ public class Events {
     private static void registerServerTickEvent() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer Player : server.getPlayerList().getPlayers()) {
+                if (Player.hasEffect(ClassesEffects.FREEZING)) {
+                    Player.setDeltaMovement(0, 0, 0);
+                    Player.setJumping(false);
+                    Player.fallDistance = 0;
+                    Player.hurtMarked = true;
+                }
+
                 PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
 
                 if (playerClass != null) {
@@ -39,7 +47,7 @@ public class Events {
 
     private static void registerPlayerJoinEvent() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            String classID = ModSavedData.get(handler.getPlayer().level().getServer().overworld()).getClass(handler.getPlayer().getUUID());
+            String classID = PlayerClassSavedDataGetter.get(handler.getPlayer().level().getServer().overworld()).getClass(handler.getPlayer().getUUID());
 
             PlayerClassHolder holder = (PlayerClassHolder) handler.getPlayer();
 
@@ -55,7 +63,7 @@ public class Events {
 
     private static void registerPlayerRespawnEvent() {
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            PlayerClassSavedData savedData = ModSavedData.get(newPlayer.level().getServer().overworld());
+            PlayerClassSavedData savedData = PlayerClassSavedDataGetter.get(newPlayer.level().getServer().overworld());
 
             PlayerClassHolder holder = (PlayerClassHolder) newPlayer;
 
@@ -77,8 +85,7 @@ public class Events {
                 return InteractionResult.PASS;
             }
 
-            PlayerClass playerClass =
-                    ((PlayerClassHolder)serverPlayer).getPlayerClass();
+            PlayerClass playerClass = ((PlayerClassHolder)serverPlayer).getPlayerClass();
 
             if (playerClass != null) {
                 playerClass.onAttack(entity);

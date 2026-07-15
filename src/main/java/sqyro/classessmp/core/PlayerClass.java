@@ -14,4 +14,6 @@ public abstract class PlayerClass {
 
     public abstract void onTick();
     public abstract void onAttack(Entity Target);
+    public abstract void onKeybind1();
+    public abstract void onKeybind2();
 }
