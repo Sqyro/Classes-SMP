@@ -8,6 +8,7 @@ import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.Events;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.PlayerClasses;
+import sqyro.classessmp.sounds.ClassesSounds;
 
 public class ClassesSMP implements ModInitializer {
 	public static final String MOD_ID = "classes-smp";
@@ -17,6 +18,7 @@ public class ClassesSMP implements ModInitializer {
 	public void onInitialize() {
 		PlayerClasses.register();
 		ClassesEffects.register();
+		ClassesSounds.register();
 
 		Events.registerEvents();
 		ClassesNetworking.registerServer();
