@@ -1,32 +1,44 @@
 package sqyro.classessmp.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import sqyro.classessmp.core.PlayerClass;
-import sqyro.classessmp.core.PlayerClassCreator;
 import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.ModSavedData;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
+import sqyro.classessmp.playerclasses.PlayerClasses;
+
+import java.awt.*;
 
 public class ChoseClassCommand {
     public static void register(CommandDispatcher<CommandSourceStack> Dispatcher) {
         Dispatcher.register(Commands.literal("choseclass")
-                .then(Commands.literal("testclass").executes(Context -> {
-                    ServerPlayer Player = Context.getSource().getPlayerOrException();
+                .then(Commands.argument("class", StringArgumentType.word()).suggests((context, builder) -> {
+                    for (String ID : PlayerClasses.getIDs()) {
+                        builder.suggest(ID);
+                    }
+                    return builder.buildFuture();
+                }).executes(context -> {
+                    ServerPlayer Player = context.getSource().getPlayerOrException();
+                    String ID = StringArgumentType.getString(context, "class");
+                    PlayerClass playerClass = PlayerClasses.create(ID, Player);
 
-                    PlayerClassHolder Holder = (PlayerClassHolder) Player;
-                    String ID = "testclass";
+                    if (playerClass == null) {
+                        context.getSource().sendFailure(Component.literal(ID + "is not a valid classname").withStyle(ChatFormatting.RED));
+                        return 0;
+                    }
 
-                    PlayerClass playerClass = PlayerClassCreator.createClass(ID, Player);
-
-                    Holder.setSavedClassID(ID);
-                    Holder.setPlayerClass(playerClass);
+                    ((PlayerClassHolder) Player).setSavedClassID(ID);
+                    ((PlayerClassHolder) Player).setPlayerClass(playerClass);
 
                     PlayerClassSavedData savedData = ModSavedData.get(Player.level().getServer().overworld());
-
                     savedData.setClass(Player.getUUID(), ID);
+
                     return 1;
                 }))
         );

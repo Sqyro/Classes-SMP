@@ -1,6 +1,7 @@
 package sqyro.classessmp.core;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 
 public abstract class PlayerClass {
     protected final ServerPlayer Player;
@@ -9,7 +10,8 @@ public abstract class PlayerClass {
         this.Player = Player;
     }
 
-    public abstract void onTick();
-
     public abstract String getID();
+
+    public abstract void onTick();
+    public abstract void onAttack(Entity Target);
 }

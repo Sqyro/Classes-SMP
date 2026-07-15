@@ -1,0 +1,31 @@
+package sqyro.classessmp.playerclasses;
+
+import net.minecraft.server.level.ServerPlayer;
+import sqyro.classessmp.core.PlayerClass;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+public class PlayerClasses {
+    private static final Map<String, Function<ServerPlayer, PlayerClass>> CLASSES = new HashMap<>();
+
+    public static void register() {
+        CLASSES.put("testclass", TestClass::new);
+    }
+
+    public static PlayerClass create(String ID, ServerPlayer Player) {
+        Function<ServerPlayer, PlayerClass> Builder = CLASSES.get(ID);
+
+        if (Builder == null) {
+            return null;
+        }
+
+        return Builder.apply(Player);
+    }
+
+    public static Collection<String> getIDs() {
+        return CLASSES.keySet();
+    }
+}

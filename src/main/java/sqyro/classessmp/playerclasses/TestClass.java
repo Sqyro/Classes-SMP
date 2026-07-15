@@ -1,12 +1,18 @@
 package sqyro.classessmp.playerclasses;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 
 public class TestClass extends PlayerClass {
     public TestClass(ServerPlayer Player) {
         super(Player);
+    }
+
+    @Override
+    public String getID() {
+        return "testclass";
     }
 
     @Override
@@ -17,7 +23,7 @@ public class TestClass extends PlayerClass {
     }
 
     @Override
-    public String getID() {
-        return "testclass";
+    public void onAttack(Entity Target) {
+
     }
 }

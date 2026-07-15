@@ -3,25 +3,28 @@ package sqyro.classessmp.event;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.command.ChoseClassCommand;
 import sqyro.classessmp.core.PlayerClass;
-import sqyro.classessmp.core.PlayerClassCreator;
 import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.ModSavedData;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
+import sqyro.classessmp.playerclasses.PlayerClasses;
 
 public class Events {
     public static void registerEvents() {
-        registerServerTick();
-        registerPlayerJoin();
-        registerPlayerRespawn();
-        registerCommands();
+        registerServerTickEvent();
+        registerPlayerJoinEvent();
+        registerPlayerRespawnEvent();
+        registerPlayerAttackEvent();
+        registerCommandsEvent();
     }
 
-    private static void registerServerTick() {
+    private static void registerServerTickEvent() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer Player : server.getPlayerList().getPlayers()) {
                 PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
@@ -34,7 +37,7 @@ public class Events {
     }
 
 
-    private static void registerPlayerJoin() {
+    private static void registerPlayerJoinEvent() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             String classID = ModSavedData.get(handler.getPlayer().level().getServer().overworld()).getClass(handler.getPlayer().getUUID());
 
@@ -42,7 +45,7 @@ public class Events {
 
             holder.setSavedClassID(classID);
 
-            PlayerClass playerClass = PlayerClassCreator.createClass(holder.getSavedClassID(), handler.getPlayer());
+            PlayerClass playerClass = PlayerClasses.create(holder.getSavedClassID(), handler.getPlayer());
 
             if (playerClass != null) {
                 holder.setPlayerClass(playerClass);
@@ -50,7 +53,7 @@ public class Events {
         });
     }
 
-    private static void registerPlayerRespawn() {
+    private static void registerPlayerRespawnEvent() {
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             PlayerClassSavedData savedData = ModSavedData.get(newPlayer.level().getServer().overworld());
 
@@ -58,7 +61,7 @@ public class Events {
 
             holder.setSavedClassID(savedData.getClass(newPlayer.getUUID()));
 
-            PlayerClass playerClass = PlayerClassCreator.createClass(savedData.getClass(newPlayer.getUUID()), newPlayer);
+            PlayerClass playerClass = PlayerClasses.create(savedData.getClass(newPlayer.getUUID()), newPlayer);
 
             if (playerClass != null) {
                 holder.setPlayerClass(playerClass);
@@ -68,7 +71,24 @@ public class Events {
         });
     }
 
-    private static void registerCommands() {
+    private static void registerPlayerAttackEvent() {
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (!(player instanceof ServerPlayer serverPlayer)) {
+                return InteractionResult.PASS;
+            }
+
+            PlayerClass playerClass =
+                    ((PlayerClassHolder)serverPlayer).getPlayerClass();
+
+            if (playerClass != null) {
+                playerClass.onAttack(entity);
+            }
+
+            return InteractionResult.PASS;
+        });
+    }
+
+    private static void registerCommandsEvent() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ChoseClassCommand.register(dispatcher);
         });
