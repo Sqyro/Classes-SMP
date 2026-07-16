@@ -3,9 +3,9 @@ package sqyro.classessmp.core;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
+import sqyro.classessmp.network.ClassesNetworking;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public abstract class PlayerClass {
@@ -32,6 +32,7 @@ public abstract class PlayerClass {
     protected void setCooldown(String Ability, int Ticks) {
         Cooldowns.put(Ability, Player.level().getGameTime() + Ticks);
         PlayerClassSavedDataGetter.get(Player.level()).setCooldowns(Player.getUUID(), Cooldowns);
+        ClassesNetworking.sendCooldownStart(Player, Ability, Ticks);
     }
 
     protected long getCooldownTicks(String Ability) {

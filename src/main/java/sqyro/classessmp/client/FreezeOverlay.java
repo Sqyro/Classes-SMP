@@ -13,7 +13,6 @@ public class FreezeOverlay {
 
     public static void register() {
         HudRenderCallback.EVENT.register((graphics, tickDelta) -> {
-
             if (Minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON) {
                 return;
             }

@@ -11,6 +11,7 @@ import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
+import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 
 public class ChoseClassCommand {
@@ -33,6 +34,8 @@ public class ChoseClassCommand {
 
                     ((PlayerClassHolder) Player).setSavedClassID(ID);
                     ((PlayerClassHolder) Player).setPlayerClass(playerClass);
+
+                    ClassesNetworking.sendClassSync(Player);
 
                     PlayerClassSavedData savedData = PlayerClassSavedDataGetter.get(Player.level().getServer().overworld());
                     savedData.setClass(Player.getUUID(), ID);

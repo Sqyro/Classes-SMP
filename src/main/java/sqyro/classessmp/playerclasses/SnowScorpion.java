@@ -28,8 +28,8 @@ public class SnowScorpion extends PlayerClass {
     private static final String ICE_PULL_ID = "ice_pull";
     private static final String ICE_PRISON_ID = "ice_prison";
 
-    private static final int ICE_PULL_COOLDOWN_SECONDS = 10;
-    private static final int ICE_PRISON_COOLDOWN_SECONDS = 30;
+    public static final int ICE_PULL_COOLDOWN = 200;
+    public static final int ICE_PRISON_COOLDOWN = 600;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;
@@ -68,7 +68,8 @@ public class SnowScorpion extends PlayerClass {
             return;
         }
 
-        setCooldown(ICE_PULL_ID, ICE_PULL_COOLDOWN_SECONDS * 20);
+        ClassesSMP.LOGGER.info("{} of class: {} activated Ice Pull", Player.getName().getString(), this.getID());
+        setCooldown(ICE_PULL_ID, ICE_PULL_COOLDOWN);
 
         ServerLevel Level = Player.level();
         boolean hitSomething = false;
@@ -97,7 +98,6 @@ public class SnowScorpion extends PlayerClass {
             Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.ICE_PULL, SoundSource.PLAYERS, 1f, 1f);
         }
 
-        ClassesSMP.LOGGER.info("{} of class: {} activated Ice Pull", Player.getName().getString(), this.getID());
     }
 
     @Override
@@ -107,7 +107,8 @@ public class SnowScorpion extends PlayerClass {
             return;
         }
 
-        setCooldown(ICE_PRISON_ID, ICE_PRISON_COOLDOWN_SECONDS * 20);
+        ClassesSMP.LOGGER.info("{} of class {} activated Ice Prison", Player.getName().getString(), this.getID());
+        setCooldown(ICE_PRISON_ID, ICE_PRISON_COOLDOWN);
 
         ServerLevel level = Player.level();
 
@@ -137,7 +138,6 @@ public class SnowScorpion extends PlayerClass {
             level.sendParticles(ClassesParticles.ICE_PARTICLE, particlePos.x, particlePos.y, particlePos.z, 16, 0.12, 0.12, 0.12, 0.01);
         }
 
-        ClassesSMP.LOGGER.info("{} of class {} activated Ice Prison", Player.getName().getString(), this.getID());
     }
 
     private LivingEntity getEntityHit(ServerLevel Level, Player player, Vec3 StartPos, Vec3 EndPos) {

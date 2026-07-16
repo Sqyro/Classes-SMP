@@ -1,15 +1,15 @@
 package sqyro.classessmp;
 
 import net.fabricmc.api.ClientModInitializer;
-import sqyro.classessmp.client.ClassesClientNetworking;
-import sqyro.classessmp.client.ClassesHud;
-import sqyro.classessmp.client.ClassesKeyBinds;
-import sqyro.classessmp.client.FreezeOverlay;
+import sqyro.classessmp.client.*;
+import sqyro.classessmp.event.ClassesClientEvents;
 import sqyro.classessmp.particle.ParticleFactory;
 
 public class ClassesSMPClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ClientClasses.register();
+
         ClassesKeyBinds.register();
         ClassesKeyBinds.registerEvents();
 
@@ -17,7 +17,9 @@ public class ClassesSMPClient implements ClientModInitializer {
         ClassesHud.register();
 
         ParticleFactory.register();
+        AbilityIndicatorHud.register();
 
         ClassesClientNetworking.register();
+        ClassesClientEvents.registerEvents();
     }
 }

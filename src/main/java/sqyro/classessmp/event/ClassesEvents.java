@@ -17,7 +17,9 @@ import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 
-public class Events {
+public class ClassesEvents {
+    public static int ABILITY_COOLDOWN_SYNC_INTERVAL = 100;
+
     public static void registerEvents() {
         registerServerTickEvent();
         registerPlayerJoinEvent();
@@ -41,6 +43,10 @@ public class Events {
                 if (playerClass != null) {
                     playerClass.onTick();
                 }
+
+                if (Player.tickCount % ABILITY_COOLDOWN_SYNC_INTERVAL == 0) {
+                    ClassesNetworking.sendCooldownSync(Player);
+                }
             }
         });
     }
@@ -51,15 +57,16 @@ public class Events {
             String classID = PlayerClassSavedDataGetter.get(handler.getPlayer().level().getServer().overworld()).getClass(handler.getPlayer().getUUID());
 
             PlayerClassHolder holder = (PlayerClassHolder) handler.getPlayer();
-
             holder.setSavedClassID(classID);
-
             PlayerClass playerClass = PlayerClasses.create(holder.getSavedClassID(), handler.getPlayer());
 
             if (playerClass != null) {
                 playerClass.loadCooldowns(PlayerClassSavedDataGetter.get(handler.getPlayer().level()).getCooldowns(handler.getPlayer().getUUID()));
                 holder.setPlayerClass(playerClass);
             }
+
+            ClassesNetworking.sendClassSync(handler.getPlayer());
+            ClassesNetworking.sendCooldownSync(handler.getPlayer());
         });
     }
 
@@ -80,6 +87,8 @@ public class Events {
             }
 
             ClassesNetworking.sendFreezeSync(newPlayer.level(), newPlayer, false);
+            ClassesNetworking.sendClassSync(newPlayer);
+            ClassesNetworking.sendCooldownSync(newPlayer);
 
             ClassesSMP.LOGGER.info("Restored class {} for {}", savedData.getClass(newPlayer.getUUID()), newPlayer.getName().getString());
         });

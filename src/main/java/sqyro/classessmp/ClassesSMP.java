@@ -5,7 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sqyro.classessmp.effect.ClassesEffects;
-import sqyro.classessmp.event.Events;
+import sqyro.classessmp.event.ClassesEvents;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.playerclasses.PlayerClasses;
@@ -22,7 +22,7 @@ public class ClassesSMP implements ModInitializer {
 		ClassesSounds.register();
 		ClassesParticles.register();
 
-		Events.registerEvents();
+		ClassesEvents.registerEvents();
 		ClassesNetworking.registerServer();
 
 		LOGGER.info("Hello Fabric world!");
