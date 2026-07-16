@@ -3,23 +3,33 @@ package sqyro.classessmp.playerclasses;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.effect.ClassesEffects;
+import sqyro.classessmp.particle.ClassesParticles;
+import sqyro.classessmp.sounds.ClassesSounds;
 
 import java.util.List;
 import java.util.Optional;
 
 public class SnowScorpion extends PlayerClass {
-    private static final double ICE_PRISON_RANGE = 20.0;
-    private static final int ICE_PRISON_HIT_EFFECT_DURATION_SECONDS = 5;
-    private static final int ICE_PRISON_MISS_EFFECT_DURATION_SECONDS = 1;
+    private static final int ABILITY_MISS_EFFECT_DURATION_SECONDS = 1;
+
+    private static final double ICE_PULL_STRENGTH = 0.7;
+    private static final double ICE_PULL_RANGE = 5;
+
+    private static final double ICE_PRISON_RANGE = 40.0;
+    private static final int ICE_PRISON_HIT_EFFECT_DURATION_SECONDS = 2;
 
     public SnowScorpion(ServerPlayer Player) {
         super(Player);
@@ -42,6 +52,33 @@ public class SnowScorpion extends PlayerClass {
 
     @Override
     public void onKeybind1() {
+        ServerLevel Level = Player.level();
+        boolean hitSomething = false;
+
+        AABB Area = Player.getBoundingBox().inflate(ICE_PULL_RANGE);
+
+        for (int i = 0; i < ICE_PULL_RANGE * 50; i++) {
+            Vec3 Offset = new Vec3(Level.random.nextDouble() * 2 - 1, Level.random.nextDouble() * 2 - 1, Level.random.nextDouble() * 2 - 1);
+            Offset = Offset.normalize().scale(Level.random.nextDouble() * ICE_PULL_RANGE);
+            Level.sendParticles(ClassesParticles.ICE_STORM_PARTICLE, Player.getX() + Offset.x, Player.getY() + 1 + Offset.y, Player.getZ() + Offset.z, 1, 0, 0, 0, 0);
+        }
+
+        List<LivingEntity> Targets = Level.getEntitiesOfClass(LivingEntity.class, Area, Entity -> Entity != Player);
+
+        for (LivingEntity Target : Targets) {
+            hitSomething = true;
+            Vec3 Direction = Player.position().subtract(Target.position()).normalize();
+            Target.setDeltaMovement(Direction.scale(ICE_PULL_STRENGTH));
+            Target.hurtMarked = true;
+            Level.sendParticles(ParticleTypes.SNOWFLAKE, Target.getX(), Target.getY() + Target.getBbHeight() / 2, Target.getZ(), 10, 0.3, 0.5, 0.3, 0.05);
+        }
+
+        if (!hitSomething) {
+            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION_SECONDS * 20, 0));
+        } else {
+            Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.ICE_PULL, SoundSource.PLAYERS, 1f, 1f);
+        }
+
         ClassesSMP.LOGGER.info("{} of class: {} activated Ice Pull", Player.getName().getString(), this.getID());
     }
 
@@ -52,24 +89,30 @@ public class SnowScorpion extends PlayerClass {
         Vec3 Start = Player.getEyePosition();
         Vec3 Direction = Player.getLookAngle();
 
-        Vec3 End = Start.add(Direction.scale(ICE_PRISON_RANGE));
-
-        for (int i = 0; i < ICE_PRISON_RANGE; i++) {
-            double Position = i / ICE_PRISON_RANGE;
-            Vec3 particlePos = Start.lerp(End, Position);
-            level.sendParticles(ParticleTypes.SNOWFLAKE, particlePos.x, particlePos.y, particlePos.z, 4, 0.12, 0.12, 0.12, 0.01);
-        }
+        Vec3 MaxEnd = Start.add(Direction.scale(ICE_PRISON_RANGE));
+        BlockHitResult blockHit = level.clip(new ClipContext(Start, MaxEnd, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, Player));
+        Vec3 End = blockHit.getType() == HitResult.Type.BLOCK ? blockHit.getLocation() : MaxEnd;
 
         LivingEntity hitEntity = getEntityHit(level, Player, Start, End);
 
         if (hitEntity != null) {
+            Vec3 hitPos = hitEntity.position().add(0, hitEntity.getBbHeight() / 2, 0);
+            End = hitPos;
             hitEntity.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ICE_PRISON_HIT_EFFECT_DURATION_SECONDS * 20, 0));
             ClassesSMP.LOGGER.info("{} hit {} with Ice Prison", Player.getName().getString(), hitEntity.getName().getString());
         } else {
-            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ICE_PRISON_MISS_EFFECT_DURATION_SECONDS * 20, 0));
+            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION_SECONDS * 20, 0));
         }
 
-        ClassesSMP.LOGGER.info("{} of class: {} activated Ice Prison", Player.getName().getString(), this.getID());
+        double Length = Start.distanceTo(End);
+
+        for (int i = 0; i < Length; i++) {
+            double Position = i / Length;
+            Vec3 particlePos = Start.lerp(End, Position);
+            level.sendParticles(ClassesParticles.ICE_PARTICLE, particlePos.x, particlePos.y, particlePos.z, 16, 0.12, 0.12, 0.12, 0.01);
+        }
+
+        ClassesSMP.LOGGER.info("{} of class {} activated Ice Prison", Player.getName().getString(), this.getID());
     }
 
     private LivingEntity getEntityHit(ServerLevel Level, Player player, Vec3 StartPos, Vec3 EndPos) {

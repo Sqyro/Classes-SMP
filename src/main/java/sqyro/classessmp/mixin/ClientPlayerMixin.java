@@ -16,7 +16,6 @@ public class ClientPlayerMixin {
 
         if (Player.hasEffect(ClassesEffects.FREEZING)) {
             Player.setDeltaMovement(Vec3.ZERO);
-            Player.setOnGround(true);
         }
     }
 }

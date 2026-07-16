@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.Events;
 import sqyro.classessmp.network.ClassesNetworking;
+import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 import sqyro.classessmp.sounds.ClassesSounds;
 
@@ -19,6 +20,7 @@ public class ClassesSMP implements ModInitializer {
 		PlayerClasses.register();
 		ClassesEffects.register();
 		ClassesSounds.register();
+		ClassesParticles.register();
 
 		Events.registerEvents();
 		ClassesNetworking.registerServer();

@@ -1,4 +1,9 @@
 {
+  "ice_pull": {
+    "sounds": [
+      "classes-smp:ice_pull"
+    ]
+  },
   "ice_prison_hit": {
     "sounds": [
       "classes-smp:ice_prison_hit"

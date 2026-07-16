@@ -1,6 +1,7 @@
 package sqyro.classessmp.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -12,6 +13,11 @@ public class FreezeOverlay {
 
     public static void register() {
         HudRenderCallback.EVENT.register((graphics, tickDelta) -> {
+
+            if (Minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON) {
+                return;
+            }
+
             if (!Minecraft.getInstance().player.hasEffect(ClassesEffects.FREEZING)) {
                 return;
             }

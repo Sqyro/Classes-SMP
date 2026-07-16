@@ -8,6 +8,7 @@ import sqyro.classessmp.ClassesSMP;
 
 public class ClassesSounds {
     public static final SoundEvent ICE_PRISON_HIT = register("ice_prison_hit");
+    public static final SoundEvent ICE_PULL = register("ice_pull");
 
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
