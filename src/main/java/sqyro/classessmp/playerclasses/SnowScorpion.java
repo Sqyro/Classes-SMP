@@ -25,6 +25,12 @@ import java.util.Optional;
 public class SnowScorpion extends PlayerClass {
     private static final int ABILITY_MISS_EFFECT_DURATION_SECONDS = 1;
 
+    private static final String ICE_PULL_ID = "ice_pull";
+    private static final String ICE_PRISON_ID = "ice_prison";
+
+    private static final int ICE_PULL_COOLDOWN_SECONDS = 10;
+    private static final int ICE_PRISON_COOLDOWN_SECONDS = 30;
+
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;
 
@@ -42,7 +48,7 @@ public class SnowScorpion extends PlayerClass {
 
     @Override
     public void onTick() {
-
+        this.tickCooldowns();
     }
 
     @Override
@@ -51,7 +57,19 @@ public class SnowScorpion extends PlayerClass {
     }
 
     @Override
+    public void onRespawn() {
+        getCooldowns().clear();
+    }
+
+    @Override
     public void onKeybind1() {
+        if (isOnCooldown(ICE_PULL_ID)) {
+            ClassesSMP.LOGGER.info("{} of class: {} tried to activate Ice Pull, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(ICE_PULL_ID));
+            return;
+        }
+
+        setCooldown(ICE_PULL_ID, ICE_PULL_COOLDOWN_SECONDS * 20);
+
         ServerLevel Level = Player.level();
         boolean hitSomething = false;
 
@@ -84,6 +102,13 @@ public class SnowScorpion extends PlayerClass {
 
     @Override
     public void onKeybind2() {
+        if (isOnCooldown(ICE_PRISON_ID)) {
+            ClassesSMP.LOGGER.info("{} of class: {} tried to activate Ice Prison, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(ICE_PRISON_ID));
+            return;
+        }
+
+        setCooldown(ICE_PRISON_ID, ICE_PRISON_COOLDOWN_SECONDS * 20);
+
         ServerLevel level = Player.level();
 
         Vec3 Start = Player.getEyePosition();

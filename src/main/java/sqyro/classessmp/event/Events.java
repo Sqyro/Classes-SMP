@@ -14,6 +14,7 @@ import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
 import sqyro.classessmp.effect.ClassesEffects;
+import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 
 public class Events {
@@ -56,6 +57,7 @@ public class Events {
             PlayerClass playerClass = PlayerClasses.create(holder.getSavedClassID(), handler.getPlayer());
 
             if (playerClass != null) {
+                playerClass.loadCooldowns(PlayerClassSavedDataGetter.get(handler.getPlayer().level()).getCooldowns(handler.getPlayer().getUUID()));
                 holder.setPlayerClass(playerClass);
             }
         });
@@ -72,8 +74,12 @@ public class Events {
             PlayerClass playerClass = PlayerClasses.create(savedData.getClass(newPlayer.getUUID()), newPlayer);
 
             if (playerClass != null) {
+                playerClass.onRespawn();
                 holder.setPlayerClass(playerClass);
+                savedData.clearCooldowns(newPlayer.getUUID());
             }
+
+            ClassesNetworking.sendFreezeSync(newPlayer.level(), newPlayer, false);
 
             ClassesSMP.LOGGER.info("Restored class {} for {}", savedData.getClass(newPlayer.getUUID()), newPlayer.getName().getString());
         });

@@ -28,6 +28,11 @@ public class TestClass extends PlayerClass {
     }
 
     @Override
+    public void onRespawn() {
+
+    }
+
+    @Override
     public void onKeybind1() {
 
     }
