@@ -24,6 +24,8 @@ public class Gambler extends PlayerClass {
     public final int MIN_BONUS_DAMAGE_LEVEL = -5;
     public final int MAX_BONUS_DAMAGE_LEVEL = 5;
 
+    public final int JACKPOT_EXTRA_DAMAGE = 5;
+
     private int currentRoll;
 
     public Gambler(ServerPlayer Player) {
@@ -57,7 +59,15 @@ public class Gambler extends PlayerClass {
     }
 
     public int rollDamageModifier() {
-        return Player.getRandom().nextInt(getMinModifier(), getMaxModifier() + 1);
+        int JackpotDamageModifier = getMaxModifier();
+        int NormalDamageModifier = Player.getRandom().nextInt(getMinModifier(), getMaxModifier() - JACKPOT_EXTRA_DAMAGE);
+
+        int RandomJackpot = Player.getRandom().nextInt(getMinModifier(), getMaxModifier() - JACKPOT_EXTRA_DAMAGE + 1);
+        if (RandomJackpot == getMaxModifier() - JACKPOT_EXTRA_DAMAGE + 1) {
+            return JackpotDamageModifier;
+        } else {
+            return NormalDamageModifier;
+        }
     }
 
     public void onKill() {
@@ -80,11 +90,19 @@ public class Gambler extends PlayerClass {
     }
 
     private int getMinModifier() {
-        return -10 + bonusLevel;
+        if (bonusLevel < 0) {
+            return -10 + bonusLevel;
+        } else {
+            return -10;
+        }
     }
 
     private int getMaxModifier() {
-        return 20 + bonusLevel;
+        if (bonusLevel > 0) {
+            return 20 + bonusLevel;
+        } else {
+            return 20;
+        }
     }
 
     public void beginAttack(Entity Target) {

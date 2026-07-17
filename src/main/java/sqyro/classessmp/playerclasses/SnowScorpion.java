@@ -23,19 +23,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class SnowScorpion extends PlayerClass {
-    private static final int ABILITY_MISS_EFFECT_DURATION_SECONDS = 1;
+    private static final int ABILITY_MISS_EFFECT_DURATION = 20;
 
     private static final String ICE_PULL_ID = "ice_pull";
     private static final String ICE_PRISON_ID = "ice_prison";
 
     public static final int ICE_PULL_COOLDOWN = 200;
-    public static final int ICE_PRISON_COOLDOWN = 600;
+    public static final int ICE_PRISON_COOLDOWN = 500;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;
 
     private static final double ICE_PRISON_RANGE = 40.0;
-    private static final int ICE_PRISON_HIT_EFFECT_DURATION_SECONDS = 2;
+    private static final int ICE_PRISON_HIT_EFFECT_DURATION = 70;
 
     public SnowScorpion(ServerPlayer Player) {
         super(Player);
@@ -88,7 +88,7 @@ public class SnowScorpion extends PlayerClass {
         }
 
         if (!hitSomething) {
-            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION_SECONDS * 20, 0));
+            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION, 0));
         } else {
             Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.ICE_PULL, SoundSource.PLAYERS, 1f, 1f);
         }
@@ -119,10 +119,10 @@ public class SnowScorpion extends PlayerClass {
         if (hitEntity != null) {
             Vec3 hitPos = hitEntity.position().add(0, hitEntity.getBbHeight() / 2, 0);
             End = hitPos;
-            hitEntity.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ICE_PRISON_HIT_EFFECT_DURATION_SECONDS * 20, 0));
+            hitEntity.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ICE_PRISON_HIT_EFFECT_DURATION, 0));
             ClassesSMP.LOGGER.info("{} hit {} with Ice Prison", Player.getName().getString(), hitEntity.getName().getString());
         } else {
-            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION_SECONDS * 20, 0));
+            Player.addEffect(new MobEffectInstance(ClassesEffects.FREEZING, ABILITY_MISS_EFFECT_DURATION, 0));
         }
 
         double Length = Start.distanceTo(End);
