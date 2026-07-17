@@ -57,7 +57,15 @@ public class Gambler extends PlayerClass {
     }
 
     public int rollDamageModifier() {
-        return Player.getRandom().nextInt(getMinModifier(), getMaxModifier() + 1);
+        int Roll = Player.getRandom().nextInt(0, 100);
+
+        if (Roll < 70) {
+            return Player.getRandom().nextInt(getMinModifier(), Math.min(11, getMaxModifier()));
+        }
+
+        int highRoll = Player.getRandom().nextInt(11, getMaxModifier() + 1);
+
+        return highRoll;
     }
 
     public void onKill() {
