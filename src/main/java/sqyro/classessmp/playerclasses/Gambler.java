@@ -24,8 +24,6 @@ public class Gambler extends PlayerClass {
     public final int MIN_BONUS_DAMAGE_LEVEL = -5;
     public final int MAX_BONUS_DAMAGE_LEVEL = 5;
 
-    public final int JACKPOT_EXTRA_DAMAGE = 5;
-
     private int currentRoll;
 
     public Gambler(ServerPlayer Player) {
@@ -59,15 +57,7 @@ public class Gambler extends PlayerClass {
     }
 
     public int rollDamageModifier() {
-        int JackpotDamageModifier = getMaxModifier();
-        int NormalDamageModifier = Player.getRandom().nextInt(getMinModifier(), getMaxModifier() - JACKPOT_EXTRA_DAMAGE);
-
-        int RandomJackpot = Player.getRandom().nextInt(getMinModifier(), getMaxModifier() - JACKPOT_EXTRA_DAMAGE + 1);
-        if (RandomJackpot == getMaxModifier() - JACKPOT_EXTRA_DAMAGE + 1) {
-            return JackpotDamageModifier;
-        } else {
-            return NormalDamageModifier;
-        }
+        return Player.getRandom().nextInt(getMinModifier(), getMaxModifier() + 1);
     }
 
     public void onKill() {
