@@ -29,13 +29,13 @@ public class SnowScorpion extends PlayerClass {
     private static final String ICE_PRISON_ID = "ice_prison";
 
     public static final int ICE_PULL_COOLDOWN = 200;
-    public static final int ICE_PRISON_COOLDOWN = 500;
+    public static final int ICE_PRISON_COOLDOWN = 400;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;
 
     private static final double ICE_PRISON_RANGE = 40.0;
-    private static final int ICE_PRISON_HIT_EFFECT_DURATION = 60;
+    private static final int ICE_PRISON_HIT_EFFECT_DURATION = 50;
 
     public SnowScorpion(ServerPlayer Player) {
         super(Player);
