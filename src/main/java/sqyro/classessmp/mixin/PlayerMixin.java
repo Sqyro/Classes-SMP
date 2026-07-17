@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.PlayerClassHolder;
+import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.playerclasses.Gambler;
 
 @Mixin(Player.class)
@@ -33,6 +35,10 @@ public abstract class PlayerMixin {
         if (playerClass instanceof Gambler gambler) {
             gambler.beginAttack(Target);
         }
+
+        if (BloodSwordItem.canUse(Player, Player.getMainHandItem())) {
+            BloodSwordItem.beginAttack(Player, Player.getMainHandItem());
+        }
     }
 
     @Inject(method = "attack", at = @At("RETURN"))
@@ -48,5 +54,7 @@ public abstract class PlayerMixin {
         if (playerClass instanceof Gambler gambler) {
             gambler.endAttack();
         }
+
+        BloodSwordItem.endAttack(Player);
     }
 }

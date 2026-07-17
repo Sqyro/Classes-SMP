@@ -8,10 +8,10 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 
-public class DiceParticle extends SingleQuadParticle {
+public class BloodSplatterParticle extends SingleQuadParticle {
     private final SpriteSet Sprites;
 
-    protected DiceParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, SpriteSet Sprites) {
+    protected BloodSplatterParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, SpriteSet Sprites) {
         super(level, x, y, z, xd, yd, zd, Sprites.get(0, 1));
 
         this.Sprites = Sprites;
@@ -56,7 +56,7 @@ public class DiceParticle extends SingleQuadParticle {
 
         @Override
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource Random) {
-            return new DiceParticle(level, x, y, z, xd, yd, zd, Sprites);
+            return new BloodSplatterParticle(level, x, y, z, xd, yd, zd, Sprites);
         }
     }
 }

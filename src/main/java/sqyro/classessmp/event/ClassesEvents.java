@@ -5,17 +5,30 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.command.ChoseClassCommand;
+import sqyro.classessmp.command.RemoveClassCommand;
+import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
 import sqyro.classessmp.effect.ClassesEffects;
+import sqyro.classessmp.items.BloodSwordData;
+import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.network.ClassesNetworking;
+import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.playerclasses.Gambler;
 import sqyro.classessmp.playerclasses.PlayerClasses;
+import sqyro.classessmp.sounds.ClassesSounds;
 
 public class ClassesEvents {
     public static int ABILITY_COOLDOWN_SYNC_INTERVAL = 100;
@@ -115,12 +128,34 @@ public class ClassesEvents {
             if (playerClass instanceof Gambler gambler) {
                 gambler.onKill();
             }
+
+            ItemStack Weapon = source.getWeaponItem();
+
+            if (!(Weapon.getItem() instanceof BloodSwordItem))
+                return;
+
+            if (!BloodSwordItem.canUse(Player, Weapon)) {
+                return;
+            }
+
+            BloodSwordData Data = BloodSwordItem.getData(Weapon);
+            BloodSwordData newData = Data.addKill(entity.getUUID());
+
+            if (newData.getBonusDamage() > Data.getBonusDamage()) {
+                Weapon.set(ClassesDataComponents.BLOOD_SWORD_DATA, newData);
+
+                ServerLevel Level = Player.level();
+
+                Level.sendParticles(ClassesParticles.BLOOD_SPLATTER_PARTICLE, entity.getX(), entity.getY() + 1.0, entity.getZ(), 80, 0.5, 0.8, 0.5, 0.1);
+                Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.BLOOD_SWORD_UPGRADE, SoundSource.PLAYERS, 1.0f, 1.5f);
+            }
         });
     }
 
     private static void registerCommandsEvent() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ChoseClassCommand.register(dispatcher);
+            RemoveClassCommand.register(dispatcher);
         });
     }
 }

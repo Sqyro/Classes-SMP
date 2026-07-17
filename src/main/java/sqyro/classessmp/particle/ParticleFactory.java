@@ -7,5 +7,6 @@ public class ParticleFactory {
         ParticleFactoryRegistry.getInstance().register(ClassesParticles.ICE_PARTICLE, IceParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ClassesParticles.ICE_STORM_PARTICLE, IceStormParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ClassesParticles.DICE_PARTICLE, DiceParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ClassesParticles.BLOOD_SPLATTER_PARTICLE, BloodSplatterParticle.Provider::new);
     }
 }

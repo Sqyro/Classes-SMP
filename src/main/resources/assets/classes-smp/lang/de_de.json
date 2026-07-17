@@ -1,7 +1,11 @@
 {
+  "effect.classes-smp.freezing": "Eingefroren",
+
+  "itemGroup.classessmp": "Classes SMP",
+
+  "item.classes-smp.bloodsword": "Blut Schwert",
+
   "key.category.classes-smp.abilities": "Classes SMP Fähigkeiten",
   "key.classessmp.ability1": "Fähigkeit 1",
-  "key.classessmp.ability2": "Fähigkeit 2",
-
-  "effect.classes-smp.freezing": "Eingefroren"
+  "key.classessmp.ability2": "Fähigkeit 2"
 }

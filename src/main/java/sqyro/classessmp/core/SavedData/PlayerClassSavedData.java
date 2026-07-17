@@ -67,6 +67,11 @@ public class PlayerClassSavedData extends SavedData {
         return ID;
     }
 
+    public void removeClass(UUID uuid) {
+        Classes.remove(uuid);
+        setDirty();
+    }
+
     public void setCooldowns(UUID uuID, Map<String, Long> cooldowns) {
         Cooldowns.put(uuID, new HashMap<>(cooldowns));
         setDirty();

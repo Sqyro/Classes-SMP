@@ -28,8 +28,8 @@ public class SnowScorpion extends PlayerClass {
     private static final String ICE_PULL_ID = "ice_pull";
     private static final String ICE_PRISON_ID = "ice_prison";
 
-    public static final int ICE_PULL_COOLDOWN = 200;
-    public static final int ICE_PRISON_COOLDOWN = 400;
+    public static final int ICE_PULL_COOLDOWN = 140;
+    public static final int ICE_PRISON_COOLDOWN = 300;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;

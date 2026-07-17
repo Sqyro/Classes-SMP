@@ -4,8 +4,11 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sqyro.classessmp.core.ClassesCreativeTabs;
+import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.ClassesEvents;
+import sqyro.classessmp.items.ClassesItems;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.playerclasses.PlayerClasses;
@@ -18,6 +21,11 @@ public class ClassesSMP implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		PlayerClasses.register();
+		ClassesDataComponents.register();
+
+		ClassesItems.register();
+		ClassesCreativeTabs.register();
+
 		ClassesEffects.register();
 		ClassesSounds.register();
 		ClassesParticles.register();

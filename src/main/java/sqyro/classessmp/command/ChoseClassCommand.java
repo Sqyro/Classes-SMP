@@ -24,6 +24,13 @@ public class ChoseClassCommand {
                     return builder.buildFuture();
                 }).executes(context -> {
                     ServerPlayer Player = context.getSource().getPlayerOrException();
+
+                    PlayerClassHolder holder = (PlayerClassHolder) Player;
+                    if (holder.getPlayerClass() != null) {
+                        context.getSource().sendFailure(Component.literal("You have already chosen a class.").withStyle(ChatFormatting.RED));
+                        return 0;
+                    }
+
                     String ID = StringArgumentType.getString(context, "class");
                     PlayerClass playerClass = PlayerClasses.create(ID, Player);
 

@@ -18,5 +18,10 @@
     "sounds": [
       "classes-smp:gambler_jackpot"
     ]
+  },
+  "blood_sword_upgrade": {
+    "sounds": [
+      "classes-smp:blood_sword_upgrade"
+    ]
   }
 }
