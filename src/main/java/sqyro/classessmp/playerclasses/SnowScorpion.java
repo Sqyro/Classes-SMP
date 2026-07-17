@@ -52,11 +52,6 @@ public class SnowScorpion extends PlayerClass {
     }
 
     @Override
-    public void onAttack(Entity Target) {
-
-    }
-
-    @Override
     public void onRespawn() {
         getCooldowns().clear();
     }

@@ -14,6 +14,7 @@ public class PlayerClasses {
     public static void register() {
         CLASSES.put("testclass", TestClass::new);
         CLASSES.put("snow_scorpion", SnowScorpion::new);
+        CLASSES.put("gambler", Gambler::new);
     }
 
     public static PlayerClass create(String ID, ServerPlayer Player) {

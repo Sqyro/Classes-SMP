@@ -8,5 +8,15 @@
     "sounds": [
       "classes-smp:ice_prison_hit"
     ]
+  },
+  "gambler_loose": {
+    "sounds": [
+      "classes-smp:gambler_loose"
+    ]
+  },
+  "gambler_jackpot": {
+    "sounds": [
+      "classes-smp:gambler_jackpot"
+    ]
   }
 }

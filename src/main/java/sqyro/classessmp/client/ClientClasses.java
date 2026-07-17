@@ -24,6 +24,7 @@ public class ClientClasses {
                         SnowScorpion.ICE_PRISON_COOLDOWN
                 )))
         );
+        CLASSES.put("gambler", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {

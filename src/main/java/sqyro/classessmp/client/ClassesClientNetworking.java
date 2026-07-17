@@ -1,10 +1,7 @@
 package sqyro.classessmp.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import sqyro.classessmp.network.ClassSyncPacket;
-import sqyro.classessmp.network.CooldownStartPacket;
-import sqyro.classessmp.network.CooldownSyncPacket;
-import sqyro.classessmp.network.FreezeSyncPacket;
+import sqyro.classessmp.network.*;
 
 public class ClassesClientNetworking {
     public static void register() {
@@ -22,7 +19,6 @@ public class ClassesClientNetworking {
             });
         });
 
-
         ClientPlayNetworking.registerGlobalReceiver(CooldownSyncPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClientPlayerData.replaceCooldowns(payload.cooldowns());
@@ -32,6 +28,18 @@ public class ClassesClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(FreezeSyncPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
                 FreezeClientCache.setFrozen(payload.entityID(), payload.Frozen());
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(GamblerLevelSyncPacket.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ClientPlayerData.setGamblerLevel(payload.Level());
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(GamblerRollPacket.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ClientPlayerData.setGamblerRoll(payload.Roll());
             });
         });
     }

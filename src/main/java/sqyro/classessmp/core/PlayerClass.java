@@ -20,7 +20,6 @@ public abstract class PlayerClass {
     public abstract String getID();
 
     public abstract void onTick();
-    public abstract void onAttack(Entity Target);
     public abstract void onRespawn();
     public abstract void onKeybind1();
     public abstract void onKeybind2();

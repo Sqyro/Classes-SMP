@@ -10,6 +10,9 @@ public class ClassesSounds {
     public static final SoundEvent ICE_PRISON_HIT = register("ice_prison_hit");
     public static final SoundEvent ICE_PULL = register("ice_pull");
 
+    public static final SoundEvent GAMBLER_LOOSE = register("gambler_loose");
+    public static final SoundEvent GAMBLER_JACKPOT = register("gambler_jackpot");
+
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
 

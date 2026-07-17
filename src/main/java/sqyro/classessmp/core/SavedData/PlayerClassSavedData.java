@@ -13,20 +13,24 @@ import java.util.UUID;
 public class PlayerClassSavedData extends SavedData {
     private static final Codec<Map<String, String>> CLASS_CODEC = Codec.unboundedMap(Codec.STRING, Codec.STRING);
     private static final Codec<Map<String, Map<String, Long>>> COOLDOWN_CODEC = Codec.unboundedMap(Codec.STRING, Codec.unboundedMap(Codec.STRING, Codec.LONG));
+    private static final Codec<Map<String, Integer>> GAMBLER_LEVEL_CODEC = Codec.unboundedMap(Codec.STRING, Codec.INT);
 
-    private static final Codec<PlayerClassSavedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(CLASS_CODEC.fieldOf("classes").forGetter(data -> data.serializeClasses()), COOLDOWN_CODEC.fieldOf("cooldowns").forGetter(data -> data.serializeCooldowns())).apply(instance, PlayerClassSavedData::new));
+    private static final Codec<PlayerClassSavedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(CLASS_CODEC.fieldOf("classes").forGetter(data -> data.serializeClasses()), COOLDOWN_CODEC.fieldOf("cooldowns").forGetter(data -> data.serializeCooldowns()), GAMBLER_LEVEL_CODEC.fieldOf("gambler_levels").forGetter(PlayerClassSavedData::serializeGamblerLevels)).apply(instance, PlayerClassSavedData::new));
 
     public static final SavedDataType<PlayerClassSavedData> TYPE = new SavedDataType<>("player_classes", PlayerClassSavedData::new, CODEC, null);
 
     private final Map<UUID, String> Classes = new HashMap<>();
     private final Map<UUID, Map<String, Long>> Cooldowns = new HashMap<>();
 
+    private final Map<UUID, Integer> gamblerLevels = new HashMap<>();
+
     public PlayerClassSavedData() {
     }
 
-    private PlayerClassSavedData(Map<String, String> classes, Map<String, Map<String, Long>> cooldowns) {
+    private PlayerClassSavedData(Map<String, String> classes, Map<String, Map<String, Long>> cooldowns, Map<String, Integer> gamblerLevels) {
         classes.forEach((uuID, ID) -> Classes.put(UUID.fromString(uuID), ID));
         cooldowns.forEach((uuID, Map) -> Cooldowns.put(UUID.fromString(uuID), new HashMap<>(Map)));
+        gamblerLevels.forEach((uuid, level) -> this.gamblerLevels.put(UUID.fromString(uuid), level));
     }
 
     private Map<String, String> serializeClasses() {
@@ -39,6 +43,13 @@ public class PlayerClassSavedData extends SavedData {
     private Map<String, Map<String, Long>> serializeCooldowns() {
         Map<String, Map<String, Long>> Map = new HashMap<>();
         Cooldowns.forEach((uuID, cooldowns) -> Map.put(uuID.toString(), new HashMap<>(cooldowns)));
+
+        return Map;
+    }
+
+    private Map<String, Integer> serializeGamblerLevels() {
+        Map<String, Integer> Map = new HashMap<>();
+        gamblerLevels.forEach((uuID, level) -> Map.put(uuID.toString(), level));
 
         return Map;
     }
@@ -67,6 +78,15 @@ public class PlayerClassSavedData extends SavedData {
 
     public void clearCooldowns(UUID uuID) {
         Cooldowns.remove(uuID);
+        setDirty();
+    }
+
+    public int getGamblerLevel(UUID uuID) {
+        return gamblerLevels.getOrDefault(uuID, 0);
+    }
+
+    public void setGamblerLevel(UUID uuID, int Level) {
+        gamblerLevels.put(uuID, Level);
         setDirty();
     }
 }

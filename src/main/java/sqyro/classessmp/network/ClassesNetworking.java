@@ -22,6 +22,9 @@ public class ClassesNetworking {
         PayloadTypeRegistry.playS2C().register(CooldownStartPacket.ID, CooldownStartPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(CooldownSyncPacket.ID, CooldownSyncPacket.CODEC);
 
+        PayloadTypeRegistry.playS2C().register(GamblerLevelSyncPacket.ID, GamblerLevelSyncPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(GamblerRollPacket.ID, GamblerRollPacket.CODEC);
+
         ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.TYPE, (payload, context) -> {
             context.server().execute(() -> {
                 ServerPlayer Player = context.player();
@@ -81,5 +84,13 @@ public class ClassesNetworking {
         });
 
         ServerPlayNetworking.send(Player, new CooldownSyncPacket(Cooldowns));
+    }
+
+    public static void sendGamblerLevel(ServerPlayer Player, int Level) {
+        ServerPlayNetworking.send(Player, new GamblerLevelSyncPacket(Level));
+    }
+
+    public static void sendGamblerRoll(ServerPlayer Player, int Roll) {
+        ServerPlayNetworking.send(Player, new GamblerRollPacket(Roll));
     }
 }

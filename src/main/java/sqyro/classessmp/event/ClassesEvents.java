@@ -1,12 +1,11 @@
 package sqyro.classessmp.event;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionResult;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.command.ChoseClassCommand;
 import sqyro.classessmp.core.PlayerClass;
@@ -15,6 +14,7 @@ import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedData;
 import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.network.ClassesNetworking;
+import sqyro.classessmp.playerclasses.Gambler;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 
 public class ClassesEvents {
@@ -24,7 +24,7 @@ public class ClassesEvents {
         registerServerTickEvent();
         registerPlayerJoinEvent();
         registerPlayerRespawnEvent();
-        registerPlayerAttackEvent();
+        registerDeathEvent();
         registerCommandsEvent();
     }
 
@@ -67,6 +67,9 @@ public class ClassesEvents {
 
             ClassesNetworking.sendClassSync(handler.getPlayer());
             ClassesNetworking.sendCooldownSync(handler.getPlayer());
+            if (holder.getPlayerClass() instanceof Gambler gambler) {
+                ClassesNetworking.sendGamblerLevel(handler.getPlayer(), gambler.getBonusLevel());
+            }
         });
     }
 
@@ -89,24 +92,29 @@ public class ClassesEvents {
             ClassesNetworking.sendFreezeSync(newPlayer.level(), newPlayer, false);
             ClassesNetworking.sendClassSync(newPlayer);
             ClassesNetworking.sendCooldownSync(newPlayer);
+            if (holder.getPlayerClass() instanceof Gambler gambler) {
+                ClassesNetworking.sendGamblerLevel(newPlayer, gambler.getBonusLevel());
+            }
 
             ClassesSMP.LOGGER.info("Restored class {} for {}", savedData.getClass(newPlayer.getUUID()), newPlayer.getName().getString());
         });
     }
 
-    private static void registerPlayerAttackEvent() {
-        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (!(player instanceof ServerPlayer serverPlayer)) {
-                return InteractionResult.PASS;
+    private static void registerDeathEvent() {
+        ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
+            if (!(source.getEntity() instanceof ServerPlayer Player)) {
+                return;
             }
 
-            PlayerClass playerClass = ((PlayerClassHolder)serverPlayer).getPlayerClass();
-
-            if (playerClass != null) {
-                playerClass.onAttack(entity);
+            if (!(entity instanceof ServerPlayer)) {
+                return;
             }
 
-            return InteractionResult.PASS;
+            PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
+
+            if (playerClass instanceof Gambler gambler) {
+                gambler.onKill();
+            }
         });
     }
 

@@ -23,11 +23,6 @@ public class TestClass extends PlayerClass {
     }
 
     @Override
-    public void onAttack(Entity Target) {
-
-    }
-
-    @Override
     public void onRespawn() {
 
     }
