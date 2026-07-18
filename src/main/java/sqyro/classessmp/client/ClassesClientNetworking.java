@@ -5,13 +5,11 @@ import sqyro.classessmp.network.*;
 
 public class ClassesClientNetworking {
     public static void register() {
-        ClientPlayNetworking.registerGlobalReceiver(
-                ClassSyncPacket.ID, (payload, context) -> {
-                    context.client().execute(() -> {
-                        ClientPlayerData.setClass(payload.classId());
-                    });
-                }
-        );
+        ClientPlayNetworking.registerGlobalReceiver(ClassSyncPacket.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ClientPlayerData.setClass(payload.classId());
+            });
+        });
 
         ClientPlayNetworking.registerGlobalReceiver(CooldownStartPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
@@ -40,6 +38,12 @@ public class ClassesClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(GamblerRollPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClientPlayerData.setGamblerRoll(payload.Roll());
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(BloodSyncPacket.ID, (payload, context) -> {
+                context.client().execute(() -> {
+                    ClientPlayerData.setBloodAmount(payload.Amount());
             });
         });
     }

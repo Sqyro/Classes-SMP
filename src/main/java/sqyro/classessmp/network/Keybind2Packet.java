@@ -7,11 +7,11 @@ import net.minecraft.resources.Identifier;
 import sqyro.classessmp.ClassesSMP;
 
 public record Keybind2Packet() implements CustomPacketPayload {
-    public static final Type<Keybind2Packet> TYPE = new Type<>(Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ability2"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, Keybind2Packet> STREAM_CODEC = StreamCodec.unit(new Keybind2Packet());
+    public static final Type<Keybind2Packet> ID = new Type<>(Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ability2"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, Keybind2Packet> CODEC = StreamCodec.unit(new Keybind2Packet());
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
-        return TYPE;
+        return ID;
     }
 }

@@ -1,5 +1,6 @@
 package sqyro.classessmp.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -7,6 +8,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import sqyro.classessmp.ClassesSMP;
+import sqyro.classessmp.items.BloodSwordData;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class ClassesHud {
 
     private static final int DICE_SIZE = 32;
     private static final int DICE_SPACING = 4;
+
+    private static final Identifier BLOOD_OVERLAY = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/blood_sword_overlay.png");
 
     public static void register() {
         HudRenderCallback.EVENT.register((graphics, deltaTracker) -> {
@@ -52,6 +56,10 @@ public class ClassesHud {
 
         if (classID.equals("gambler")) {
             renderGamblerHud(Graphics);
+        }
+
+        if (classID.equals("blood_sword")) {
+            renderBloodOverlay(Graphics);
         }
     }
 
@@ -141,5 +149,19 @@ public class ClassesHud {
         for (int i = 0; i < Amount; i++) {
             Graphics.blit(RenderPipelines.GUI_TEXTURED, Texture, StartX, StartY - i * (DICE_SIZE + DICE_SPACING), 0, 0, DICE_SIZE, DICE_SIZE, DICE_SIZE, DICE_SIZE);
         }
+    }
+
+    private static void renderBloodOverlay(GuiGraphics graphics) {
+        float Alpha = ClientPlayerData.getBloodIntensity();
+
+        if (Alpha <= 0.001F) {
+            return;
+        }
+
+        int alphaInt = (int) (Alpha * 255);
+
+        int Color = (alphaInt << 24) | 0xFFFFFF;
+
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BLOOD_OVERLAY, 0, 0, 0, 0, graphics.guiWidth(), graphics.guiHeight(), graphics.guiWidth(), graphics.guiHeight(), Color);
     }
 }

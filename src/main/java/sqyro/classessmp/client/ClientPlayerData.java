@@ -1,7 +1,10 @@
 package sqyro.classessmp.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Mth;
 import sqyro.classessmp.ClassesSMP;
+import sqyro.classessmp.items.BloodSwordData;
+import sqyro.classessmp.items.BloodSwordItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +17,12 @@ public class ClientPlayerData {
     private static int gamblerLevel;
     private static int gamblerLastRoll;
     private static long gamblerLastRollTick;
+
+    private static int bloodAmount;
+    private static float bloodIntensity;
+
+    private static long lastBloodAttack;
+    private static float bloodFade = 1.0f;
 
     public static void setClass(String ID) {
         classID = ID;
@@ -46,6 +55,38 @@ public class ClientPlayerData {
 
     public static int getGamblerRoll() {
         return gamblerLastRoll;
+    }
+
+
+    public static void setBloodAmount(int amount) {
+        bloodAmount = amount;
+    }
+
+    public static int getBloodAmount() {
+        return bloodAmount;
+    }
+
+    public static void markBloodAttack() {
+        lastBloodAttack = System.currentTimeMillis();
+    }
+
+    public static float getBloodIntensity() {
+        Minecraft minecraft = Minecraft.getInstance();
+
+        boolean holdingBloodSword = minecraft.player != null && minecraft.player.getMainHandItem().getItem() instanceof BloodSwordItem;
+
+        if (!holdingBloodSword) {
+            bloodFade -= 0.005f;
+        }
+        else if (System.currentTimeMillis() - lastBloodAttack < 10 * 1000) {
+            bloodFade = 1.0f;
+        }
+
+        float Target = bloodAmount / (float) BloodSwordData.MAX_DAMAGE;
+
+        bloodIntensity += (Target * bloodFade - bloodIntensity) * 0.02f;
+
+        return Mth.clamp(bloodIntensity, 0, 1);
     }
 
     public static boolean shouldRenderGamblerRoll() {

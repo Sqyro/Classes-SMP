@@ -22,7 +22,7 @@ import sqyro.classessmp.sounds.ClassesSounds;
 import java.util.List;
 import java.util.Optional;
 
-public class SnowScorpion extends PlayerClass {
+public class SnowScorpio extends PlayerClass {
     private static final int ABILITY_MISS_EFFECT_DURATION = 20;
 
     private static final String ICE_PULL_ID = "ice_pull";
@@ -37,13 +37,13 @@ public class SnowScorpion extends PlayerClass {
     private static final double ICE_PRISON_RANGE = 40.0;
     private static final int ICE_PRISON_HIT_EFFECT_DURATION = 50;
 
-    public SnowScorpion(ServerPlayer Player) {
+    public SnowScorpio(ServerPlayer Player) {
         super(Player);
     }
 
     @Override
     public String getID() {
-        return "snow_scorpion";
+        return "snow_scorpio";
     }
 
     @Override

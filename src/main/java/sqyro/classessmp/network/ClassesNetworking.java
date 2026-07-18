@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class ClassesNetworking {
     public static void registerServer() {
-        PayloadTypeRegistry.playC2S().register(Keybind1Packet.TYPE, Keybind1Packet.STREAM_CODEC);
-        PayloadTypeRegistry.playC2S().register(Keybind2Packet.TYPE, Keybind2Packet.STREAM_CODEC);
+        PayloadTypeRegistry.playC2S().register(Keybind1Packet.ID, Keybind1Packet.CODEC);
+        PayloadTypeRegistry.playC2S().register(Keybind2Packet.ID, Keybind2Packet.CODEC);
 
         PayloadTypeRegistry.playS2C().register(FreezeSyncPacket.ID, FreezeSyncPacket.CODEC);
 
@@ -25,7 +25,9 @@ public class ClassesNetworking {
         PayloadTypeRegistry.playS2C().register(GamblerLevelSyncPacket.ID, GamblerLevelSyncPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(GamblerRollPacket.ID, GamblerRollPacket.CODEC);
 
-        ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.TYPE, (payload, context) -> {
+        PayloadTypeRegistry.playS2C().register(BloodSyncPacket.ID, BloodSyncPacket.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ServerPlayer Player = context.player();
                 PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
@@ -36,7 +38,7 @@ public class ClassesNetworking {
             });
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(Keybind2Packet.TYPE, (payload, context) -> {
+        ServerPlayNetworking.registerGlobalReceiver(Keybind2Packet.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ServerPlayer Player = context.player();
                 PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
@@ -92,5 +94,9 @@ public class ClassesNetworking {
 
     public static void sendGamblerRoll(ServerPlayer Player, int Roll) {
         ServerPlayNetworking.send(Player, new GamblerRollPacket(Roll));
+    }
+
+    public static void sendBloodAmount(ServerPlayer Player, int Amount) {
+        ServerPlayNetworking.send(Player, new BloodSyncPacket(Amount));
     }
 }

@@ -15,6 +15,7 @@ public class ClassesSMPClient implements ClientModInitializer {
 
         FreezeOverlay.register();
         ClassesHud.register();
+        ClientSounds.register();
 
         ParticleFactory.register();
         AbilityIndicatorHud.register();

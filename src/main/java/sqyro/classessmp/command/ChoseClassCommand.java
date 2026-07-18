@@ -47,6 +47,11 @@ public class ChoseClassCommand {
                     PlayerClassSavedData savedData = PlayerClassSavedDataGetter.get(Player.level().getServer().overworld());
                     savedData.setClass(Player.getUUID(), ID);
 
+                    context.getSource().sendSuccess(() -> Component.literal("Set class to ")
+                            .append(Component.literal(ID).withStyle(ChatFormatting.GREEN))
+                            .withStyle(ChatFormatting.GREEN), false
+                    );
+
                     return 1;
                 }))
         );

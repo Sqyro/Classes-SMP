@@ -17,8 +17,6 @@ public class BloodSplatterParticle extends SingleQuadParticle {
         this.Sprites = Sprites;
 
         this.rCol = level.random.nextFloat();
-        this.gCol = level.random.nextFloat();
-        this.bCol = level.random.nextFloat();
 
         this.lifetime = 20 + level.random.nextInt(20);
 

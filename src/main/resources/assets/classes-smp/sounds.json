@@ -23,5 +23,15 @@
     "sounds": [
       "classes-smp:blood_sword_upgrade"
     ]
+  },
+  "blood_sword_consume": {
+    "sounds": [
+      "classes-smp:blood_sword_consume"
+    ]
+  },
+  "blood_sword_rage": {
+    "sounds": [
+      "classes-smp:blood_sword_rage"
+    ]
   }
 }

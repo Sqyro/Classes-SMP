@@ -14,6 +14,8 @@ public class ClassesSounds {
     public static final SoundEvent GAMBLER_JACKPOT = register("gambler_jackpot");
 
     public static final SoundEvent BLOOD_SWORD_UPGRADE = register("blood_sword_upgrade");
+    public static final SoundEvent BLOOD_SWORD_CONSUME = register("blood_sword_consume");
+    public static final SoundEvent BLOOD_SWORD_RAGE = register("blood_sword_rage");
 
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);

@@ -3,15 +3,12 @@ package sqyro.classessmp.items;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.UUIDUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class BloodSwordData {
     public static final Codec<BloodSwordData> CODEC = UUIDUtil.CODEC.listOf().xmap(Kills -> new BloodSwordData(new HashSet<>(Kills)), Data -> new ArrayList<>(Data.getKilledPlayers()));
 
-    private static final int MAX_DAMAGE = 20;
+    public static final int MAX_DAMAGE = 14;
 
     private final Set<UUID> killedPlayers;
 
@@ -34,11 +31,30 @@ public class BloodSwordData {
         return new BloodSwordData(newKills);
     }
 
+    public BloodSwordData removeKill() {
+        BloodSwordData newData = new BloodSwordData();
+        newData.killedPlayers.addAll(this.killedPlayers);
+
+        if (!newData.killedPlayers.isEmpty()) {
+            Iterator<UUID> it = newData.killedPlayers.iterator();
+            it.next();
+            it.remove();
+        } else {
+            return null;
+        }
+
+        return newData;
+    }
+
     public Set<UUID> getKilledPlayers() {
         return killedPlayers;
     }
 
     public int getKillCount() {
         return killedPlayers.size();
+    }
+
+    public float getFill() {
+        return Math.min(getKillCount() / (float) MAX_DAMAGE, 1.0F);
     }
 }

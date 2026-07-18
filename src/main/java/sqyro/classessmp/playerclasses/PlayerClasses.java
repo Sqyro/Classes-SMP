@@ -13,7 +13,7 @@ public class PlayerClasses {
 
     public static void register() {
         CLASSES.put("testclass", TestClass::new);
-        CLASSES.put("snow_scorpion", SnowScorpion::new);
+        CLASSES.put("snow_scorpio", SnowScorpio::new);
         CLASSES.put("gambler", Gambler::new);
         CLASSES.put("blood_sword", BloodSword::new);
     }

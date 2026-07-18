@@ -83,6 +83,16 @@ public class ClassesEvents {
             if (holder.getPlayerClass() instanceof Gambler gambler) {
                 ClassesNetworking.sendGamblerLevel(handler.getPlayer(), gambler.getBonusLevel());
             }
+
+            ItemStack MainHandStack = handler.getPlayer().getMainHandItem();
+
+            if (MainHandStack == ItemStack.EMPTY) {
+                return;
+            }
+
+            if (MainHandStack.getItem() instanceof BloodSwordItem) {
+                ClassesNetworking.sendBloodAmount(handler.getPlayer(), BloodSwordItem.getData(MainHandStack).getKillCount());
+            }
         });
     }
 
@@ -129,25 +139,36 @@ public class ClassesEvents {
                 gambler.onKill();
             }
 
+            if (source.getWeaponItem() == null) {
+                return;
+            }
+
             ItemStack Weapon = source.getWeaponItem();
 
-            if (!(Weapon.getItem() instanceof BloodSwordItem))
+            if (!(Weapon.getItem() instanceof BloodSwordItem)) {
                 return;
+            }
 
             if (!BloodSwordItem.canUse(Player, Weapon)) {
                 return;
             }
 
             BloodSwordData Data = BloodSwordItem.getData(Weapon);
-            BloodSwordData newData = Data.addKill(entity.getUUID());
 
-            if (newData.getBonusDamage() > Data.getBonusDamage()) {
+            if (Data.getKillCount() < BloodSwordData.MAX_DAMAGE) {
+                BloodSwordData newData = Data.addKill(entity.getUUID());
+
                 Weapon.set(ClassesDataComponents.BLOOD_SWORD_DATA, newData);
+                ClassesNetworking.sendBloodAmount(Player, newData.getKillCount());
 
-                ServerLevel Level = Player.level();
+                if (newData.getBonusDamage() > Data.getBonusDamage()) {
+                    Weapon.set(ClassesDataComponents.BLOOD_SWORD_DATA, newData);
 
-                Level.sendParticles(ClassesParticles.BLOOD_SPLATTER_PARTICLE, entity.getX(), entity.getY() + 1.0, entity.getZ(), 80, 0.5, 0.8, 0.5, 0.1);
-                Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.BLOOD_SWORD_UPGRADE, SoundSource.PLAYERS, 1.0f, 1.5f);
+                    ServerLevel Level = Player.level();
+
+                    Level.sendParticles(ClassesParticles.BLOOD_SPLATTER_PARTICLE, entity.getX(), entity.getY() + 1.0, entity.getZ(), 80, 0.5, 0.8, 0.5, 0.1);
+                    Level.playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.BLOOD_SWORD_UPGRADE, SoundSource.PLAYERS, 1.0f, 1.5f);
+                }
             }
         });
     }
