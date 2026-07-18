@@ -16,6 +16,7 @@ public class PlayerClasses {
         CLASSES.put("snow_scorpio", SnowScorpio::new);
         CLASSES.put("gambler", Gambler::new);
         CLASSES.put("blood_sword", BloodSword::new);
+        CLASSES.put("pickpocket", Pickpocket::new);
     }
 
     public static PlayerClass create(String ID, ServerPlayer Player) {

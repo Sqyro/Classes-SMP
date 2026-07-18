@@ -10,6 +10,7 @@ public class ClassesClientEvents {
 
     public static void registerEvents() {
         registerClientTickEvent();
+        registerPlayerJoinEvent();
         registerPlayerDisconnectEvent();
     }
 
@@ -30,6 +31,13 @@ public class ClassesClientEvents {
             }
         });
     }
+
+    private static void registerPlayerJoinEvent() {
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            ClientPlayerData.clear();
+        });
+    }
+
 
     private static void registerPlayerDisconnectEvent() {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {

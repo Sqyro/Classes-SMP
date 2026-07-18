@@ -13,7 +13,7 @@ import sqyro.classessmp.ClassesSMP;
 import java.util.function.Function;
 
 public class ClassesItems {
-    public static final Item BLOODSWORD = registerItem("bloodsword", settings -> new BloodSwordItem(settings.sword(ToolMaterial.IRON, 3.0F, -2.4F).rarity(Rarity.RARE)));
+    public static final Item BLOODSWORD = registerItem("bloodsword", settings -> new BloodSwordItem(settings.sword(ToolMaterial.DIAMOND, 2.0F, -2.4F).rarity(Rarity.RARE)));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);

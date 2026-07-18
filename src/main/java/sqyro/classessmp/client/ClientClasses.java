@@ -3,6 +3,7 @@ package sqyro.classessmp.client;
 import net.minecraft.resources.Identifier;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.playerclasses.BloodSword;
+import sqyro.classessmp.playerclasses.Pickpocket;
 import sqyro.classessmp.playerclasses.SnowScorpio;
 
 import java.util.HashMap;
@@ -31,6 +32,13 @@ public class ClientClasses {
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/life_steal_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/life_steal_color.png"),
                         BloodSword.LIFE_STEAL_COOLDOWN
+                )))
+        );
+        CLASSES.put("pickpocket", new ClientClassData(List.of(
+                new ClientAbility("steal",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/steal_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/steal_color.png"),
+                        Pickpocket.STEAL_COOLDOWN
                 )))
         );
     }

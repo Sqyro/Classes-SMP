@@ -8,7 +8,7 @@ import java.util.*;
 public class BloodSwordData {
     public static final Codec<BloodSwordData> CODEC = UUIDUtil.CODEC.listOf().xmap(Kills -> new BloodSwordData(new HashSet<>(Kills)), Data -> new ArrayList<>(Data.getKilledPlayers()));
 
-    public static final int MAX_DAMAGE = 14;
+    public static final int MAX_DAMAGE = 15;
 
     private final Set<UUID> killedPlayers;
 

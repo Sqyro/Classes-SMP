@@ -107,6 +107,11 @@ public class ClientPlayerData {
         gamblerLevel = 0;
         gamblerLastRoll = 0;
         gamblerLastRollTick = 0;
+
+        bloodAmount = 0;
+        bloodIntensity = 0;
+        bloodFade = 1.0f;
+        lastBloodAttack = 0;
     }
 
     public static void tick() {
