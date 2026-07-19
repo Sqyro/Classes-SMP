@@ -23,6 +23,7 @@ public abstract class PlayerClass {
     public abstract void onRespawn();
     public abstract void onKeybind1();
     public abstract void onKeybind2();
+    public abstract void onKeybind3();
 
     protected boolean isOnCooldown(String Ability) {
         return getCooldownTicks(Ability) > 0;

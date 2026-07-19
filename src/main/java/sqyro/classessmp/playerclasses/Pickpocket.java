@@ -93,6 +93,11 @@ public class Pickpocket extends PlayerClass {
 
     }
 
+    @Override
+    public void onKeybind3() {
+
+    }
+
     private LivingEntity getEntityHit(ServerLevel Level, Player player, Vec3 StartPos, Vec3 EndPos) {
         AABB hitBox = player.getBoundingBox().expandTowards(EndPos.subtract(StartPos)).inflate(1.0);
 

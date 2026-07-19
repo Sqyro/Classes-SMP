@@ -56,6 +56,11 @@ public class Gambler extends PlayerClass {
 
     }
 
+    @Override
+    public void onKeybind3() {
+
+    }
+
     public int rollDamageModifier() {
         int Roll = Player.getRandom().nextInt(0, 100);
 

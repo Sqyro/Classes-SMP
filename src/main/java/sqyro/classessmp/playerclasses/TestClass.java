@@ -36,4 +36,9 @@ public class TestClass extends PlayerClass {
     public void onKeybind2() {
 
     }
+
+    @Override
+    public void onKeybind3() {
+
+    }
 }

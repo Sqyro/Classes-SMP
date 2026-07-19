@@ -16,11 +16,16 @@ public abstract class KeyboardInputMixin {
     private void classessmp$freezeInput(CallbackInfo callbackInfo) {
         Minecraft Instance = Minecraft.getInstance();
 
-        if (Instance.player != null && Instance.player.hasEffect(ClassesEffects.FREEZING)) {
-            ClientInputAccessor Accessor = (ClientInputAccessor) this;
+        ClientInputAccessor Accessor = (ClientInputAccessor) this;
 
+        if (Instance.player != null && Instance.player.hasEffect(ClassesEffects.FREEZING)) {
             Accessor.setKeyPresses(Input.EMPTY);
             Accessor.setMoveVector(Vec2.ZERO);
+        }
+
+        if (Instance.player.hasEffect(ClassesEffects.SHOCKED)) {
+            Input keys = Accessor.getKeyPresses();
+            Accessor.setKeyPresses(new Input(keys.forward(), keys.backward(), keys.left(), keys.right(), false, keys.shift(), false));
         }
     }
 }

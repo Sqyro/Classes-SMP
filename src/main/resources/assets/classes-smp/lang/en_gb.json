@@ -1,5 +1,6 @@
 {
   "effect.classes-smp.freezing": "Frozen",
+  "effect.classes-smp.shocked": "Shocked",
 
   "itemGroup.classessmp": "Classes SMP",
 
@@ -7,5 +8,6 @@
 
   "key.category.classes-smp.abilities": "Classes SMP Abilities",
   "key.classessmp.ability1": "Ability 1",
-  "key.classessmp.ability2": "Ability 2"
+  "key.classessmp.ability2": "Ability 2",
+  "key.classessmp.ability3": "Ability 3"
 }

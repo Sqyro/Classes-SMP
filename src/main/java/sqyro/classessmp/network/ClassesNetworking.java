@@ -15,6 +15,7 @@ public class ClassesNetworking {
     public static void registerServer() {
         PayloadTypeRegistry.playC2S().register(Keybind1Packet.ID, Keybind1Packet.CODEC);
         PayloadTypeRegistry.playC2S().register(Keybind2Packet.ID, Keybind2Packet.CODEC);
+        PayloadTypeRegistry.playC2S().register(Keybind3Packet.ID, Keybind3Packet.CODEC);
 
         PayloadTypeRegistry.playS2C().register(FreezeSyncPacket.ID, FreezeSyncPacket.CODEC);
 
@@ -45,6 +46,17 @@ public class ClassesNetworking {
 
                 if (playerClass != null) {
                     playerClass.onKeybind2();
+                }
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(Keybind3Packet.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                ServerPlayer Player = context.player();
+                PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
+
+                if (playerClass != null) {
+                    playerClass.onKeybind3();
                 }
             });
         });

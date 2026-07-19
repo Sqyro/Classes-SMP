@@ -5,6 +5,7 @@ import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.playerclasses.BloodSword;
 import sqyro.classessmp.playerclasses.Pickpocket;
 import sqyro.classessmp.playerclasses.SnowScorpio;
+import sqyro.classessmp.playerclasses.Thunderbolt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,23 @@ public class ClientClasses {
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/steal_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/steal_color.png"),
                         Pickpocket.STEAL_COOLDOWN
+                )))
+        );
+        CLASSES.put("thunderbolt", new ClientClassData(List.of(
+                new ClientAbility("thunderstorm",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/thunderstorm_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/thunderstorm_color.png"),
+                        Thunderbolt.THUNDERSTORM_COOLDOWN
+                ),
+                new ClientAbility("lightning_dash",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/lightning_dash_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/lightning_dash_color.png"),
+                        Thunderbolt.LIGHTNING_DASH_COOLDOWN
+                ),
+                new ClientAbility("chain_lightning",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/chain_lightning_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/chain_lightning_color.png"),
+                        Thunderbolt.CHAIN_LIGHTNING_COOLDOWN
                 )))
         );
     }

@@ -28,14 +28,14 @@ public class SnowScorpio extends PlayerClass {
     private static final String ICE_PULL_ID = "ice_pull";
     private static final String ICE_PRISON_ID = "ice_prison";
 
-    public static final int ICE_PULL_COOLDOWN = 140;
-    public static final int ICE_PRISON_COOLDOWN = 300;
+    public static final int ICE_PULL_COOLDOWN = 200;
+    public static final int ICE_PRISON_COOLDOWN = 600;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;
 
     private static final double ICE_PRISON_RANGE = 40.0;
-    private static final int ICE_PRISON_HIT_EFFECT_DURATION = 50;
+    private static final int ICE_PRISON_HIT_EFFECT_DURATION = 40;
 
     public SnowScorpio(ServerPlayer Player) {
         super(Player);
@@ -132,6 +132,11 @@ public class SnowScorpio extends PlayerClass {
             Vec3 particlePos = Start.lerp(End, Position);
             level.sendParticles(ClassesParticles.ICE_PARTICLE, particlePos.x, particlePos.y, particlePos.z, 16, 0.12, 0.12, 0.12, 0.01);
         }
+
+    }
+
+    @Override
+    public void onKeybind3() {
 
     }
 

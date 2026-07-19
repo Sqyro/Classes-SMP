@@ -33,5 +33,25 @@
     "sounds": [
       "classes-smp:blood_sword_rage"
     ]
+  },
+  "thunderstorm": {
+    "sounds": [
+      "classes-smp:thunderstorm"
+    ]
+  },
+  "lightning_dash": {
+    "sounds": [
+      "classes-smp:lightning_dash"
+    ]
+  },
+  "chain_lightning": {
+    "sounds": [
+      "classes-smp:chain_lightning"
+    ]
+  },
+  "shocked_impact": {
+    "sounds": [
+      "classes-smp:shocked_impact"
+    ]
   }
 }

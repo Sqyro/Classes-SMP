@@ -17,6 +17,11 @@ public class ClassesSounds {
     public static final SoundEvent BLOOD_SWORD_CONSUME = register("blood_sword_consume");
     public static final SoundEvent BLOOD_SWORD_RAGE = register("blood_sword_rage");
 
+    public static final SoundEvent THUNDERSTORM = register("thunderstorm");
+    public static final SoundEvent LIGHTNING_DASH = register("lightning_dash");
+    public static final SoundEvent CHAIN_LIGHTNING = register("chain_lightning");
+    public static final SoundEvent SHOCKED_IMPACT = register("shocked_impact");
+
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
 

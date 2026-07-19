@@ -13,4 +13,7 @@ public interface ClientInputAccessor {
 
     @Accessor("moveVector")
     void setMoveVector(Vec2 Vector);
+
+    @Accessor("keyPresses")
+    Input getKeyPresses();
 }
