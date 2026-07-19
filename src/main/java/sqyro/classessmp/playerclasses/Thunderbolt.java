@@ -42,7 +42,7 @@ public class Thunderbolt extends PlayerClass {
     public static final String CHAIN_LIGHTNING_ID = "chain_lightning";
     public static final int CHAIN_LIGHTNING_COOLDOWN = 400;
     public static final float CHAIN_LIGHTNING_DAMAGE = 3;
-    public static final int CHAIN_LIGHTNING_SHOCKED_DURATION = 60;
+    public static final int CHAIN_LIGHTNING_SHOCKED_DURATION = 80;
     public static final float CHAIN_LIGHTNING_RANGE = 20;
     public static final float CHAIN_LIGHTNING_BOUNCE_RANGE = 5;
 
@@ -66,10 +66,10 @@ public class Thunderbolt extends PlayerClass {
         thunderstormTicks--;
 
         if (thunderstormTicks % 5 == 0) {
-            Vec3 start = Player.getEyePosition();
-            Vec3 end = start.add(Player.getLookAngle().scale(CHAIN_LIGHTNING_RANGE));
+            Vec3 Start = Player.getEyePosition();
+            Vec3 End = Start.add(Player.getLookAngle().scale(CHAIN_LIGHTNING_RANGE));
 
-            LivingEntity newTarget = getEntityHit(Player.level(), Player, start, end);
+            LivingEntity newTarget = getEntityHit(Player.level(), Player, Start, End);
 
             if (newTarget != null) {
                 stormTarget = newTarget;
@@ -189,56 +189,55 @@ public class Thunderbolt extends PlayerClass {
     }
 
     private void spawnLightning() {
-        ServerLevel level = Player.level();
-        DamageSource damage = Player.damageSources().lightningBolt();
+        DamageSource fireDamage = Player.damageSources().inFire();
 
         boolean hitTracked = stormTarget != null && stormTarget.isAlive() && Player.getRandom().nextInt(0, 100) <= THUNDERSTORM_HIT_PLAYER_CHANCE;
 
         if (hitTracked) {
-            strike(level, stormTarget.position(), damage, stormTarget);
+            strike(Player.level(), stormTarget.position(), fireDamage, stormTarget);
             return;
         }
 
-        double angle = Player.getRandom().nextDouble() * Math.PI * 2;
-        double distance = Player.getRandom().nextDouble() * THUNDERSTORM_RADIUS;
+        double Angle = Player.getRandom().nextDouble() * Math.PI * 2;
+        double Distance = Player.getRandom().nextDouble() * THUNDERSTORM_RADIUS;
 
-        double x = Player.getX() + Math.cos(angle) * distance;
-        double z = Player.getZ() + Math.sin(angle) * distance;
+        double x = Player.getX() + Math.cos(Angle) * Distance;
+        double z = Player.getZ() + Math.sin(Angle) * Distance;
 
-        BlockPos pos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos((int)x, 0, (int)z));
+        BlockPos Pos = Player.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos((int)x, 0, (int)z));
 
-        strike(level, Vec3.atCenterOf(pos), damage, null);
+        strike(Player.level(), Vec3.atCenterOf(Pos), fireDamage, null);
     }
 
-    private void strike(ServerLevel level, Vec3 pos, DamageSource damage, @Nullable LivingEntity directTarget) {
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+    private void strike(ServerLevel Level, Vec3 Pos, DamageSource Damage, @Nullable LivingEntity directTarget) {
+        LightningBolt Lightning = EntityType.LIGHTNING_BOLT.create(Level, EntitySpawnReason.TRIGGERED);
 
-        if (lightning != null) {
-            lightning.moveOrInterpolateTo(pos);
-            lightning.setCause(Player);
-            level.addFreshEntity(lightning);
+        if (Lightning != null) {
+            Lightning.moveOrInterpolateTo(Pos);
+            Lightning.setCause(Player);
+            Level.addFreshEntity(Lightning);
         }
 
         if (directTarget != null) {
-            directTarget.hurtServer(level, damage, THUNDERSTORM_DAMAGE);
+            directTarget.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
             return;
         }
 
-        AABB area = new AABB(pos, pos).inflate(2);
+        AABB Area = new AABB(Pos, Pos).inflate(2);
 
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area, e -> e != Player)) {
-            entity.hurtServer(level, damage, THUNDERSTORM_DAMAGE);
+        for (LivingEntity Entity : Level.getEntitiesOfClass(LivingEntity.class, Area, entity -> entity != Player)) {
+            Entity.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
         }
     }
 
-    private void spawnLightningParticles(ServerLevel level, Vec3 start, Vec3 end) {
-        double distance = start.distanceTo(end);
+    private void spawnLightningParticles(ServerLevel Level, Vec3 Start, Vec3 End) {
+        double Distance = Start.distanceTo(End);
 
-        for (int i = 0; i < distance * 4; i++) {
-            double progress = i / (distance * 4);
-            Vec3 pos = start.lerp(end, progress);
+        for (int i = 0; i < Distance * 4; i++) {
+            double Progress = i / (Distance * 4);
+            Vec3 Pos = Start.lerp(End, Progress);
 
-            level.sendParticles(ClassesParticles.LIGHTNING_PARTICLE, pos.x, pos.y, pos.z, 1, 0.05, 0.05, 0.05, 0.01);
+            Level.sendParticles(ClassesParticles.LIGHTNING_PARTICLE, Pos.x, Pos.y, Pos.z, 1, 0.05, 0.05, 0.05, 0.01);
         }
     }
 }

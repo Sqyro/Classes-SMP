@@ -59,6 +59,7 @@ public class ClientClasses {
                         Thunderbolt.CHAIN_LIGHTNING_COOLDOWN
                 )))
         );
+        CLASSES.put("terrorist", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {

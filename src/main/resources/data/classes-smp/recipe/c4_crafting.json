@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:gunpowder",
+    "T": "minecraft:tnt",
+    "M": "minecraft:tnt_minecart"
+  },
+  "pattern": [
+    "GG",
+    "TT",
+    "MM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "classes-smp:c4"
+  }
+}

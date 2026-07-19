@@ -15,6 +15,7 @@ public class ClassesCreativeTabs {
             .title(Component.translatable("itemGroup.classessmp"))
             .displayItems((context, entries) -> {
                 entries.accept(ClassesItems.BLOODSWORD);
+                entries.accept(ClassesItems.C4);
 
             }).build();
 
