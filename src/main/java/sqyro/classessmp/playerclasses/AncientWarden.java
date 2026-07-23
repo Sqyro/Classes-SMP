@@ -38,17 +38,17 @@ public class AncientWarden extends PlayerClass {
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ancient_warden_damage");
 
     private static final String NOISE_METER_FREEZE_ID = "noise_meter_freeze";
-    public static final int NOISE_METER_FREEZE_COOLDOWN = 100;
+    public static final int NOISE_METER_FREEZE_COOLDOWN = 1200;
     public static final int NOISE_METER_FREEZE_DURATION = 200;
 
     private static final String BLINDING_ID = "blinding";
-    public static final int BLINDING_COOLDOWN = 100;
+    public static final int BLINDING_COOLDOWN = 600;
     public static final int BLINDING_NOISE_CONSUMPTION = 13;
     public static final int BLINDING_RADIUS = 50;
     public static final int BLINDING_DURATION = 300;
 
     private static final String SONIC_BOOM_ID = "sonic_boom";
-    public static final int SONIC_BOOM_COOLDOWN = 100;
+    public static final int SONIC_BOOM_COOLDOWN = 400;
     public static final int SONIC_BOOM_FOOD_CONSUMPTION = 8;
     public static final int SONIC_BOOM_NOISE_CONSUMPTION = 64;
     public static final int SONIC_BOOM_RANGE = 15;

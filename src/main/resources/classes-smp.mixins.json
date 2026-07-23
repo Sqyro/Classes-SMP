@@ -18,7 +18,8 @@
 		"PlayerMixin",
 		"ServerPlayerMixin",
 		"GameEventDispatcherAccessor",
-		"GameEventDispatcherMixin"
+		"GameEventDispatcherMixin",
+		"EndPortalBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
