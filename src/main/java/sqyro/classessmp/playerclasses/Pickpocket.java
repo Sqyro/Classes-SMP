@@ -98,6 +98,16 @@ public class Pickpocket extends PlayerClass {
 
     }
 
+    @Override
+    public void beginAttack(Entity Target) {
+
+    }
+
+    @Override
+    public void endAttack() {
+
+    }
+
     private LivingEntity getEntityHit(ServerLevel Level, Player player, Vec3 StartPos, Vec3 EndPos) {
         AABB hitBox = player.getBoundingBox().expandTowards(EndPos.subtract(StartPos)).inflate(1.0);
 

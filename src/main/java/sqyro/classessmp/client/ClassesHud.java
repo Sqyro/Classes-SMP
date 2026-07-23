@@ -1,6 +1,5 @@
 package sqyro.classessmp.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -8,7 +7,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import sqyro.classessmp.ClassesSMP;
-import sqyro.classessmp.items.BloodSwordData;
+import sqyro.classessmp.playerclasses.AncientWarden;
 
 import java.util.List;
 
@@ -26,6 +25,12 @@ public class ClassesHud {
     private static final int DICE_SPACING = 4;
 
     private static final Identifier BLOOD_OVERLAY = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/blood_sword_overlay.png");
+
+    private static final Identifier NOISE_BACKGROUND = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ancient_warden/noise_meter_bar_bg.png");
+    private static final Identifier NOISE_BAR = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ancient_warden/noise_meter_bar_fill.png");
+
+    private static final int NOISE_WIDTH = 8;
+    private static final int NOISE_HEIGHT = 128;
 
     public static void register() {
         HudRenderCallback.EVENT.register((graphics, deltaTracker) -> {
@@ -60,6 +65,10 @@ public class ClassesHud {
 
         if (classID.equals("blood_sword")) {
             renderBloodOverlay(Graphics);
+        }
+
+        if (classID.equals("ancient_warden")) {
+            renderNoiseMeter(Graphics);
         }
     }
 
@@ -116,7 +125,7 @@ public class ClassesHud {
         float Progress;
 
         if (Roll < 0) {
-            Progress = (Roll - Min) / (float)(0 - Min);
+            Progress = (Roll - Min) / (float)(Min);
             int r = 255;
             int g = (int)(Progress * 255);
             int b = 0;
@@ -159,9 +168,46 @@ public class ClassesHud {
         }
 
         int alphaInt = (int) (Alpha * 255);
-
         int Color = (alphaInt << 24) | 0xFFFFFF;
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, BLOOD_OVERLAY, 0, 0, 0, 0, graphics.guiWidth(), graphics.guiHeight(), graphics.guiWidth(), graphics.guiHeight(), Color);
+    }
+
+    private static void renderNoiseMeter(GuiGraphics Graphics) {
+        int PosX = RIGHT_MARGIN;
+        int PosY = Graphics.guiHeight()/2 - NOISE_HEIGHT/2;
+
+        Graphics.blit(RenderPipelines.GUI_TEXTURED, NOISE_BACKGROUND, PosX, PosY, 0, 0, NOISE_WIDTH, NOISE_HEIGHT, NOISE_WIDTH, NOISE_HEIGHT);
+
+        int extraDamage;
+
+        if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.75f) {
+            extraDamage = 5;
+        } else if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.5f) {
+            extraDamage = 2;
+        } else if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.25f) {
+            extraDamage = 1;
+        } else {
+            extraDamage = 0;
+        }
+
+        String Text = "+" + extraDamage;
+
+        Graphics.drawString(Minecraft.getInstance().font, Text, Graphics.guiWidth() / 2 + 10, Graphics.guiHeight() / 2 + 5, 0xFF058769);
+
+        float Progress = ClientPlayerData.getNoiseMeter() / (float)AncientWarden.NOISE_METER_MAX_VALUE;
+        int VisibleHeight = Math.round(NOISE_HEIGHT * Progress);
+
+        if (VisibleHeight <= 0) {
+            return;
+        }
+
+
+        int ClipTop = PosY + NOISE_HEIGHT - VisibleHeight;
+        Graphics.enableScissor(PosX, ClipTop, PosX + NOISE_WIDTH, PosY + NOISE_HEIGHT);
+
+        Graphics.blit(RenderPipelines.GUI_TEXTURED, NOISE_BAR, PosX, PosY, 0, 0, NOISE_WIDTH, NOISE_HEIGHT, NOISE_WIDTH, NOISE_HEIGHT);
+
+        Graphics.disableScissor();
     }
 }

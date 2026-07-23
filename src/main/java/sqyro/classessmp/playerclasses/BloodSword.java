@@ -1,10 +1,15 @@
 package sqyro.classessmp.playerclasses;
 
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.ClassesDataComponents;
@@ -16,6 +21,8 @@ import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.sounds.ClassesSounds;
 
 public class BloodSword extends PlayerClass {
+    private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "blood_sword_damage");
+
     public static final String LIFE_STEAL_ID = "life_steal";
     public static final int LIFE_STEAL_COOLDOWN = 100;
     public static final int LIFE_STEAL_HEAL = 15;
@@ -95,5 +102,40 @@ public class BloodSword extends PlayerClass {
     @Override
     public void onKeybind3() {
         
+    }
+
+    @Override
+    public void beginAttack(Entity Target) {
+        ItemStack itemInHand = Player.getItemInHand(InteractionHand.MAIN_HAND);
+
+        if (itemInHand == ItemStack.EMPTY) {
+            return;
+        }
+
+        if (!(itemInHand.getItem() instanceof BloodSwordItem bloodSwordItem)) {
+            return;
+        }
+
+        AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
+
+        if (attackDamage == null) {
+            return;
+        }
+
+        attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
+        int Bonus = bloodSwordItem.getData(itemInHand).getBonusDamage();
+
+        if (Bonus > 0) {
+            attackDamage.addTransientModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, Bonus, AttributeModifier.Operation.ADD_VALUE));
+        }
+    }
+
+    @Override
+    public void endAttack() {
+        AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
+
+        if (attackDamage != null) {
+            attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
+        }
     }
 }

@@ -2,9 +2,12 @@ package sqyro.classessmp.core.SavedData;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import sqyro.classessmp.ClassesSMP;
+import sqyro.classessmp.network.ClassesNetworking;
+import sqyro.classessmp.playerclasses.AncientWarden;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +17,14 @@ public class PlayerClassSavedData extends SavedData {
     private static final Codec<Map<String, String>> CLASS_CODEC = Codec.unboundedMap(Codec.STRING, Codec.STRING);
     private static final Codec<Map<String, Map<String, Long>>> COOLDOWN_CODEC = Codec.unboundedMap(Codec.STRING, Codec.unboundedMap(Codec.STRING, Codec.LONG));
     private static final Codec<Map<String, Integer>> GAMBLER_LEVEL_CODEC = Codec.unboundedMap(Codec.STRING, Codec.INT);
+    private static final Codec<Map<String, Integer>> NOISE_METER_CODEC = Codec.unboundedMap(Codec.STRING, Codec.INT);
 
-    private static final Codec<PlayerClassSavedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(CLASS_CODEC.fieldOf("classes").forGetter(data -> data.serializeClasses()), COOLDOWN_CODEC.fieldOf("cooldowns").forGetter(data -> data.serializeCooldowns()), GAMBLER_LEVEL_CODEC.fieldOf("gambler_levels").forGetter(PlayerClassSavedData::serializeGamblerLevels)).apply(instance, PlayerClassSavedData::new));
+    private static final Codec<PlayerClassSavedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(CLASS_CODEC.fieldOf("classes")
+            .forGetter(data -> data.serializeClasses()), COOLDOWN_CODEC.fieldOf("cooldowns")
+            .forGetter(data -> data.serializeCooldowns()), GAMBLER_LEVEL_CODEC.fieldOf("gambler_levels")
+            .forGetter(PlayerClassSavedData::serializeGamblerLevels),
+            NOISE_METER_CODEC.fieldOf("noise_meters").forGetter(PlayerClassSavedData::serializeNoiseMeters)
+    ).apply(instance, PlayerClassSavedData::new));
 
     public static final SavedDataType<PlayerClassSavedData> TYPE = new SavedDataType<>("player_classes", PlayerClassSavedData::new, CODEC, null);
 
@@ -24,13 +33,16 @@ public class PlayerClassSavedData extends SavedData {
 
     private final Map<UUID, Integer> gamblerLevels = new HashMap<>();
 
+    private final Map<UUID, Integer> noiseMeters = new HashMap<>();
+
     public PlayerClassSavedData() {
     }
 
-    private PlayerClassSavedData(Map<String, String> classes, Map<String, Map<String, Long>> cooldowns, Map<String, Integer> gamblerLevels) {
+    private PlayerClassSavedData(Map<String, String> classes, Map<String, Map<String, Long>> cooldowns, Map<String, Integer> gamblerLevels, Map<String, Integer> noiseMeters) {
         classes.forEach((uuID, ID) -> Classes.put(UUID.fromString(uuID), ID));
         cooldowns.forEach((uuID, Map) -> Cooldowns.put(UUID.fromString(uuID), new HashMap<>(Map)));
         gamblerLevels.forEach((uuid, level) -> this.gamblerLevels.put(UUID.fromString(uuid), level));
+        noiseMeters.forEach((uuID, Noise) -> this.noiseMeters.put(UUID.fromString(uuID), Noise));
     }
 
     private Map<String, String> serializeClasses() {
@@ -51,6 +63,12 @@ public class PlayerClassSavedData extends SavedData {
         Map<String, Integer> Map = new HashMap<>();
         gamblerLevels.forEach((uuID, level) -> Map.put(uuID.toString(), level));
 
+        return Map;
+    }
+
+    private Map<String, Integer> serializeNoiseMeters() {
+        Map<String, Integer> Map = new HashMap<>();
+        noiseMeters.forEach((uuID, Noise) -> Map.put(uuID.toString(), Noise));
         return Map;
     }
 
@@ -93,5 +111,26 @@ public class PlayerClassSavedData extends SavedData {
     public void setGamblerLevel(UUID uuID, int Level) {
         gamblerLevels.put(uuID, Level);
         setDirty();
+    }
+
+    public int getNoiseMeter(UUID uuID) {
+        return noiseMeters.getOrDefault(uuID, 0);
+    }
+
+    public void setNoiseMeter(ServerPlayer Player, int Value) {
+        int NewValue = Math.clamp(Value, 0, AncientWarden.NOISE_METER_MAX_VALUE);
+
+        if (noiseMeters.getOrDefault(Player.getUUID(), 0) == NewValue) {
+            return;
+        }
+
+        noiseMeters.put(Player.getUUID(), NewValue);
+        setDirty();
+
+        ClassesNetworking.sendNoiseMeter(Player, NewValue);
+    }
+
+    public void addNoise(ServerPlayer Player, int Amount) {
+        setNoiseMeter(Player,getNoiseMeter(Player.getUUID()) + Amount);
     }
 }

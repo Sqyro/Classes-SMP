@@ -24,6 +24,9 @@ public abstract class PlayerClass {
     public abstract void onKeybind1();
     public abstract void onKeybind2();
     public abstract void onKeybind3();
+    public abstract void beginAttack(Entity Target);
+    public abstract void endAttack();
+
 
     protected boolean isOnCooldown(String Ability) {
         return getCooldownTicks(Ability) > 0;

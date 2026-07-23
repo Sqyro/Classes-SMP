@@ -16,7 +16,9 @@
 		"LivingEntityMixin",
 		"MobMixin",
 		"PlayerMixin",
-		"ServerPlayerMixin"
+		"ServerPlayerMixin",
+		"GameEventDispatcherAccessor",
+		"GameEventDispatcherMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -46,5 +46,12 @@ public class ClassesClientNetworking {
                     ClientPlayerData.setBloodAmount(payload.Amount());
             });
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(NoiseMeterPacket.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ClientPlayerData.setNoiseMeter(payload.Value());
+            });
+        });
+
     }
 }

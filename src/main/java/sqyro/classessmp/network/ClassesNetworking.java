@@ -28,6 +28,8 @@ public class ClassesNetworking {
 
         PayloadTypeRegistry.playS2C().register(BloodSyncPacket.ID, BloodSyncPacket.CODEC);
 
+        PayloadTypeRegistry.playS2C().register(NoiseMeterPacket.ID, NoiseMeterPacket.CODEC);
+
         ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ServerPlayer Player = context.player();
@@ -110,5 +112,9 @@ public class ClassesNetworking {
 
     public static void sendBloodAmount(ServerPlayer Player, int Amount) {
         ServerPlayNetworking.send(Player, new BloodSyncPacket(Amount));
+    }
+
+    public static void sendNoiseMeter(ServerPlayer Player, int Value) {
+        ServerPlayNetworking.send(Player, new NoiseMeterPacket(Value));
     }
 }

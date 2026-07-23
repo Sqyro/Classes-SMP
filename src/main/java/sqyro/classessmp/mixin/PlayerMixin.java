@@ -38,15 +38,8 @@ public abstract class PlayerMixin {
 
         PlayerClass playerClass = ((PlayerClassHolder)Player).getPlayerClass();
 
-        if (playerClass instanceof Gambler gambler) {
-            ItemStack Stack = Player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!Stack.isEmpty() && Stack.has(DataComponents.WEAPON)) {
-                gambler.beginAttack(Target);
-            }
-        }
-
-        if (BloodSwordItem.canUse(Player, Player.getMainHandItem())) {
-            BloodSwordItem.beginAttack(Player, Player.getMainHandItem());
+        if (playerClass != null) {
+            playerClass.beginAttack(Target);
         }
     }
 
@@ -60,12 +53,8 @@ public abstract class PlayerMixin {
 
         PlayerClass playerClass = ((PlayerClassHolder)Player).getPlayerClass();
 
-        if (playerClass instanceof Gambler gambler) {
-            gambler.endAttack();
-        }
-
-        if (playerClass instanceof BloodSword bloodSword) {
-            BloodSwordItem.endAttack(Player);
+        if (playerClass != null) {
+            playerClass.endAttack();
         }
     }
 

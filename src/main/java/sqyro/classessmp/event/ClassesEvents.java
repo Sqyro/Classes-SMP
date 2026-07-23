@@ -5,12 +5,8 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
@@ -26,6 +22,7 @@ import sqyro.classessmp.items.BloodSwordData;
 import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
+import sqyro.classessmp.playerclasses.AncientWarden;
 import sqyro.classessmp.playerclasses.Gambler;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 import sqyro.classessmp.sounds.ClassesSounds;
@@ -82,6 +79,10 @@ public class ClassesEvents {
             ClassesNetworking.sendCooldownSync(handler.getPlayer());
             if (holder.getPlayerClass() instanceof Gambler gambler) {
                 ClassesNetworking.sendGamblerLevel(handler.getPlayer(), gambler.getBonusLevel());
+            }
+
+            if (holder.getPlayerClass() instanceof AncientWarden) {
+                ClassesNetworking.sendNoiseMeter(handler.getPlayer(), PlayerClassSavedDataGetter.get(handler.getPlayer().level()).getNoiseMeter(handler.getPlayer().getUUID()));
             }
 
             ItemStack MainHandStack = handler.getPlayer().getMainHandItem();

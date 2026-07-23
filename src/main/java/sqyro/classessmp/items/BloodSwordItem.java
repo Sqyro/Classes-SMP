@@ -24,8 +24,6 @@ public class BloodSwordItem extends ClassRestrictedItem {
         super(properties);
     }
 
-    private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "blood_sword_damage");
-
     @Override
     public String getRequiredClass() {
         return "blood_sword";
@@ -47,28 +45,5 @@ public class BloodSwordItem extends ClassRestrictedItem {
         PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
 
         return Stack.getItem() instanceof BloodSwordItem && playerClass != null && playerClass.getID().equals("blood_sword");
-    }
-
-    public static void beginAttack(ServerPlayer Player, ItemStack Stack) {
-        AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
-
-        if (attackDamage == null) {
-            return;
-        }
-
-        attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
-        int Bonus = getData(Stack).getBonusDamage();
-
-        if (Bonus > 0) {
-            attackDamage.addTransientModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, Bonus, AttributeModifier.Operation.ADD_VALUE));
-        }
-    }
-
-    public static void endAttack(ServerPlayer Player) {
-        AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
-
-        if (attackDamage != null) {
-            attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
-        }
     }
 }

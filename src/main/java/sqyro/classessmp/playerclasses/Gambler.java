@@ -1,15 +1,18 @@
 package sqyro.classessmp.playerclasses;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
@@ -108,33 +111,39 @@ public class Gambler extends PlayerClass {
         }
     }
 
+    @Override
     public void beginAttack(Entity Target) {
-        if (!(Target instanceof LivingEntity)) {
-            return;
+        ItemStack Stack = Player.getItemInHand(InteractionHand.MAIN_HAND);
+        if (!Stack.isEmpty() && Stack.has(DataComponents.WEAPON)) {
+            if (!(Target instanceof LivingEntity)) {
+                return;
+            }
+
+            AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
+
+            if (attackDamage == null) {
+                return;
+            }
+
+            attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
+
+            currentRoll = rollDamageModifier();
+            ClassesNetworking.sendGamblerRoll(Player, currentRoll);
+
+            ClassesSMP.LOGGER.info("{} of class {} rolled {} extra damage (Level {})", Player.getName().getString(), this.getID(), currentRoll, bonusLevel);
+
+            if (currentRoll == this.getMinModifier()) {
+                Player.level().playSound(null, Target.getX(), Target.getY(), Target.getZ(), ClassesSounds.GAMBLER_LOOSE, SoundSource.PLAYERS, 1f, 1f);
+            } else if (currentRoll == this.getMaxModifier()) {
+                Player.level().playSound(null, Target.getX(), Target.getY(), Target.getZ(), ClassesSounds.GAMBLER_JACKPOT, SoundSource.PLAYERS, 1f, 1f);
+                spawnJackpotParticles(Target);
+            }
+            attackDamage.addTransientModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, currentRoll, AttributeModifier.Operation.ADD_VALUE));
+
         }
-
-        AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
-
-        if (attackDamage == null) {
-            return;
-        }
-
-        attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
-
-        currentRoll = rollDamageModifier();
-        ClassesNetworking.sendGamblerRoll(Player, currentRoll);
-
-        ClassesSMP.LOGGER.info("{} of class {} rolled {} extra damage (Level {})", Player.getName().getString(), this.getID(), currentRoll, bonusLevel);
-
-        if (currentRoll == this.getMinModifier()) {
-            Player.level().playSound(null, Target.getX(), Target.getY(), Target.getZ(), ClassesSounds.GAMBLER_LOOSE, SoundSource.PLAYERS, 1f, 1f);
-        } else if (currentRoll == this.getMaxModifier()) {
-            Player.level().playSound(null, Target.getX(), Target.getY(), Target.getZ(), ClassesSounds.GAMBLER_JACKPOT, SoundSource.PLAYERS, 1f, 1f);
-            spawnJackpotParticles(Target);
-        }
-        attackDamage.addTransientModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, currentRoll, AttributeModifier.Operation.ADD_VALUE));
     }
 
+    @Override
     public void endAttack() {
         AttributeInstance attackDamage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
 

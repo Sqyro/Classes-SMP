@@ -1,6 +1,7 @@
 package sqyro.classessmp.playerclasses;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import sqyro.classessmp.core.PlayerClass;
 
 public class Terrorist extends PlayerClass {
@@ -35,6 +36,16 @@ public class Terrorist extends PlayerClass {
 
     @Override
     public void onKeybind3() {
+
+    }
+
+    @Override
+    public void beginAttack(Entity Target) {
+
+    }
+
+    @Override
+    public void endAttack() {
 
     }
 }

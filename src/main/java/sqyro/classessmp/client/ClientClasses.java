@@ -2,10 +2,7 @@ package sqyro.classessmp.client;
 
 import net.minecraft.resources.Identifier;
 import sqyro.classessmp.ClassesSMP;
-import sqyro.classessmp.playerclasses.BloodSword;
-import sqyro.classessmp.playerclasses.Pickpocket;
-import sqyro.classessmp.playerclasses.SnowScorpio;
-import sqyro.classessmp.playerclasses.Thunderbolt;
+import sqyro.classessmp.playerclasses.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +57,23 @@ public class ClientClasses {
                 )))
         );
         CLASSES.put("terrorist", new ClientClassData(List.of()));
+        CLASSES.put("ancient_warden", new ClientClassData(List.of(
+                new ClientAbility("noise_meter_freeze",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_freeze_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_freeze_color.png"),
+                        AncientWarden.NOISE_METER_FREEZE_COOLDOWN
+                ),
+                new ClientAbility("blinding",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blinding_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blinding_color.png"),
+                        AncientWarden.BLINDING_COOLDOWN
+                ),
+                new ClientAbility("sonic_boom",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sonic_boom_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sonic_boom_color.png"),
+                        AncientWarden.SONIC_BOOM_COOLDOWN
+                )))
+        );
     }
 
     public static ClientClassData get(String ID) {

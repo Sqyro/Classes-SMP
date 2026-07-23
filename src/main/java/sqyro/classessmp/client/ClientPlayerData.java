@@ -2,9 +2,9 @@ package sqyro.classessmp.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
-import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.items.BloodSwordData;
 import sqyro.classessmp.items.BloodSwordItem;
+import sqyro.classessmp.playerclasses.AncientWarden;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +24,8 @@ public class ClientPlayerData {
     private static long lastBloodAttack;
     private static float bloodFade = 1.0f;
 
+    private static int noiseMeter;
+
     public static void setClass(String ID) {
         classID = ID;
     }
@@ -38,6 +40,11 @@ public class ClientPlayerData {
 
     public static int getCooldown(String Ability) {
         return cooldowns.getOrDefault(Ability, 0);
+    }
+
+    public static void replaceCooldowns(Map<String,Integer> Values) {
+        cooldowns.clear();
+        cooldowns.putAll(Values);
     }
 
     public static void setGamblerLevel(int level) {
@@ -57,6 +64,11 @@ public class ClientPlayerData {
         return gamblerLastRoll;
     }
 
+    public static boolean shouldRenderGamblerRoll() {
+        Minecraft minecraft = Minecraft.getInstance();
+        boolean shouldRender = minecraft.level != null && minecraft.level.getGameTime() - gamblerLastRollTick < 40;
+        return shouldRender;
+    }
 
     public static void setBloodAmount(int amount) {
         bloodAmount = amount;
@@ -89,15 +101,12 @@ public class ClientPlayerData {
         return Mth.clamp(bloodIntensity, 0, 1);
     }
 
-    public static boolean shouldRenderGamblerRoll() {
-        Minecraft minecraft = Minecraft.getInstance();
-        boolean shouldRender = minecraft.level != null && minecraft.level.getGameTime() - gamblerLastRollTick < 40;
-        return shouldRender;
+    public static void setNoiseMeter(int Value) {
+        noiseMeter = Mth.clamp(Value, 0, AncientWarden.NOISE_METER_MAX_VALUE);
     }
 
-    public static void replaceCooldowns(Map<String,Integer> Values) {
-        cooldowns.clear();
-        cooldowns.putAll(Values);
+    public static int getNoiseMeter() {
+        return noiseMeter;
     }
 
     public static void clear() {
@@ -112,6 +121,8 @@ public class ClientPlayerData {
         bloodIntensity = 0;
         bloodFade = 1.0f;
         lastBloodAttack = 0;
+
+        noiseMeter = 0;
     }
 
     public static void tick() {
