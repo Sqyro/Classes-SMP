@@ -27,5 +27,10 @@ public abstract class KeyboardInputMixin {
             Input keys = Accessor.getKeyPresses();
             Accessor.setKeyPresses(new Input(keys.forward(), keys.backward(), keys.left(), keys.right(), false, keys.shift(), false));
         }
+
+        if (Instance.player != null && Instance.player.hasEffect(ClassesEffects.ROOTING)) {
+            Accessor.setKeyPresses(Input.EMPTY);
+            Accessor.setMoveVector(Vec2.ZERO);
+        }
     }
 }

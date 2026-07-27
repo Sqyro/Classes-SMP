@@ -1,4 +1,4 @@
-package sqyro.classessmp.core;
+package sqyro.classessmp.items;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -8,14 +8,16 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
-import sqyro.classessmp.items.ClassesItems;
+import sqyro.classessmp.blocks.ClassesBlocks;
 
 public class ClassesCreativeTabs {
     public static final CreativeModeTab CLASSES_TAB = FabricItemGroup.builder().icon(() -> new ItemStack(ClassesItems.BLOODSWORD))
             .title(Component.translatable("itemGroup.classessmp"))
             .displayItems((context, entries) -> {
                 entries.accept(ClassesItems.BLOODSWORD);
+                entries.accept(ClassesItems.CLOWNSWORD);
                 entries.accept(ClassesItems.C4);
+                entries.accept(ClassesBlocks.WHITE_KEYPAD);
 
             }).build();
 

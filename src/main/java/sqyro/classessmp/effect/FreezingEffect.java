@@ -1,7 +1,5 @@
 package sqyro.classessmp.effect;
 
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;

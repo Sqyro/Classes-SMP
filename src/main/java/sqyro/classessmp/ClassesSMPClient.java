@@ -3,7 +3,7 @@ package sqyro.classessmp;
 import net.fabricmc.api.ClientModInitializer;
 import sqyro.classessmp.client.*;
 import sqyro.classessmp.event.ClassesClientEvents;
-import sqyro.classessmp.particle.ParticleFactory;
+import sqyro.classessmp.particle.ClassesParticles;
 
 public class ClassesSMPClient implements ClientModInitializer {
     @Override
@@ -16,8 +16,8 @@ public class ClassesSMPClient implements ClientModInitializer {
         FreezeOverlay.register();
         ClassesHud.register();
         ClientSounds.register();
+        ClassesParticles.register();
 
-        //ParticleFactory.register();
         AbilityIndicatorHud.register();
 
         ClassesClientNetworking.register();

@@ -18,6 +18,7 @@ public class ClassesNetworking {
         PayloadTypeRegistry.playC2S().register(Keybind3Packet.ID, Keybind3Packet.CODEC);
 
         PayloadTypeRegistry.playS2C().register(FreezeSyncPacket.ID, FreezeSyncPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(RootSyncPacket.ID, RootSyncPacket.CODEC);
 
         PayloadTypeRegistry.playS2C().register(ClassSyncPacket.ID, ClassSyncPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(CooldownStartPacket.ID, CooldownStartPacket.CODEC);
@@ -66,6 +67,16 @@ public class ClassesNetworking {
 
     public static void sendFreezeSync(ServerLevel Level, LivingEntity Entity, boolean Frozen) {
         FreezeSyncPacket Packet = new FreezeSyncPacket(Entity.getId(), Frozen);
+
+        for (ServerPlayer Player : Level.players()) {
+            if (Player.distanceTo(Entity) < 128) {
+                ServerPlayNetworking.send(Player, Packet);
+            }
+        }
+    }
+
+    public static void sendRootSync(ServerLevel Level, LivingEntity Entity, boolean Rooted) {
+        RootSyncPacket Packet = new RootSyncPacket(Entity.getId(), Rooted);
 
         for (ServerPlayer Player : Level.players()) {
             if (Player.distanceTo(Entity) < 128) {

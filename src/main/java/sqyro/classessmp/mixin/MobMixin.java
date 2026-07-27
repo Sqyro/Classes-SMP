@@ -11,7 +11,7 @@ import sqyro.classessmp.effect.ClassesEffects;
 public class MobMixin {
     @Inject(method = "serverAiStep", at = @At("HEAD"), cancellable = true)
     private void classessmp$stopMobAI(CallbackInfo callbackInfo) {
-        if (((Mob)(Object)this).hasEffect(ClassesEffects.FREEZING)) {
+        if (((Mob)(Object)this).hasEffect(ClassesEffects.FREEZING) || ((Mob)(Object)this).hasEffect(ClassesEffects.ROOTING)) {
             callbackInfo.cancel();
         }
     }

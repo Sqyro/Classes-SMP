@@ -19,10 +19,7 @@ public class EndPortalBlockMixin {
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void injectOnEntityCollision(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean bl, CallbackInfo ci) {
         MinecraftServer s = level.getServer();
-        if (s != null
-                && s.overworld().getGameRules().get(ClassesSMP.DISABLE_END).equals(true)
-                && level instanceof ServerLevel
-                && entity.level().dimension() != Level.END) {
+        if (s != null && s.overworld().getGameRules().get(ClassesSMP.DISABLE_END).equals(true) && level instanceof ServerLevel && entity.level().dimension() != Level.END) {
             ci.cancel();
         }
     }

@@ -18,6 +18,7 @@ import sqyro.classessmp.playerclasses.Gambler;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
     private boolean classessmp$wasFrozen;
+    private boolean classessmp$wasRooted;
 
     @Inject(method = "aiStep", at = @At("TAIL"))
     private void classessmp$freezeEntity(CallbackInfo callbackInfo) {
@@ -29,6 +30,15 @@ public class LivingEntityMixin {
             classessmp$wasFrozen = Frozen;
             if (!Entity.level().isClientSide() && Entity.level() instanceof ServerLevel serverLevel) {
                 ClassesNetworking.sendFreezeSync(serverLevel, Entity, Frozen);
+            }
+        }
+
+        boolean Rooted = Entity.hasEffect(ClassesEffects.ROOTING);
+
+        if (Rooted != classessmp$wasRooted) {
+            classessmp$wasRooted = Rooted;
+            if (!Entity.level().isClientSide() && Entity.level() instanceof ServerLevel serverLevel) {
+                ClassesNetworking.sendRootSync(serverLevel, Entity, Rooted);
             }
         }
 

@@ -53,5 +53,10 @@
     "sounds": [
       "classes-smp:shocked_impact"
     ]
+  },
+  "clown_kill": {
+    "sounds": [
+      "classes-smp:clown_kill"
+    ]
   }
 }

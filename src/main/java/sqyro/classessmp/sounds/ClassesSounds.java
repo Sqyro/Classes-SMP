@@ -22,6 +22,8 @@ public class ClassesSounds {
     public static final SoundEvent CHAIN_LIGHTNING = register("chain_lightning");
     public static final SoundEvent SHOCKED_IMPACT = register("shocked_impact");
 
+    public static final SoundEvent CLOWN_KILL = register("clown_kill");
+
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
 

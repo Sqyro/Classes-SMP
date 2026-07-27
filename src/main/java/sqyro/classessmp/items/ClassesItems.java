@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 public class ClassesItems {
     public static final Item BLOODSWORD = registerItem("bloodsword", settings -> new BloodSwordItem(settings.sword(ToolMaterial.DIAMOND, 2.0F, -2.4F).rarity(Rarity.RARE)));
+    public static final Item CLOWNSWORD = registerItem("clownsword", settings -> new ClownSwordItem(settings.sword(ToolMaterial.DIAMOND, 3.0F, -2.4F).rarity(Rarity.RARE)));
     public static final Item C4 = registerItem("c4", settings -> new C4Item(settings));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {

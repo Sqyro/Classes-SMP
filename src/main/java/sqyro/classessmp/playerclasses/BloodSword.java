@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.core.PlayerClass;
-import sqyro.classessmp.items.BloodSwordData;
+import sqyro.classessmp.items.KillCountingSwordData;
 import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
@@ -63,8 +63,8 @@ public class BloodSword extends PlayerClass {
         }
 
         if (ItemStackInHand.getItem() instanceof BloodSwordItem) {
-            BloodSwordData bloodSwordData = BloodSwordItem.getData(ItemStackInHand);
-            BloodSwordData newData = bloodSwordData.removeKill();
+            KillCountingSwordData killCountingSwordData = BloodSwordItem.getData(ItemStackInHand);
+            KillCountingSwordData newData = killCountingSwordData.removeKill();
             if (newData == null) {
                 ClassesSMP.LOGGER.info("{} of class: {} tried to activate Life Steal, but has no blood", Player.getName().getString(), this.getID());
                 return;
@@ -72,11 +72,11 @@ public class BloodSword extends PlayerClass {
 
             ClassesSMP.LOGGER.info("{} of class: {} activated Life Steal", Player.getName().getString(), this.getID());
             setCooldown(LIFE_STEAL_ID, LIFE_STEAL_COOLDOWN);
-            ItemStackInHand.set(ClassesDataComponents.BLOOD_SWORD_DATA, newData);
+            ItemStackInHand.set(ClassesDataComponents.KILL_COUNTING_SWORD_DATA, newData);
 
             Player.containerMenu.broadcastChanges();
 
-            ItemStackInHand.set(ClassesDataComponents.BLOOD_SWORD_DATA, newData);
+            ItemStackInHand.set(ClassesDataComponents.KILL_COUNTING_SWORD_DATA, newData);
             ClassesNetworking.sendBloodAmount(Player, newData.getKillCount());
 
             Player.heal(LIFE_STEAL_HEAL);
@@ -112,7 +112,7 @@ public class BloodSword extends PlayerClass {
             return;
         }
 
-        if (!(itemInHand.getItem() instanceof BloodSwordItem bloodSwordItem)) {
+        if (!(itemInHand.getItem() instanceof BloodSwordItem)) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class BloodSword extends PlayerClass {
         }
 
         attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
-        int Bonus = bloodSwordItem.getData(itemInHand).getBonusDamage();
+        int Bonus = BloodSwordItem.getData(itemInHand).getKillCount();
 
         if (Bonus > 0) {
             attackDamage.addTransientModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, Bonus, AttributeModifier.Operation.ADD_VALUE));

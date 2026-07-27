@@ -19,6 +19,7 @@ public class PlayerClasses {
         CLASSES.put("thunderbolt", Thunderbolt::new);
         CLASSES.put("terrorist", Terrorist::new);
         CLASSES.put("ancient_warden", AncientWarden::new);
+        CLASSES.put("clown", Clown::new);
     }
 
     public static PlayerClass create(String ID, ServerPlayer Player) {

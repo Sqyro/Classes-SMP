@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "classes-smp:block/white_keypad"
+    },
+    "facing=east": {
+      "model": "classes-smp:block/white_keypad",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "classes-smp:block/white_keypad",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "classes-smp:block/white_keypad",
+      "y": 270
+    }
+  }
+}

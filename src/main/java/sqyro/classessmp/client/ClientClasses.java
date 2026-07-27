@@ -74,6 +74,23 @@ public class ClientClasses {
                         AncientWarden.SONIC_BOOM_COOLDOWN
                 )))
         );
+        CLASSES.put("clown", new ClientClassData(List.of(
+                new ClientAbility("circus_cage",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/circus_cage_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/circus_cage_color.png"),
+                        Clown.CIRCUS_CAGE_COOLDOWN
+                ),
+                new ClientAbility("tri_card_attack",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/tri_card_attack_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/tri_card_attack_color.png"),
+                        Clown.TRI_CARD_ATTACK_COOLDOWN
+                ),
+                new ClientAbility("circus_finale",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/circus_finale_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/circus_finale_color.png"),
+                        Clown.CIRCUS_FINALE_COOLDOWN
+                )))
+        );
     }
 
     public static ClientClassData get(String ID) {

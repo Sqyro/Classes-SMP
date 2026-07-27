@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "classes-smp:block/white_keypad_front",
+    "side": "classes-smp:block/white_keypad",
+    "top": "classes-smp:block/white_keypad"
+  }
+}

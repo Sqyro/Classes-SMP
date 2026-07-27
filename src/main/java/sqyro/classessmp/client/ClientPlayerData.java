@@ -2,7 +2,7 @@ package sqyro.classessmp.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
-import sqyro.classessmp.items.BloodSwordData;
+import sqyro.classessmp.items.KillCountingSwordData;
 import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.playerclasses.AncientWarden;
 
@@ -94,7 +94,7 @@ public class ClientPlayerData {
             bloodFade = 1.0f;
         }
 
-        float Target = bloodAmount / (float) BloodSwordData.MAX_DAMAGE;
+        float Target = bloodAmount / (float) BloodSwordItem.MAX_KILLS;
 
         bloodIntensity += (Target * bloodFade - bloodIntensity) * 0.02f;
 

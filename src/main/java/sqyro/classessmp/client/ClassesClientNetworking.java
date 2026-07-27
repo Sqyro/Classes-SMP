@@ -29,6 +29,12 @@ public class ClassesClientNetworking {
             });
         });
 
+        ClientPlayNetworking.registerGlobalReceiver(RootSyncPacket.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                RootingClientCache.setRooted(payload.entityID(), payload.Rooted());
+            });
+        });
+
         ClientPlayNetworking.registerGlobalReceiver(GamblerLevelSyncPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClientPlayerData.setGamblerLevel(payload.Level());

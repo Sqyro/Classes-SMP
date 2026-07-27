@@ -9,7 +9,8 @@ import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRuleCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sqyro.classessmp.core.ClassesCreativeTabs;
+import sqyro.classessmp.blocks.ClassesBlocks;
+import sqyro.classessmp.items.ClassesCreativeTabs;
 import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.ClassesEvents;
@@ -22,7 +23,7 @@ import sqyro.classessmp.sounds.ClassesSounds;
 public class ClassesSMP implements ModInitializer {
 	public static final String MOD_ID = "classes-smp";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final GameRule<Boolean> DISABLE_END = GameRuleBuilder.forBoolean(false).category(GameRuleCategory.MISC).buildAndRegister(Identifier.fromNamespaceAndPath(MOD_ID, "disable_end"));
+	public static final GameRule<Boolean> DISABLE_END = GameRuleBuilder.forBoolean(true).category(GameRuleCategory.MISC).buildAndRegister(Identifier.fromNamespaceAndPath(MOD_ID, "disable_end"));
 
 	@Override
 	public void onInitialize() {
@@ -30,11 +31,11 @@ public class ClassesSMP implements ModInitializer {
 		ClassesDataComponents.register();
 
 		ClassesItems.register();
+		ClassesBlocks.register();
 		ClassesCreativeTabs.register();
 
 		ClassesEffects.register();
 		ClassesSounds.register();
-		ClassesParticles.register();
 
 		ClassesEvents.registerEvents();
 		ClassesNetworking.registerServer();

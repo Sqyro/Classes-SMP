@@ -2,6 +2,9 @@ package sqyro.classessmp.items;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import sqyro.classessmp.core.PlayerClass;
+import sqyro.classessmp.core.PlayerClassHolder;
 import sqyro.classessmp.core.SavedData.PlayerClassSavedDataGetter;
 
 public abstract class ClassRestrictedItem extends Item {

@@ -30,4 +30,6 @@ public class ClientAbility {
     public int getMaxCooldown() {
         return maxCooldown;
     }
+
+
 }

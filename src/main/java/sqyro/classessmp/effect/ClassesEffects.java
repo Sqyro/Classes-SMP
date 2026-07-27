@@ -10,6 +10,7 @@ import sqyro.classessmp.ClassesSMP;
 public class ClassesEffects {
     public static final Holder<MobEffect> FREEZING = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "freezing"), new FreezingEffect());
     public static final Holder<MobEffect> SHOCKED = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "shocked"), new ShockedEffect());
+    public static final Holder<MobEffect> ROOTING = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "rooting"), new RootingEffect());
 
     public static void register() {}
 }
