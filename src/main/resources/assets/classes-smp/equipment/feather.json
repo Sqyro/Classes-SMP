@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "classes-smp:feather"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "classes-smp:feather"
+      }
+    ]
+  }
+}

@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import sqyro.classessmp.ClassesSMP;
 
@@ -18,9 +19,19 @@ public class ClassesItems {
     public static final Item CLOWNSWORD = registerItem("clownsword", settings -> new ClownSwordItem(settings.sword(ToolMaterial.DIAMOND, 3.0F, -2.4F).rarity(Rarity.RARE)));
     public static final Item C4 = registerItem("c4", settings -> new C4Item(settings));
 
+    public static final Item FEATHER_HELMET = registerItem("feather_helmet", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.HELMET));
+    public static final Item FEATHER_CHESTPLATE = registerItem("feather_chestplate", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.CHESTPLATE));
+    public static final Item FEATHER_LEGGINGS = registerItem("feather_leggings", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.LEGGINGS));
+    public static final Item FEATHER_BOOTS = registerItem("feather_boots", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.BOOTS));
+
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);
         return Registry.register(BuiltInRegistries.ITEM, ID, Function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ID))));
+    }
+
+    private static Item registerItem(String name, Item.Properties properties) {
+        Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, name);
+        return Registry.register(BuiltInRegistries.ITEM, ID, new Item(properties.setId(ResourceKey.create(Registries.ITEM, ID))));
     }
 
     public static void register() {

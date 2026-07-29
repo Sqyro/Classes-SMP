@@ -91,6 +91,7 @@ public class ClientClasses {
                         Clown.CIRCUS_FINALE_COOLDOWN
                 )))
         );
+        CLASSES.put("builder", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {
