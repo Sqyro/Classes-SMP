@@ -125,6 +125,7 @@ public class ClassesEvents {
             if (!(source.getEntity() instanceof ServerPlayer Player)) {
                 return;
             }
+
             /*
             if (!(entity instanceof ServerPlayer)) {
                 return;
