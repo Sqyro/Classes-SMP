@@ -92,6 +92,7 @@ public class ClientClasses {
                 )))
         );
         CLASSES.put("builder", new ClientClassData(List.of()));
+        CLASSES.put("thevessel", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {
