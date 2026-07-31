@@ -16,7 +16,6 @@ import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.ClassesEvents;
 import sqyro.classessmp.items.ClassesItems;
 import sqyro.classessmp.network.ClassesNetworking;
-import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 import sqyro.classessmp.sounds.ClassesSounds;
 

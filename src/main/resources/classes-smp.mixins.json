@@ -19,7 +19,9 @@
 		"ServerPlayerMixin",
 		"GameEventDispatcherAccessor",
 		"GameEventDispatcherMixin",
-		"EndPortalBlockMixin"
+		"EndPortalBlockMixin",
+		"DebugHudMixin",
+		"TripwireHookBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
