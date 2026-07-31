@@ -23,6 +23,7 @@ public class ClassesSMP implements ModInitializer {
 	public static final String MOD_ID = "classes-smp";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final GameRule<Boolean> DISABLE_END = GameRuleBuilder.forBoolean(true).category(GameRuleCategory.MISC).buildAndRegister(Identifier.fromNamespaceAndPath(MOD_ID, "disable_end"));
+	public static final GameRule<Integer> MAX_MACE = GameRuleBuilder.forInteger(2).category(GameRuleCategory.MISC).buildAndRegister(Identifier.fromNamespaceAndPath(MOD_ID, "max_mace"));
 
 	@Override
 	public void onInitialize() {
