@@ -5,12 +5,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import sqyro.classessmp.ClassesSMP;
+import sqyro.classessmp.playerclasses.PlayerClasses;
+import sqyro.classessmp.playerclasses.SigeonPex;
 
 import java.util.function.Function;
 
@@ -23,6 +26,9 @@ public class ClassesItems {
     public static final Item FEATHER_CHESTPLATE = registerItem("feather_chestplate", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.CHESTPLATE));
     public static final Item FEATHER_LEGGINGS = registerItem("feather_leggings", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.LEGGINGS));
     public static final Item FEATHER_BOOTS = registerItem("feather_boots", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.BOOTS));
+
+    public static final Item ELEPHANT_SPAWNER = registerItem("elephant_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", EntityType.ARMADILLO));
+    public static final Item LASER_CHICKEN_SPAWNER = registerItem("laser_chicken_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", EntityType.ARMADILLO));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);

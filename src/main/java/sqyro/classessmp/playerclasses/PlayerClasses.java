@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class PlayerClasses {
-    private static final Map<String, Function<ServerPlayer, PlayerClass>> CLASSES = new HashMap<>();
+    public static final Map<String, Function<ServerPlayer, PlayerClass>> CLASSES = new HashMap<>();
 
     public static void register() {
         CLASSES.put("snow_scorpio", SnowScorpio::new);
@@ -21,7 +21,8 @@ public class PlayerClasses {
         CLASSES.put("ancient_warden", AncientWarden::new);
         CLASSES.put("clown", Clown::new);
         CLASSES.put("builder", Builder::new);
-        CLASSES.put("thevessel", TheVessel::new);
+        CLASSES.put("the_vessel", TheVessel::new);
+        CLASSES.put("sigeon_pex", SigeonPex::new);
     }
 
     public static PlayerClass create(String ID, ServerPlayer Player) {

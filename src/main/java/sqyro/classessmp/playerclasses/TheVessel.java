@@ -21,7 +21,7 @@ public class TheVessel extends PlayerClass {
 
     @Override
     public String getID() {
-        return "thevessel";
+        return "the_vessel";
     }
 
     @Override
