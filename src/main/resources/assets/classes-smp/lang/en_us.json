@@ -1,6 +1,7 @@
 {
   "effect.classes-smp.freezing": "Frozen",
   "effect.classes-smp.shocked": "Shocked",
+  "effect.classes-smp.rooting": "Rooting",
 
   "itemGroup.classessmp": "Classes SMP",
 
