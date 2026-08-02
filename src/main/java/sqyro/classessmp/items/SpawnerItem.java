@@ -1,8 +1,27 @@
 package sqyro.classessmp.items;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import org.jspecify.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class SpawnerItem extends ClassRestrictedItem {
+    public static final int SPAWNER_ITEM_COOLDOWN = 100;
+    public static final int SPAWNER_ITEM_OFFSET_RANGE = 3;
+
     private final String requiredClassID;
     private final EntityType SpawnedEntity;
 
@@ -15,5 +34,55 @@ public class SpawnerItem extends ClassRestrictedItem {
     @Override
     protected String getRequiredClass() {
         return requiredClassID;
+    }
+
+    /*
+    @Override
+    public InteractionResult useOn(UseOnContext useOnContext) {
+        Player usePlayer = useOnContext.getPlayer();
+        Supplier<Integer> RandomOffset = () -> usePlayer.getRandom().nextInt(-5, 5);
+        BlockPos spawnPos = new BlockPos((int)usePlayer.getX() + RandomOffset.get(), (int)usePlayer.getY(), (int)usePlayer.getZ() + RandomOffset.get());
+        ItemStack thisItemStack = useOnContext.getItemInHand();
+        usePlayer.getCooldowns().addCooldown(thisItemStack, SPAWNER_ITEM_COOLDOWN);
+        return this.spawnMob(usePlayer, thisItemStack, useOnContext.getLevel(), spawnPos);
+    }
+    */
+
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
+        if (level instanceof ServerLevel) {
+            Supplier<Integer> RandomOffset = () -> player.getRandom().nextInt(-SPAWNER_ITEM_OFFSET_RANGE, SPAWNER_ITEM_OFFSET_RANGE);
+            BlockPos spawnPos = new BlockPos((int) player.getX() + RandomOffset.get(), (int) player.getY(), (int) player.getZ() + RandomOffset.get());
+
+            while (!level.getBlockState(spawnPos).isAir()) {
+                spawnPos = spawnPos.above();
+            }
+            while (!level.getBlockState(spawnPos.below()).canOcclude()) {
+                spawnPos = spawnPos.below();
+            }
+
+            ItemStack thisItemStack = player.getItemInHand(interactionHand);
+            player.getCooldowns().addCooldown(thisItemStack, SPAWNER_ITEM_COOLDOWN);
+
+            return this.spawnMob(player, thisItemStack, level, spawnPos);
+        } else {
+            return InteractionResult.SUCCESS;
+        }
+    }
+
+    private InteractionResult spawnMob(@Nullable LivingEntity livingEntity, ItemStack itemStack, Level level, BlockPos blockPos) {
+        EntityType<?> entityType = this.SpawnedEntity;
+        if (entityType == null) {
+            return InteractionResult.FAIL;
+        }
+
+        if (entityType.spawn((ServerLevel)level, itemStack, livingEntity, blockPos, EntitySpawnReason.SPAWN_ITEM_USE, false, false) != null) {
+            level.gameEvent(livingEntity, GameEvent.ENTITY_PLACE, blockPos);
+        }
+
+        level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundEvents.BRUSH_SAND_COMPLETED, SoundSource.PLAYERS);
+        ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 20, 0.4, 0.6, 0.4, 0.05);
+
+        return InteractionResult.SUCCESS;
     }
 }
