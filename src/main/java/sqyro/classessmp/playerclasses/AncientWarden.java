@@ -45,7 +45,7 @@ public class AncientWarden extends PlayerClass {
     public static final int BLINDING_COOLDOWN = 600;
     public static final int BLINDING_NOISE_CONSUMPTION = 13;
     public static final int BLINDING_RADIUS = 50;
-    public static final int BLINDING_DURATION = 300;
+    public static final int BLINDING_DURATION = 200;
 
     private static final String SONIC_BOOM_ID = "sonic_boom";
     public static final int SONIC_BOOM_COOLDOWN = 800;

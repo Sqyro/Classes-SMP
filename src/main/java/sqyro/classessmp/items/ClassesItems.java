@@ -12,8 +12,6 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import sqyro.classessmp.ClassesSMP;
-import sqyro.classessmp.playerclasses.PlayerClasses;
-import sqyro.classessmp.playerclasses.SigeonPex;
 
 import java.util.function.Function;
 
