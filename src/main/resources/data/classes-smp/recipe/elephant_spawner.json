@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "W": "minecraft:gray_wool"
+  },
+  "pattern": [
+    " I ",
+    "IWI",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "classes-smp:elephant_spawner"
+  }
+}

@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jspecify.annotations.Nullable;
+import sqyro.classessmp.core.PlayerClassHolder;
 
 import java.util.function.Supplier;
 
@@ -36,21 +37,13 @@ public class SpawnerItem extends ClassRestrictedItem {
         return requiredClassID;
     }
 
-    /*
-    @Override
-    public InteractionResult useOn(UseOnContext useOnContext) {
-        Player usePlayer = useOnContext.getPlayer();
-        Supplier<Integer> RandomOffset = () -> usePlayer.getRandom().nextInt(-5, 5);
-        BlockPos spawnPos = new BlockPos((int)usePlayer.getX() + RandomOffset.get(), (int)usePlayer.getY(), (int)usePlayer.getZ() + RandomOffset.get());
-        ItemStack thisItemStack = useOnContext.getItemInHand();
-        usePlayer.getCooldowns().addCooldown(thisItemStack, SPAWNER_ITEM_COOLDOWN);
-        return this.spawnMob(usePlayer, thisItemStack, useOnContext.getLevel(), spawnPos);
-    }
-    */
-
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
         if (level instanceof ServerLevel) {
+            if (!(player instanceof PlayerClassHolder Holder) || Holder.getPlayerClass() == null || !Holder.getPlayerClass().getID().equals(getRequiredClass())) {
+                return InteractionResult.FAIL;
+            }
+
             Supplier<Integer> RandomOffset = () -> player.getRandom().nextInt(-SPAWNER_ITEM_OFFSET_RANGE, SPAWNER_ITEM_OFFSET_RANGE);
             BlockPos spawnPos = new BlockPos((int) player.getX() + RandomOffset.get(), (int) player.getY(), (int) player.getZ() + RandomOffset.get());
 

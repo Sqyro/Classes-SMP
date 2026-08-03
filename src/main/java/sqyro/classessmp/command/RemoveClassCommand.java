@@ -27,8 +27,16 @@ public class RemoveClassCommand {
                     Collection<ServerPlayer> Targets = EntityArgument.getPlayers(context, "target");
                     PlayerClassSavedData savedData = PlayerClassSavedDataGetter.get(context.getSource().getServer().overworld());
 
+                    int hitTargets = 0;
+
                     for (ServerPlayer Player : Targets) {
                         PlayerClassHolder holder = (PlayerClassHolder) Player;
+
+                        if (holder.getPlayerClass() == null) {
+                            continue;
+                        }
+
+                        hitTargets++;
 
                         holder.setPlayerClass(null);
                         holder.setSavedClassID("none");
@@ -39,7 +47,8 @@ public class RemoveClassCommand {
                         Player.sendSystemMessage(Component.literal("Your class has been removed.").withStyle(ChatFormatting.RED));
                     }
 
-                    context.getSource().sendSuccess(() -> Component.literal("Removed class from " + Targets.size() + " player(s).").withStyle(ChatFormatting.GRAY), true);
+                    int finalHitTargets = hitTargets;
+                    context.getSource().sendSuccess(() -> Component.literal("Removed class from " + finalHitTargets + " player(s).").withStyle(ChatFormatting.GRAY), true);
 
                     return Targets.size();
                 }))
