@@ -7,3 +7,8 @@ This Mod is licensed under ARR License. Do not copy/fork unless explicitly state
 ## Usage
 
 Core minecraft mod for the Classes SMP
+
+Adds multiple unique classes for PvP and building
+
+/choseclass <class_id>
+/removeclass @<target>
