@@ -4,4 +4,6 @@
 
 This Mod is licensed under ARR License. Do not copy/fork unless explicitly stated
 
-Core mod for the classes SMP minecraft sercer
+## Usage
+
+Core minecraft mod for the Classes SMP
