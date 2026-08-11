@@ -3,6 +3,7 @@ package sqyro.classessmp.core.SavedData;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import sqyro.classessmp.ClassesSMP;
@@ -85,8 +86,13 @@ public class PlayerClassSavedData extends SavedData {
         return ID;
     }
 
-    public void removeClass(UUID uuid) {
-        Classes.remove(uuid);
+    public void removeClass(Player Player) {
+        if (Player.getAbilities().mayfly && !Player.isCreative() && !Player.isSpectator()) {
+            Player.getAbilities().mayfly = false;
+            Player.getAbilities().flying = false;
+            Player.onUpdateAbilities();
+        }
+        Classes.remove(Player.getUUID());
         setDirty();
     }
 

@@ -9,6 +9,7 @@
   "item.classes-smp.clownsword": "Clown Schwert",
   "item.classes-smp.c4": "C4",
   "item.classes-smp.white_keypad": "Weißes Tastenschloss",
+  "item.classes-smp.bossminer2000": "Bossminer 2000",
   "item.classes-smp.feather_helmet": "Federkappe",
   "item.classes-smp.feather_chestplate": "Federjacke",
   "item.classes-smp.feather_leggings": "Federhose",
@@ -17,6 +18,7 @@
   "item.classes-smp.laser_chicken_spawner": "Laser Hühnchen Spawner",
 
   "block.classes-smp.white_keypad": "Weißes Tastenschloss",
+  "block.classes-smp.bossminer2000": "Bossminer 2000",
 
   "key.category.classes-smp.abilities": "Classes SMP Fähigkeiten",
   "key.classessmp.ability1": "Fähigkeit 1",

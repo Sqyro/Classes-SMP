@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "classes-smp:block/bossminer2000"
+    },
+    "facing=east": {
+      "model": "classes-smp:block/bossminer2000",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "classes-smp:block/bossminer2000",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "classes-smp:block/bossminer2000",
+      "y": 270
+    }
+  }
+}

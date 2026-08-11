@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:black_wool",
+    "P": "minecraft:diamond_pickaxe",
+    "Y": "minecraft:yellow_wool"
+  },
+  "pattern": [
+    " Y ",
+    "BBP",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "classes-smp:bossminer2000"
+  }
+}

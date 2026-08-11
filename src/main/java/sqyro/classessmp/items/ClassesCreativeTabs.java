@@ -18,6 +18,7 @@ public class ClassesCreativeTabs {
                 entries.accept(ClassesItems.CLOWNSWORD);
                 entries.accept(ClassesItems.C4);
                 entries.accept(ClassesBlocks.WHITE_KEYPAD);
+                entries.accept(ClassesBlocks.BOSSMINER2000);
                 entries.accept(ClassesItems.FEATHER_HELMET);
                 entries.accept(ClassesItems.FEATHER_CHESTPLATE);
                 entries.accept(ClassesItems.FEATHER_LEGGINGS);

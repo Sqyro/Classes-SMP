@@ -24,6 +24,8 @@ public class ClassesSounds {
 
     public static final SoundEvent CLOWN_KILL = register("clown_kill");
 
+    public static final SoundEvent BOSSMINER2000_SQUISH = register("bossminer2000_squish");
+
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
 

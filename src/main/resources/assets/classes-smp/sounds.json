@@ -58,5 +58,10 @@
     "sounds": [
       "classes-smp:clown_kill"
     ]
+  },
+  "bossminer2000_squish": {
+    "sounds": [
+      "classes-smp:bossminer2000_squish"
+    ]
   }
 }

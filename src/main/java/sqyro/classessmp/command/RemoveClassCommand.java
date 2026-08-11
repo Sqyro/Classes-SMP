@@ -41,7 +41,7 @@ public class RemoveClassCommand {
                         holder.setPlayerClass(null);
                         holder.setSavedClassID("none");
 
-                        savedData.removeClass(Player.getUUID());
+                        savedData.removeClass(Player);
                         ClassesNetworking.sendClassSync(Player);
 
                         Player.sendSystemMessage(Component.literal("Your class has been removed.").withStyle(ChatFormatting.RED));
