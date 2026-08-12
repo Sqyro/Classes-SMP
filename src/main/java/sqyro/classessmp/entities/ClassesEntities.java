@@ -14,7 +14,7 @@ public class ClassesEntities {
 
     public static final EntityType<ElephantEntity> ELEPHANT = Registry.register(BuiltInRegistries.ENTITY_TYPE,
             Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "elephant"), EntityType.Builder.of(ElephantEntity::new, MobCategory.CREATURE)
-                    .sized(1.0F, 2.5F)
+                    .sized(2.5F, 3.0F)
                     .build(ELEPHANT_KEY)
     );
 

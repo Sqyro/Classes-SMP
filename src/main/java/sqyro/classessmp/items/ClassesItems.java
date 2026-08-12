@@ -12,6 +12,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import sqyro.classessmp.ClassesSMP;
+import sqyro.classessmp.entities.ClassesEntities;
 
 import java.util.function.Function;
 
@@ -25,7 +26,7 @@ public class ClassesItems {
     public static final Item FEATHER_LEGGINGS = registerItem("feather_leggings", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.LEGGINGS));
     public static final Item FEATHER_BOOTS = registerItem("feather_boots", new Item.Properties().humanoidArmor(ClassesArmorMaterials.FEATHER, ArmorType.BOOTS));
 
-    public static final Item ELEPHANT_SPAWNER = registerItem("elephant_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", EntityType.COW));
+    public static final Item ELEPHANT_SPAWNER = registerItem("elephant_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.ELEPHANT));
     public static final Item LASER_CHICKEN_SPAWNER = registerItem("laser_chicken_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", EntityType.CHICKEN));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {

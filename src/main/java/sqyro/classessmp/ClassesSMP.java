@@ -4,12 +4,15 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRuleCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sqyro.classessmp.blocks.ClassesBlocks;
+import sqyro.classessmp.entities.ClassesEntities;
+import sqyro.classessmp.entities.ElephantEntity;
 import sqyro.classessmp.items.ClassesCreativeTabs;
 import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.effect.ClassesEffects;
@@ -33,6 +36,9 @@ public class ClassesSMP implements ModInitializer {
 		ClassesItems.register();
 		ClassesBlocks.register();
 		ClassesCreativeTabs.register();
+
+		ClassesEntities.register();
+		FabricDefaultAttributeRegistry.register(ClassesEntities.ELEPHANT, ElephantEntity.createAttributes());
 
 		ClassesEffects.register();
 		ClassesSounds.register();
