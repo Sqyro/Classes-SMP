@@ -7,14 +7,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jspecify.annotations.Nullable;
+import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClassHolder;
 
 import java.util.function.Supplier;
@@ -63,14 +62,21 @@ public class SpawnerItem extends ClassRestrictedItem {
         }
     }
 
-    private InteractionResult spawnMob(@Nullable LivingEntity livingEntity, ItemStack itemStack, Level level, BlockPos blockPos) {
+    private InteractionResult spawnMob(@Nullable LivingEntity useEntity, ItemStack itemStack, Level level, BlockPos blockPos) {
         EntityType<?> entityType = this.SpawnedEntity;
         if (entityType == null) {
             return InteractionResult.FAIL;
         }
 
-        if (entityType.spawn((ServerLevel)level, itemStack, livingEntity, blockPos, EntitySpawnReason.SPAWN_ITEM_USE, false, false) != null) {
-            level.gameEvent(livingEntity, GameEvent.ENTITY_PLACE, blockPos);
+        Entity spawnedEntity = entityType.spawn((ServerLevel)level, itemStack, useEntity, blockPos, EntitySpawnReason.SPAWN_ITEM_USE, false, false);
+
+        if (spawnedEntity != null) {
+            level.gameEvent(useEntity, GameEvent.ENTITY_PLACE, blockPos);
+        }
+
+        if (spawnedEntity instanceof TamableAnimal tamableAnimal && useEntity instanceof Player player) {
+            tamableAnimal.tame(player);
+            ClassesSMP.LOGGER.info("Spawned Tamable Animal");
         }
 
         level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundEvents.BRUSH_SAND_COMPLETED, SoundSource.PLAYERS);

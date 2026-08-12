@@ -20,6 +20,9 @@
   "block.classes-smp.white_keypad": "White Keypad",
   "block.classes-smp.bossminer2000": "Bossminer 2000",
 
+  "entity.classes-smp.elephant": "Elephant",
+  "entity.classes-smp.laser_chicken": "Laser Chicken",
+
   "key.category.classes-smp.abilities": "Classes SMP Abilities",
   "key.classessmp.ability1": "Ability 1",
   "key.classessmp.ability2": "Ability 2",

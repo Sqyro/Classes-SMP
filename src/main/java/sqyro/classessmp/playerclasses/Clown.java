@@ -1,6 +1,5 @@
 package sqyro.classessmp.playerclasses;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -13,10 +12,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.hurtingprojectile.WitherSkull;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -24,9 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.effect.ClassesEffects;
-import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.items.ClownSwordItem;
-import sqyro.classessmp.particle.ClassesParticles;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +31,7 @@ public class Clown extends PlayerClass {
     private static final Identifier MOVEMENT_SPEED_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "clown_movement_speed");
 
     private static final String CIRCUS_CAGE_ID = "circus_cage";
-    public static final int CIRCUS_CAGE_COOLDOWN = 100;
+    public static final int CIRCUS_CAGE_COOLDOWN = 600;
     public static final int CIRCUS_CAGE_RANGE = 20;
     public static final int CIRCUS_CAGE_ROOTING_DURATION = 100;
 

@@ -42,7 +42,7 @@ public class ElephantModel extends EntityModel<ElephantRenderState> {
 		this.idlingAnimation = ElephantAnimations.idle.bake(root);
 	}
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition getTexturedModelData() {
 		MeshDefinition modelData = new MeshDefinition();
 		PartDefinition modelPartData = modelData.getRoot();
 		PartDefinition legs = modelPartData.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 21.0F, 0.0F));

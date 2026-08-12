@@ -13,7 +13,7 @@ public class ElephantRenderer extends MobRenderer<ElephantEntity, ElephantRender
 
     @Override
     public Identifier getTextureLocation(ElephantRenderState livingEntityRenderState) {
-        return Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/entity/elephant/elephant_texture.png");
+        return Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/entity/elephant_texture.png");
     }
 
     @Override
