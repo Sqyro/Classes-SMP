@@ -93,13 +93,7 @@ public class ClientClasses {
         );
         CLASSES.put("builder", new ClientClassData(List.of()));
         CLASSES.put("the_vessel", new ClientClassData(List.of()));
-        CLASSES.put("sigeon_pex", new ClientClassData(List.of(
-                new ClientAbility("sigeon_ultimate",
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sigeon_ultimate_bg.png"),
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sigeon_ultimate_color.png"),
-                        SigeonPex.SIGEON_ULTIMATE_COOLDOWN
-                )))
-        );
+        CLASSES.put("sigeon_pex", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {

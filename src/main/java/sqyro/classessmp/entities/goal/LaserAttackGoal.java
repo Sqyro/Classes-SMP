@@ -8,6 +8,9 @@ import sqyro.classessmp.entities.LaserChickenEntity;
 import java.util.EnumSet;
 
 public class LaserAttackGoal extends Goal {
+    public static final double LASER_RANGE = 16.0D;
+    public static final float LASER_DAMAGE = 12.0F;
+
     private final LaserChickenEntity chicken;
 
     private int attackTime;
@@ -22,7 +25,7 @@ public class LaserAttackGoal extends Goal {
     public boolean canUse() {
         LivingEntity target = this.chicken.getTarget();
 
-        return target != null && target.isAlive() && this.chicken.shouldAttackTarget(target) && this.chicken.distanceToSqr(target) > 16.0D;
+        return target != null && target.isAlive() && this.chicken.shouldAttackTarget(target) && this.chicken.distanceToSqr(target) > LASER_RANGE;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class LaserAttackGoal extends Goal {
         if (this.attackTime >= this.chicken.getAttackDuration()) {
             ServerLevel serverLevel = getServerLevel(this.chicken);
 
-            target.hurtServer(serverLevel, this.chicken.damageSources().mobAttack(this.chicken), 12.0F);
+            target.hurtServer(serverLevel, this.chicken.damageSources().mobAttack(this.chicken), LASER_DAMAGE);
             this.chicken.triggerLaserAttack(target);
 
             this.attackTime = 0;

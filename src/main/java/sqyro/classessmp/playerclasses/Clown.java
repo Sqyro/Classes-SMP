@@ -21,6 +21,8 @@ import net.minecraft.world.phys.Vec3;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.effect.ClassesEffects;
+import sqyro.classessmp.entities.CardProjectileEntity;
+import sqyro.classessmp.entities.ClassesEntities;
 import sqyro.classessmp.items.ClownSwordItem;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class Clown extends PlayerClass {
     public static final int CIRCUS_CAGE_ROOTING_DURATION = 100;
 
     private static final String TRI_CARD_ATTACK_ID = "tri_card_attack";
-    public static final int TRI_CARD_ATTACK_COOLDOWN = 100;
+    public static final int TRI_CARD_ATTACK_COOLDOWN = 500;
 
     private static final String CIRCUS_FINALE_ID = "circus_finale";
     public static final int CIRCUS_FINALE_COOLDOWN = 4800;
@@ -125,7 +127,35 @@ public class Clown extends PlayerClass {
         ClassesSMP.LOGGER.info("{} of class {} activated Tri Card Attack", Player.getName().getString(), this.getID());
         setCooldown(TRI_CARD_ATTACK_ID, TRI_CARD_ATTACK_COOLDOWN);
 
+        Vec3 direction = Player.getLookAngle();
+        Vec3 spawnPosition = new Vec3(
+                Player.getX(),
+                Player.getEyeY(),
+                Player.getZ()
+        );
 
+        double angle = Math.toRadians(15.0);
+
+        Vec3 leftDirection = direction.yRot((float) angle);
+        Vec3 centerDirection = direction;
+        Vec3 rightDirection = direction.yRot((float) -angle);
+
+        shootCard(spawnPosition, leftDirection);
+        shootCard(spawnPosition, centerDirection);
+        shootCard(spawnPosition, rightDirection);
+    }
+
+    private void shootCard(Vec3 position, Vec3 direction) {
+        CardProjectileEntity card = new CardProjectileEntity(
+                ClassesEntities.CARD_PROJECTILE,
+                Player.level()
+        );
+
+        card.setOwner(Player);
+        card.setPos(position);
+        card.shoot(direction);
+
+        Player.level().addFreshEntity(card);
     }
 
     @Override

@@ -24,7 +24,7 @@ import sqyro.classessmp.entities.goal.LaserAttackGoal;
 
 public class LaserChickenEntity extends TamableAnimal {
     private static final int ATTACK_TIME = 40;
-    private static final int ATTACK_COOLDOWN = 40;
+    private static final int ATTACK_COOLDOWN = 20;
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -67,7 +67,6 @@ public class LaserChickenEntity extends TamableAnimal {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.ATTACK_DAMAGE, 12.0D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D);
     }

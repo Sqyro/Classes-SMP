@@ -5,10 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import sqyro.classessmp.client.*;
 import sqyro.classessmp.entities.ClassesEntities;
-import sqyro.classessmp.entities.rendering.ElephantModel;
-import sqyro.classessmp.entities.rendering.ElephantRenderer;
-import sqyro.classessmp.entities.rendering.LaserChickenModel;
-import sqyro.classessmp.entities.rendering.LaserChickenRenderer;
+import sqyro.classessmp.entities.rendering.*;
 import sqyro.classessmp.event.ClassesClientEvents;
 import sqyro.classessmp.particle.ClassesParticles;
 
@@ -29,6 +26,8 @@ public class ClassesSMPClient implements ClientModInitializer {
         EntityRendererRegistry.register(ClassesEntities.ELEPHANT, ElephantRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(LaserChickenModel.LASER_CHICKEN, LaserChickenModel::getTexturedModelData);
         EntityRendererRegistry.register(ClassesEntities.LASER_CHICKEN, LaserChickenRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(CardProjectileModel.CARD, CardProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ClassesEntities.CARD_PROJECTILE, CardProjectileRenderer::new);
 
         AbilityIndicatorHud.register();
 

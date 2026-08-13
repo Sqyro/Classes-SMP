@@ -22,6 +22,7 @@
 
   "entity.classes-smp.elephant": "Elephant",
   "entity.classes-smp.laser_chicken": "Laser Chicken",
+  "entity.classes-smp.card_projectile": "Card",
 
   "key.category.classes-smp.abilities": "Classes SMP Abilities",
   "key.classessmp.ability1": "Ability 1",
