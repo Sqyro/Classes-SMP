@@ -120,7 +120,7 @@ public class LaserChickenEntity extends TamableAnimal {
             return false;
         }
 
-        if (target instanceof TamableAnimal tamable && this.isTame() && tamable.isTame() && this.getOwner().equals(tamable.getOwner())) {
+        if (target instanceof TamableAnimal tamable && this.isTame() && tamable.isTame() && this.getOwner() != null && tamable.getOwner() != null && this.getOwner().equals(tamable.getOwner())) {
             return false;
         }
 
