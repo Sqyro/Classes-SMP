@@ -3,12 +3,15 @@ package sqyro.classessmp.core.SavedData;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.AncientWarden;
+import sqyro.classessmp.playerclasses.TheVessel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,6 +95,15 @@ public class PlayerClassSavedData extends SavedData {
             Player.getAbilities().flying = false;
             Player.onUpdateAbilities();
         }
+        AttributeInstance damage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
+        AttributeInstance health = Player.getAttribute(Attributes.MAX_HEALTH);
+        if (damage != null) {
+            damage.removeModifier(TheVessel.DAMAGE_MODIFIER_ID);
+        }
+        if (health != null) {
+            health.removeModifier(TheVessel.HEALTH_MODIFIER_ID);
+        }
+
         Classes.remove(Player.getUUID());
         setDirty();
     }

@@ -126,11 +126,9 @@ public class ClassesEvents {
                 return;
             }
 
-            /*
             if (!(entity instanceof ServerPlayer)) {
                 return;
             }
-            */
 
             PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
 

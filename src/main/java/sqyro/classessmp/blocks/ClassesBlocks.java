@@ -15,7 +15,6 @@ import sqyro.classessmp.ClassesSMP;
 
 import java.util.function.Function;
 
-
 public class ClassesBlocks {
     public static final Block WHITE_KEYPAD = registerBlock("white_keypad", properties -> new KeypadBlock(properties.strength(2.0F).noOcclusion()));
     public static final Block BOSSMINER2000 = registerBossminerBlock("bossminer2000", properties -> new BossminerBlock(properties.strength(1.0F).noOcclusion().sound(SoundType.WOOL)));

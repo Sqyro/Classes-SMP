@@ -29,6 +29,8 @@ public class ClassesItems {
     public static final Item ELEPHANT_SPAWNER = registerItem("elephant_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.ELEPHANT));
     public static final Item LASER_CHICKEN_SPAWNER = registerItem("laser_chicken_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.LASER_CHICKEN));
 
+    public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings));
+
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);
         return Registry.register(BuiltInRegistries.ITEM, ID, Function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ID))));

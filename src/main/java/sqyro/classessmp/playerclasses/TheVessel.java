@@ -12,8 +12,8 @@ import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 
 public class TheVessel extends PlayerClass {
-    private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "vessel_damage");
-    private static final Identifier HEALTH_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "vessel_health");
+    public static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "vessel_damage");
+    public static final Identifier HEALTH_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "vessel_health");
 
     public TheVessel(ServerPlayer Player) {
         super(Player);

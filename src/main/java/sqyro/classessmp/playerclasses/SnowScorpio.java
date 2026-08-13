@@ -29,7 +29,7 @@ public class SnowScorpio extends PlayerClass {
     private static final String ICE_PRISON_ID = "ice_prison";
 
     public static final int ICE_PULL_COOLDOWN = 200;
-    public static final int ICE_PRISON_COOLDOWN = 600;
+    public static final int ICE_PRISON_COOLDOWN = 400;
 
     private static final double ICE_PULL_STRENGTH = 0.7;
     private static final double ICE_PULL_RANGE = 5;

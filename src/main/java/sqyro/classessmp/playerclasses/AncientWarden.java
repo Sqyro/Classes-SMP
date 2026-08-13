@@ -212,7 +212,6 @@ public class AncientWarden extends PlayerClass {
         if (attackDamage != null) {
             attackDamage.removeModifier(DAMAGE_MODIFIER_ID);
         }
-
     }
 
     private int getNoiseExtraDamage() {
