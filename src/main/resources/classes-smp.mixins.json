@@ -4,13 +4,14 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"ClientInputAccessor",
-		"ClientPlayerMixin",
+      	"ClientLocalPlayerMixin",
 		"KeyboardInputMixin",
 		"MouseHandlerMixin",
 		"LivingEntityRendererMixin",
 		"LivingEntityRenderStateMixin",
 		"DebugHudMixin",
-		"GuiMixin"
+		"GuiMixin",
+		"PlayerMixin"
 	],
 	"mixins": [
 		"ServerPlayerClassAttachment",

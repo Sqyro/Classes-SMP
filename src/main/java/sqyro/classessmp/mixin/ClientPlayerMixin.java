@@ -1,21 +1,29 @@
 package sqyro.classessmp.mixin;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sqyro.classessmp.effect.ClassesEffects;
+import sqyro.classessmp.client.ClientPlayerData;
+import sqyro.classessmp.items.BloodSwordItem;
 
-@Mixin(LocalPlayer.class)
+
+@Mixin(Player.class)
 public class ClientPlayerMixin {
-    @Inject(method = "aiStep", at = @At("TAIL"))
-    private void classessmp$freezePhysics(CallbackInfo callbackInfo) {
-        LocalPlayer Player = (LocalPlayer)(Object)this;
+    @Inject(method = "attack", at = @At("HEAD"))
+    private void classes$bloodAttack(Entity target, CallbackInfo ci) {
 
-        if (Player.hasEffect(ClassesEffects.FREEZING)) {
-            Player.setDeltaMovement(Vec3.ZERO);
+        Player Self = (Player)(Object)this;
+
+        if (!(Self instanceof LocalPlayer player)) {
+            return;
+        }
+
+        if (player.getMainHandItem().getItem() instanceof BloodSwordItem) {
+            ClientPlayerData.markBloodAttack();
         }
     }
 }
