@@ -28,21 +28,24 @@ public class CaseRollScreen extends Screen {
     private static final Identifier GOLD_BG = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/gold_bg_texture.png");
 
     private static final int ITEM_SIZE = 80;
-    private static final int ITEM_COUNT = 40;
+    private static final int ITEM_COUNT = 50;
 
-    private static final int REWARD_INDEX = 30;
+    private static final int REWARD_INDEX = 40;
     private static final int ANIMATION_TICKS = 100;
 
     private static final int ITEM_DISTANCE = 133;
 
-    private final ItemStack reward;
+    private static final int STARTING_VISIBLE_ITEMS = 10;
 
+    private static final double MAX_LANDING_OFFSET = 50.0;
+    private double landingOffset;
+
+    private final ItemStack reward;
     private final List<ScrollingItem> items = new ArrayList<>();
 
     private int animationTick = 0;
 
     private boolean finished;
-
     private ScrollingItem lastClosestItem;
 
     public CaseRollScreen(ItemStack reward) {
@@ -64,6 +67,9 @@ public class CaseRollScreen extends Screen {
         int middleY = height / 2 - ITEM_SIZE / 2;
         double centerX = width / 2.0;
 
+        landingOffset = (Math.random() * 2.0 - 1.0) * MAX_LANDING_OFFSET;
+        double startX = centerX - STARTING_VISIBLE_ITEMS * ITEM_DISTANCE;
+
         for (int i = 0; i < ITEM_COUNT; i++) {
             ItemStack stack;
 
@@ -73,7 +79,8 @@ public class CaseRollScreen extends Screen {
                 stack = createVisualRollItem();
             }
 
-            items.add(new ScrollingItem(stack, centerX + i * ITEM_DISTANCE, middleY));
+            double x = startX + i * ITEM_DISTANCE;
+            items.add(new ScrollingItem(stack, x, middleY));
         }
     }
 
@@ -96,23 +103,25 @@ public class CaseRollScreen extends Screen {
         animationTick++;
 
         double progress = Math.min(1.0, animationTick / (double) ANIMATION_TICKS);
+
         double eased = 1.0 - Math.pow(1.0 - progress, 3.0);
-        double startingOffset = 350.0;
 
-        double totalTravel = startingOffset + REWARD_INDEX * ITEM_DISTANCE;
+        double centerX = width / 2.0;
+        double rewardStartX = centerX + (REWARD_INDEX - STARTING_VISIBLE_ITEMS) * ITEM_DISTANCE;
+        double rewardEndX = centerX + landingOffset;
 
+        double totalTravel = rewardEndX - rewardStartX;
         double travel = totalTravel * eased;
+
+        double startX = centerX - STARTING_VISIBLE_ITEMS * ITEM_DISTANCE;
 
         for (int i = 0; i < items.size(); i++) {
             ScrollingItem item = items.get(i);
 
-            item.x = width / 2.0 + startingOffset + i * ITEM_DISTANCE - travel;
+            item.x = startX + i * ITEM_DISTANCE + travel;
         }
 
-        double centerX = width / 2.0;
-
         ScrollingItem closest = null;
-
         double closestDistance = Double.MAX_VALUE;
 
         for (ScrollingItem item : items) {
@@ -211,6 +220,10 @@ public class CaseRollScreen extends Screen {
     }
 
     private void renderScrollingItem(GuiGraphics graphics, ScrollingItem item) {
+        if (item.x < -ITEM_SIZE || item.x > width + ITEM_SIZE) {
+            return;
+        }
+
         int bgWidth = 120;
         int bgHeight = 85;
 
