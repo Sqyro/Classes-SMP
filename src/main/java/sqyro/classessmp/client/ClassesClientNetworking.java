@@ -58,6 +58,5 @@ public class ClassesClientNetworking {
                 ClientPlayerData.setNoiseMeter(payload.Value());
             });
         });
-
     }
 }

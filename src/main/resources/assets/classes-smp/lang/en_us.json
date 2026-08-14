@@ -16,10 +16,13 @@
   "item.classes-smp.feather_boots": "Feather Boots",
   "item.classes-smp.elephant_spawner": "Elephant Spawner",
   "item.classes-smp.laser_chicken_spawner": "Laser Chicken Spawner",
+  "item.classes-smp.case_block": "Case",
+  "item.classes-smp.case_key": "Case Key",
   "item.classes-smp.remove_class_item": "Remove Class Item",
 
   "block.classes-smp.white_keypad": "White Keypad",
   "block.classes-smp.bossminer2000": "Bossminer 2000",
+  "block.classes-smp.case_block": "Case",
 
   "entity.classes-smp.elephant": "Elephant",
   "entity.classes-smp.laser_chicken": "Laser Chicken",

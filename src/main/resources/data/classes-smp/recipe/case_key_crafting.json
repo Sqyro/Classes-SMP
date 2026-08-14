@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " G",
+    "I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "classes-smp:case_key"
+  }
+}

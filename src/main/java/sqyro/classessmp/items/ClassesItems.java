@@ -29,7 +29,8 @@ public class ClassesItems {
     public static final Item ELEPHANT_SPAWNER = registerItem("elephant_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.ELEPHANT));
     public static final Item LASER_CHICKEN_SPAWNER = registerItem("laser_chicken_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.LASER_CHICKEN));
 
-    public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings));
+    public static final Item CASE_KEY = registerItem("case_key", settings -> new Item(settings.rarity(Rarity.UNCOMMON)));
+    public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings.rarity(Rarity.EPIC)));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);

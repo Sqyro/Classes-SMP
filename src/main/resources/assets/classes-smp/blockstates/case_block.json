@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "classes-smp:block/case_block"
+    },
+    "facing=east": {
+      "model": "classes-smp:block/case_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "classes-smp:block/case_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "classes-smp:block/case_block",
+      "y": 270
+    }
+  }
+}

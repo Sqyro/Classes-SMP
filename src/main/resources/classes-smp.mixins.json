@@ -8,7 +8,9 @@
 		"KeyboardInputMixin",
 		"MouseHandlerMixin",
 		"LivingEntityRendererMixin",
-		"LivingEntityRenderStateMixin"
+		"LivingEntityRenderStateMixin",
+		"DebugHudMixin",
+		"GuiMixin"
 	],
 	"mixins": [
 		"ServerPlayerClassAttachment",
@@ -20,7 +22,6 @@
 		"GameEventDispatcherAccessor",
 		"GameEventDispatcherMixin",
 		"EndPortalBlockMixin",
-		"DebugHudMixin",
 		"TripwireHookBlockMixin"
 	],
 	"injectors": {

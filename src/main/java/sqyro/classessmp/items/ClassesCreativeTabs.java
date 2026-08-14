@@ -25,6 +25,8 @@ public class ClassesCreativeTabs {
                 entries.accept(ClassesItems.FEATHER_BOOTS);
                 entries.accept(ClassesItems.ELEPHANT_SPAWNER);
                 entries.accept(ClassesItems.LASER_CHICKEN_SPAWNER);
+                entries.accept(ClassesBlocks.CASE_BLOCK);
+                entries.accept(ClassesItems.CASE_KEY);
                 entries.accept(ClassesItems.REMOVE_CLASS_ITEM);
 
             }).build();

@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "classes-smp:item/case_block_item"
+  }
+}

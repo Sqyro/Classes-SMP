@@ -11,6 +11,7 @@ import net.minecraft.world.level.gamerules.GameRuleCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sqyro.classessmp.blocks.ClassesBlocks;
+import sqyro.classessmp.blocks.entity.ClassesBlockEntities;
 import sqyro.classessmp.entities.ClassesEntities;
 import sqyro.classessmp.entities.ElephantEntity;
 import sqyro.classessmp.entities.LaserChickenEntity;
@@ -20,6 +21,7 @@ import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.ClassesEvents;
 import sqyro.classessmp.items.ClassesItems;
 import sqyro.classessmp.network.ClassesNetworking;
+import sqyro.classessmp.network.cases.CaseNetworking;
 import sqyro.classessmp.playerclasses.PlayerClasses;
 import sqyro.classessmp.sounds.ClassesSounds;
 
@@ -35,6 +37,7 @@ public class ClassesSMP implements ModInitializer {
 
 		ClassesItems.register();
 		ClassesBlocks.register();
+		ClassesBlockEntities.register();
 		ClassesCreativeTabs.register();
 
 		ClassesEntities.register();
@@ -45,7 +48,9 @@ public class ClassesSMP implements ModInitializer {
 		ClassesSounds.register();
 
 		ClassesEvents.registerEvents();
+
 		ClassesNetworking.registerServer();
+		CaseNetworking.registerServer();
 
 		LOGGER.info("Hello Fabric world!");
 	}
