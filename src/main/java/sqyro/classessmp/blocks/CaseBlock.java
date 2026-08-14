@@ -28,13 +28,15 @@ public class CaseBlock extends BaseEntityBlock {
     private static final VoxelShape EAST_SHAPE = Shapes.or(Block.box(2, 0, 1, 15, 8, 15));
     private static final VoxelShape WEST_SHAPE = Shapes.or(Block.box(1, 0, 1, 14, 8, 15));
 
+    private static final MapCodec<CaseBlock> CODEC = simpleCodec(CaseBlock::new);
+
     public CaseBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
+        return CODEC;
     }
 
     @Override

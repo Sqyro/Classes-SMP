@@ -10,6 +10,7 @@ import sqyro.classessmp.client.GUI.screen.CaseScreen;
 import sqyro.classessmp.entities.ClassesEntities;
 import sqyro.classessmp.entities.rendering.*;
 import sqyro.classessmp.event.ClassesClientEvents;
+import sqyro.classessmp.network.cases.CaseClientNetworking;
 import sqyro.classessmp.network.cases.CaseNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
 
@@ -38,7 +39,7 @@ public class ClassesSMPClient implements ClientModInitializer {
         ClassesClientEvents.registerEvents();
 
         ClassesClientNetworking.register();
-        CaseNetworking.registerClient();
+        CaseClientNetworking.registerClient();
 
         MenuScreens.register(ClassesMenuTypes.CASE_MENU, CaseScreen::new);
     }
