@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import sqyro.classessmp.core.PlayerClass;
 
 public class SigeonPex extends PlayerClass {
-    public static final int SIGEON_ULTIMATE_COOLDOWN = 100;
+    public static final int SIGEON_ROOTING_COOLDOWN = 100;
 
     public SigeonPex(ServerPlayer Player) {
         super(Player);

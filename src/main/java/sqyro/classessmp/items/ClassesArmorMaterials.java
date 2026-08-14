@@ -18,7 +18,7 @@ public class ClassesArmorMaterials {
     private static final ResourceKey<? extends Registry<EquipmentAsset>> EQUIPMENT_ASSET_REGISTRY = ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset"));
     public static final ResourceKey<EquipmentAsset> FEATHER_ASSET = ResourceKey.create(EQUIPMENT_ASSET_REGISTRY, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "feather"));
 
-    public static final ArmorMaterial FEATHER = new ArmorMaterial(5,
+    public static final ArmorMaterial FEATHER = new ArmorMaterial(8,
             Util.make(new EnumMap<>(ArmorType.class), map -> {
                 map.put(ArmorType.BOOTS, 1);
                 map.put(ArmorType.LEGGINGS, 2);
