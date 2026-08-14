@@ -11,6 +11,7 @@ import net.minecraft.world.level.gamerules.GameRuleCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sqyro.classessmp.blocks.ClassesBlocks;
+import sqyro.classessmp.blocks.ClassesMenuTypes;
 import sqyro.classessmp.blocks.entity.ClassesBlockEntities;
 import sqyro.classessmp.entities.ClassesEntities;
 import sqyro.classessmp.entities.ElephantEntity;
@@ -49,6 +50,8 @@ public class ClassesSMP implements ModInitializer {
 
 		ClassesEffects.register();
 		ClassesSounds.register();
+
+		ClassesMenuTypes.register();
 
 		ClassesEvents.registerEvents();
 

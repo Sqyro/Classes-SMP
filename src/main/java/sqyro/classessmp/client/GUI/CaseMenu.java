@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import sqyro.classessmp.blocks.ClassesMenuTypes;
 import sqyro.classessmp.blocks.entity.CaseBlockEntity;
 
 public class CaseMenu extends AbstractContainerMenu {

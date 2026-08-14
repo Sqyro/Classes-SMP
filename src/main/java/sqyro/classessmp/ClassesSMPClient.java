@@ -5,13 +5,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import sqyro.classessmp.client.*;
-import sqyro.classessmp.client.GUI.ClassesMenuTypes;
+import sqyro.classessmp.blocks.ClassesMenuTypes;
 import sqyro.classessmp.client.GUI.screen.CaseScreen;
 import sqyro.classessmp.entities.ClassesEntities;
 import sqyro.classessmp.entities.rendering.*;
 import sqyro.classessmp.event.ClassesClientEvents;
 import sqyro.classessmp.network.cases.CaseClientNetworking;
-import sqyro.classessmp.network.cases.CaseNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
 
 public class ClassesSMPClient implements ClientModInitializer {
