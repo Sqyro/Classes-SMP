@@ -12,7 +12,7 @@ public record CaseRollResultPayload(ItemStack reward) implements CustomPacketPay
 
     public static final Type<CaseRollResultPayload> TYPE = new Type<>(ID);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CaseRollResultPayload> CODEC = StreamCodec.composite(ItemStack.STREAM_CODEC, CaseRollResultPayload::reward, CaseRollResultPayload::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, CaseRollResultPayload> CODEC = ItemStack.STREAM_CODEC.map(CaseRollResultPayload::new, CaseRollResultPayload::reward);
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
