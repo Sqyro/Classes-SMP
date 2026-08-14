@@ -25,7 +25,7 @@ public class ClassesSMPClient implements ClientModInitializer {
         FreezeOverlay.register();
         ClassesHud.register();
         ClientSounds.register();
-        ClassesParticles.register();
+        ClassesParticles.registerClient();
 
         EntityModelLayerRegistry.registerModelLayer(ElephantModel.ELEPHANT, ElephantModel::getTexturedModelData);
         EntityRendererRegistry.register(ClassesEntities.ELEPHANT, ElephantRenderer::new);

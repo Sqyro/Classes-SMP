@@ -16,10 +16,14 @@ public class ClassesParticles {
     public static final SimpleParticleType LIGHTNING_PARTICLE = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "lightning_particle"), FabricParticleTypes.simple());
 
     public static void register() {
-        ParticleFactoryRegistry.getInstance().register(ClassesParticles.ICE_PARTICLE, IceParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(ClassesParticles.ICE_STORM_PARTICLE, IceStormParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(ClassesParticles.DICE_PARTICLE, DiceParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(ClassesParticles.BLOOD_SPLATTER_PARTICLE, BloodSplatterParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(ClassesParticles.LIGHTNING_PARTICLE, LightningParticle.Provider::new);
+
+    }
+
+    public static void registerClient() {
+        ParticleFactoryRegistry.getInstance().register(ICE_PARTICLE, IceParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ICE_STORM_PARTICLE, IceStormParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(DICE_PARTICLE, DiceParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(BLOOD_SPLATTER_PARTICLE, BloodSplatterParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(LIGHTNING_PARTICLE, LightningParticle.Provider::new);
     }
 }
