@@ -105,7 +105,7 @@ public class Clown extends PlayerClass {
             Vec3 hitPos = hitEntity.position().add(0, hitEntity.getBbHeight() / 2, 0);
             End = hitPos;
             hitEntity.addEffect(new MobEffectInstance(ClassesEffects.ROOTING, CIRCUS_CAGE_ROOTING_DURATION, 0));
-            ClassesSMP.LOGGER.info("{} hit {} with Ice Prison", Player.getName().getString(), hitEntity.getName().getString());
+            ClassesSMP.LOGGER.info("{} hit {} with Circus Cage", Player.getName().getString(), hitEntity.getName().getString());
         }
 
         double Length = Start.distanceTo(End);

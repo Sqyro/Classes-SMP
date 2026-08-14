@@ -6,8 +6,8 @@
     "I": "minecraft:iron_ingot"
   },
   "pattern": [
-    " G",
-    "I "
+    "IG",
+    "II"
   ],
   "result": {
     "count": 1,
