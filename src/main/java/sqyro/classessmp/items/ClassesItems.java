@@ -5,7 +5,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ToolMaterial;
@@ -30,7 +29,7 @@ public class ClassesItems {
     public static final Item LASER_CHICKEN_SPAWNER = registerItem("laser_chicken_spawner", settings -> new SpawnerItem(settings, "sigeon_pex", ClassesEntities.LASER_CHICKEN));
 
     public static final Item CASE_KEY = registerItem("case_key", settings -> new Item(settings.rarity(Rarity.UNCOMMON)));
-    public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings.rarity(Rarity.EPIC)));
+    public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings.rarity(Rarity.EPIC).fireResistant()));
 
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);
