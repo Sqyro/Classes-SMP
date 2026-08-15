@@ -19,7 +19,7 @@ import sqyro.classessmp.core.PlayerClassHolder;
 import java.util.function.Supplier;
 
 public class SpawnerItem extends ClassRestrictedItem {
-    public static final int SPAWNER_ITEM_COOLDOWN = 800;
+    public static final int SPAWNER_ITEM_COOLDOWN = 500;
     public static final int SPAWNER_ITEM_OFFSET_RANGE = 3;
 
     private final String requiredClassID;

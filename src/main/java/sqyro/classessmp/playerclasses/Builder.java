@@ -18,6 +18,9 @@ public class Builder extends PlayerClass {
 
     private Vec3 lastPosition;
 
+    public static final float BUILDER_FLYING_SPEED = 0.025f;
+    public static final float DEFAULT_FLYING_SPEED = 0.05f;
+
     public Builder(ServerPlayer Player) {
         super(Player);
         this.lastPosition = Player.position();
@@ -34,6 +37,7 @@ public class Builder extends PlayerClass {
 
         if (hasFeatherArmor) {
             Player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, 2, false, false));
+            Player.getAbilities().setFlyingSpeed(BUILDER_FLYING_SPEED);
             if (flyingEnergy > 0) {
                 if (!Player.getAbilities().mayfly) {
                     Player.getAbilities().mayfly = true;
@@ -48,6 +52,7 @@ public class Builder extends PlayerClass {
             }
             Player.displayClientMessage(Component.literal("Flying Energy " + flyingEnergy).withStyle(ChatFormatting.GREEN), true);
         } else {
+            Player.getAbilities().setFlyingSpeed(DEFAULT_FLYING_SPEED);
             if (Player.getAbilities().mayfly && !Player.isCreative() && !Player.isSpectator()) {
                 Player.getAbilities().mayfly = false;
                 Player.getAbilities().flying = false;
