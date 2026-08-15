@@ -58,10 +58,10 @@ public class ClientClasses {
         );
         CLASSES.put("terrorist", new ClientClassData(List.of()));
         CLASSES.put("ancient_warden", new ClientClassData(List.of(
-                new ClientAbility("noise_meter_freeze",
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_freeze_bg.png"),
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_freeze_color.png"),
-                        AncientWarden.NOISE_METER_FREEZE_COOLDOWN
+                new ClientAbility("noise_meter",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/noise_meter_color.png"),
+                        AncientWarden.NOISE_METER_COOLDOWN
                 ),
                 new ClientAbility("blinding",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blinding_bg.png"),

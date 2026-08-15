@@ -29,7 +29,7 @@ public class Thunderbolt extends PlayerClass {
     public static final int THUNDERSTORM_COOLDOWN = 1200;
     public static final int THUNDERSTORM_DURATION = 200;
     public static final int THUNDERSTORM_RADIUS = 50;
-    public static final float THUNDERSTORM_DAMAGE = 3f;
+    public static final float THUNDERSTORM_DAMAGE = 4f;
     public static final int THUNDERSTORM_HIT_PLAYER_CHANCE = 50;
 
     private int thunderstormTicks = 0;
@@ -37,12 +37,12 @@ public class Thunderbolt extends PlayerClass {
 
     public static final String LIGHTNING_DASH_ID = "lightning_dash";
     public static final int LIGHTNING_DASH_COOLDOWN = 100;
-    public static final float LIGHTNING_DASH_STRENGTH = 1.1f;
+    public static final float LIGHTNING_DASH_STRENGTH = 1.3f;
 
     public static final String CHAIN_LIGHTNING_ID = "chain_lightning";
     public static final int CHAIN_LIGHTNING_COOLDOWN = 400;
-    public static final float CHAIN_LIGHTNING_DAMAGE = 3;
-    public static final int CHAIN_LIGHTNING_SHOCKED_DURATION = 80;
+    public static final float CHAIN_LIGHTNING_DAMAGE = 5;
+    public static final int CHAIN_LIGHTNING_SHOCKED_DURATION = 100;
     public static final float CHAIN_LIGHTNING_RANGE = 20;
     public static final float CHAIN_LIGHTNING_BOUNCE_RANGE = 5;
 

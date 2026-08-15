@@ -23,7 +23,7 @@ public class SigeonPex extends PlayerClass {
     public static final String SIGEON_ROOTING_ID = "sigeon_rooting";
     public static final int SIGEON_ROOTING_COOLDOWN = 800;
     public static final int SIGEON_ROOTING_RANGE = 20;
-    public static final int SIGEON_ROOTING_DURATION = 100;
+    public static final int SIGEON_ROOTING_DURATION = 70;
 
     public SigeonPex(ServerPlayer Player) {
         super(Player);

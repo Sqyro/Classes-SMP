@@ -27,9 +27,7 @@ import java.util.Optional;
 
 public class AncientWarden extends PlayerClass {
     private boolean heardNoiseThisTick = false;
-    private boolean noiseFrozen = false;
     private int noiseDecayTimer = 0;
-    private int noiseFreezeTimer = 0;
     private int extraDamage;
 
     public static final int NOISE_METER_MAX_VALUE = 128;
@@ -37,19 +35,19 @@ public class AncientWarden extends PlayerClass {
 
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ancient_warden_damage");
 
-    private static final String NOISE_METER_FREEZE_ID = "noise_meter_freeze";
-    public static final int NOISE_METER_FREEZE_COOLDOWN = 1200;
-    public static final int NOISE_METER_FREEZE_DURATION = 200;
+    private static final String NOISE_METER_ID = "noise_meter";
+    public static final int NOISE_METER_COOLDOWN = 1200;
+    public static final int NOISE_METER_INCREASE = 64;
 
     private static final String BLINDING_ID = "blinding";
-    public static final int BLINDING_COOLDOWN = 600;
-    public static final int BLINDING_NOISE_CONSUMPTION = 13;
+    public static final int BLINDING_COOLDOWN = 800;
+    public static final int BLINDING_NOISE_CONSUMPTION = 10;
     public static final int BLINDING_RADIUS = 50;
-    public static final int BLINDING_DURATION = 200;
+    public static final int BLINDING_DURATION = 250;
 
     private static final String SONIC_BOOM_ID = "sonic_boom";
     public static final int SONIC_BOOM_COOLDOWN = 800;
-    public static final int SONIC_BOOM_FOOD_CONSUMPTION = 8;
+    public static final int SONIC_BOOM_FOOD_CONSUMPTION = 6;
     public static final int SONIC_BOOM_NOISE_CONSUMPTION = 64;
     public static final int SONIC_BOOM_RANGE = 15;
     public static final int SONIC_BOOM_DAMAGE = 10;
@@ -67,17 +65,6 @@ public class AncientWarden extends PlayerClass {
     @Override
     public void onTick() {
         tickCooldowns();
-
-        if (noiseFrozen) {
-            noiseFreezeTimer--;
-
-            if (noiseFreezeTimer <= 0) {
-                noiseFrozen = false;
-                noiseFreezeTimer = 0;
-            }
-
-            return;
-        }
 
         PlayerClassSavedData data = PlayerClassSavedDataGetter.get(Player.level());
 
@@ -102,16 +89,16 @@ public class AncientWarden extends PlayerClass {
 
     @Override
     public void onKeybind1() {
-        if (isOnCooldown(NOISE_METER_FREEZE_ID)) {
-            ClassesSMP.LOGGER.info("{} of class: {} tried to activate Noise Meter Freeze, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(NOISE_METER_FREEZE_ID));
+        if (isOnCooldown(NOISE_METER_ID)) {
+            ClassesSMP.LOGGER.info("{} of class: {} tried to activate Noise Meter, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(NOISE_METER_ID));
             return;
         }
 
-        ClassesSMP.LOGGER.info("{} of class {} activated Noise Meter Freeze", Player.getName().getString(), this.getID());
-        setCooldown(NOISE_METER_FREEZE_ID, NOISE_METER_FREEZE_COOLDOWN);
+        ClassesSMP.LOGGER.info("{} of class {} activated Noise Meter", Player.getName().getString(), this.getID());
+        setCooldown(NOISE_METER_ID, NOISE_METER_COOLDOWN);
 
-        noiseFrozen = true;
-        noiseFreezeTimer = NOISE_METER_FREEZE_DURATION;
+        PlayerClassSavedDataGetter.get(Player.level()).addNoise(Player, NOISE_METER_INCREASE);
+        Player.level().playSound(null, Player.getX(), Player.getY(), Player.getZ(), SoundEvents.WARDEN_ANGRY, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
     @Override
@@ -218,9 +205,9 @@ public class AncientWarden extends PlayerClass {
         int currentNoise = PlayerClassSavedDataGetter.get(Player.level()).getNoiseMeter(Player.getUUID());
 
         if (currentNoise >= NOISE_METER_MAX_VALUE * 0.75f) {
-            return 5;
+            return 6;
         } else if (currentNoise >= NOISE_METER_MAX_VALUE * 0.5f) {
-            return 2;
+            return 3;
         } else if (currentNoise >= NOISE_METER_MAX_VALUE * 0.25f) {
             return 1;
         } else {
@@ -230,10 +217,7 @@ public class AncientWarden extends PlayerClass {
 
     public void hearNoise(int Amount) {
         heardNoiseThisTick = true;
-
-        if (!noiseFrozen) {
-            PlayerClassSavedDataGetter.get(Player.level()).addNoise(Player, Amount);
-        }
+        PlayerClassSavedDataGetter.get(Player.level()).addNoise(Player, Amount);
     }
 
     private LivingEntity getEntityHit(ServerLevel Level, Player player, Vec3 StartPos, Vec3 EndPos) {

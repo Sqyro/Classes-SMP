@@ -35,10 +35,10 @@ public class Clown extends PlayerClass {
     private static final String CIRCUS_CAGE_ID = "circus_cage";
     public static final int CIRCUS_CAGE_COOLDOWN = 600;
     public static final int CIRCUS_CAGE_RANGE = 20;
-    public static final int CIRCUS_CAGE_ROOTING_DURATION = 100;
+    public static final int CIRCUS_CAGE_ROOTING_DURATION = 70;
 
     private static final String TRI_CARD_ATTACK_ID = "tri_card_attack";
-    public static final int TRI_CARD_ATTACK_COOLDOWN = 500;
+    public static final int TRI_CARD_ATTACK_COOLDOWN = 600;
 
     private static final String CIRCUS_FINALE_ID = "circus_finale";
     public static final int CIRCUS_FINALE_COOLDOWN = 4800;
@@ -128,11 +128,7 @@ public class Clown extends PlayerClass {
         setCooldown(TRI_CARD_ATTACK_ID, TRI_CARD_ATTACK_COOLDOWN);
 
         Vec3 direction = Player.getLookAngle();
-        Vec3 spawnPosition = new Vec3(
-                Player.getX(),
-                Player.getEyeY(),
-                Player.getZ()
-        );
+        Vec3 spawnPosition = new Vec3(Player.getX(), Player.getEyeY(), Player.getZ());
 
         double angle = Math.toRadians(15.0);
 
@@ -146,10 +142,7 @@ public class Clown extends PlayerClass {
     }
 
     private void shootCard(Vec3 position, Vec3 direction) {
-        CardProjectileEntity card = new CardProjectileEntity(
-                ClassesEntities.CARD_PROJECTILE,
-                Player.level()
-        );
+        CardProjectileEntity card = new CardProjectileEntity(ClassesEntities.CARD_PROJECTILE, Player.level());
 
         card.setOwner(Player);
         card.setPos(position);
@@ -168,7 +161,7 @@ public class Clown extends PlayerClass {
         ClassesSMP.LOGGER.info("{} of class {} activated Circus Finale", Player.getName().getString(), this.getID());
         setCooldown(CIRCUS_FINALE_ID, CIRCUS_FINALE_COOLDOWN);
 
-        Player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, CIRCUS_FINALE_DURATION, 2));
+        Player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, CIRCUS_FINALE_DURATION, 1));
         Player.addEffect(new MobEffectInstance(MobEffects.HASTE, CIRCUS_FINALE_DURATION, 1));
     }
 
