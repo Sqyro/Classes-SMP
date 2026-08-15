@@ -67,7 +67,7 @@ public class Builder extends PlayerClass {
                 flyingEnergy--;
             }
         } else {
-            if (flyingEnergy < MAX_FLYING_ENERGY) {
+            if (flyingEnergy < MAX_FLYING_ENERGY && Player.onGround()) {
                 flyingEnergy++;
             }
         }
