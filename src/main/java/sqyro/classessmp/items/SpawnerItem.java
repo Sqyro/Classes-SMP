@@ -23,13 +23,14 @@ public class SpawnerItem extends ClassRestrictedItem {
     public static final int SPAWNER_ITEM_OFFSET_RANGE = 3;
 
     private final String requiredClassID;
-    private final EntityType SpawnedEntity;
+    private final EntityType<?> SpawnedEntity;
 
-    public SpawnerItem(Properties properties, String requiredClassID, EntityType SpawnedEntity) {
+    public SpawnerItem(Properties properties, String requiredClassID, EntityType<?> SpawnedEntity) {
         super(properties);
         this.requiredClassID = requiredClassID;
         this.SpawnedEntity = SpawnedEntity;
     }
+
 
     @Override
     protected String getRequiredClass() {
@@ -83,5 +84,9 @@ public class SpawnerItem extends ClassRestrictedItem {
         ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 20, 0.4, 0.6, 0.4, 0.05);
 
         return InteractionResult.SUCCESS;
+    }
+
+    public boolean isFor(EntityType<?> entityType) {
+        return this.SpawnedEntity == entityType;
     }
 }

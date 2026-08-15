@@ -91,9 +91,14 @@ public class LaserChickenEntity extends ClassSummonEntity {
         builder.define(DATA_ID_ATTACK, 0);
     }
 
-
     public void setActiveAttackTarget(int id) {
         this.entityData.set(DATA_ID_ATTACK_TARGET, id);
+    }
+
+    @Override
+    public void clearAttackTarget() {
+        this.setTarget(null);
+        this.setActiveAttackTarget(0);
     }
 
     @Nullable

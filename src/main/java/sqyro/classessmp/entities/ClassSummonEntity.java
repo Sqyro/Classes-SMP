@@ -1,13 +1,17 @@
 package sqyro.classessmp.entities;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
+import sqyro.classessmp.items.SpawnerItem;
 
 public class ClassSummonEntity extends TamableAnimal {
     protected ClassSummonEntity(EntityType<? extends TamableAnimal> entityType, Level level) {
@@ -42,6 +46,23 @@ public class ClassSummonEntity extends TamableAnimal {
         }
 
         return true;
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (!this.level().isClientSide() && player.isShiftKeyDown() && this.isOwnedBy(player) && stack.getItem() instanceof SpawnerItem spawnerItem && spawnerItem.isFor(this.getType())) {
+            this.clearAttackTarget();
+
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(player, hand);
+    }
+
+    public void clearAttackTarget() {
+        this.setTarget(null);
     }
 
     @Override
