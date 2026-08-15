@@ -31,17 +31,9 @@ public class LaserChickenEntity extends TamableAnimal {
 
     public final AnimationState attackAnimationState = new AnimationState();
 
-    private static final EntityDataAccessor<Integer> DATA_ID_ATTACK_TARGET =
-            SynchedEntityData.defineId(
-                    LaserChickenEntity.class,
-                    EntityDataSerializers.INT
-            );
+    private static final EntityDataAccessor<Integer> DATA_ID_ATTACK_TARGET = SynchedEntityData.defineId(LaserChickenEntity.class, EntityDataSerializers.INT);
 
-    private static final EntityDataAccessor<Integer> DATA_ID_ATTACK =
-            SynchedEntityData.defineId(
-                    LaserChickenEntity.class,
-                    EntityDataSerializers.INT
-            );
+    private static final EntityDataAccessor<Integer> DATA_ID_ATTACK = SynchedEntityData.defineId(LaserChickenEntity.class, EntityDataSerializers.INT);
 
     private int clientSideAttack = 0;
 

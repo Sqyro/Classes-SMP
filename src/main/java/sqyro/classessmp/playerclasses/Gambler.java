@@ -23,6 +23,8 @@ import sqyro.classessmp.sounds.ClassesSounds;
 public class Gambler extends PlayerClass {
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "gambler_damage");
 
+    private static final int LOW_ROLL_PERCENTAGE = 85;
+
     private int bonusLevel;
     public final int MIN_BONUS_DAMAGE_LEVEL = -5;
     public final int MAX_BONUS_DAMAGE_LEVEL = 5;
@@ -67,11 +69,11 @@ public class Gambler extends PlayerClass {
     public int rollDamageModifier() {
         int Roll = Player.getRandom().nextInt(0, 100);
 
-        if (Roll < 80) {
-            return Player.getRandom().nextInt(getMinModifier(), Math.min(11, getMaxModifier()));
+        if (Roll < LOW_ROLL_PERCENTAGE) {
+            return Player.getRandom().nextInt(getMinModifier(), Math.min(8, getMaxModifier()));
         }
 
-        int highRoll = Player.getRandom().nextInt(11, getMaxModifier() + 1);
+        int highRoll = Player.getRandom().nextInt(8, getMaxModifier() + 1);
 
         return highRoll;
     }
@@ -105,9 +107,9 @@ public class Gambler extends PlayerClass {
 
     private int getMaxModifier() {
         if (bonusLevel > 0) {
-            return 20 + bonusLevel;
+            return 16 + bonusLevel;
         } else {
-            return 20;
+            return 16;
         }
     }
 

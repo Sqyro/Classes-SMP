@@ -28,7 +28,7 @@ public class ElephantEntity extends TamableAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.8D, false));
         this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1.0, 10.0F, 3.0F));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -41,9 +41,9 @@ public class ElephantEntity extends TamableAnimal {
 
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 80.0D)
+                .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.ATTACK_DAMAGE, 4.0D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D);
     }
