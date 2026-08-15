@@ -20,9 +20,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
+import sqyro.classessmp.entities.goal.HostileTargetGoal;
 import sqyro.classessmp.entities.goal.LaserAttackGoal;
 
-public class LaserChickenEntity extends TamableAnimal {
+public class LaserChickenEntity extends ClassSummonEntity {
     private static final int ATTACK_TIME = 40;
     private static final int ATTACK_COOLDOWN = 20;
 
@@ -52,7 +53,8 @@ public class LaserChickenEntity extends TamableAnimal {
 
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new HostileTargetGoal(this, 10.0D));
+        this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -87,36 +89,6 @@ public class LaserChickenEntity extends TamableAnimal {
 
         builder.define(DATA_ID_ATTACK_TARGET, 0);
         builder.define(DATA_ID_ATTACK, 0);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-
-        if (target != null && !this.shouldAttackTarget(target)) {
-            target = null;
-        }
-
-        super.setTarget(target);
-    }
-
-    public boolean shouldAttackTarget(LivingEntity target) {
-        if (!target.isAlive()) {
-            return false;
-        }
-
-        if (target == this) {
-            return false;
-        }
-
-        if (this.isOwnedBy(target)) {
-            return false;
-        }
-
-        if (target instanceof TamableAnimal tamable && this.isTame() && tamable.isTame() && this.getOwner() != null && tamable.getOwner() != null && this.getOwner().equals(tamable.getOwner())) {
-            return false;
-        }
-
-        return true;
     }
 
 

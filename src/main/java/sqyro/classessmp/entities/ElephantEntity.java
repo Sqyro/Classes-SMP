@@ -15,8 +15,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
+import sqyro.classessmp.entities.goal.HostileTargetGoal;
 
-public class ElephantEntity extends TamableAnimal {
+import java.util.UUID;
+
+public class ElephantEntity extends ClassSummonEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
@@ -36,7 +39,8 @@ public class ElephantEntity extends TamableAnimal {
 
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new HostileTargetGoal(this, 6.0D));
+        this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
