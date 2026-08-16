@@ -100,6 +100,13 @@ public class ClientClasses {
                         SigeonPex.SIGEON_ROOTING_COOLDOWN
                 )
         )));
+        CLASSES.put("death_jester", new ClientClassData(List.of(
+                new ClientAbility("carnival_frenzy",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/carnival_frenzy_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/carnival_frenzy_color.png"),
+                        DeathJester.CARNIVAL_FRENZY_COOLDOWN
+                )
+        )));
     }
 
     public static ClientClassData get(String ID) {

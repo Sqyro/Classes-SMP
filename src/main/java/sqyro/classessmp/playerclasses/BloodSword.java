@@ -1,5 +1,8 @@
 package sqyro.classessmp.playerclasses;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -19,6 +22,8 @@ import sqyro.classessmp.items.BloodSwordItem;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
 import sqyro.classessmp.sounds.ClassesSounds;
+
+import java.util.UUID;
 
 public class BloodSword extends PlayerClass {
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "blood_sword_damage");
@@ -64,11 +69,18 @@ public class BloodSword extends PlayerClass {
 
         if (ItemStackInHand.getItem() instanceof BloodSwordItem) {
             KillCountingSwordData killCountingSwordData = BloodSwordItem.getData(ItemStackInHand);
-            KillCountingSwordData newData = killCountingSwordData.removeKill();
-            if (newData == null) {
+            KillCountingSwordData.RemovedKillResult result = killCountingSwordData.removeKill();
+
+            if (result == null) {
                 ClassesSMP.LOGGER.info("{} of class: {} tried to activate Life Steal, but has no blood", Player.getName().getString(), this.getID());
                 return;
             }
+
+            KillCountingSwordData newData = result.data();
+
+            UUID removedUUID = result.playerUUID();
+            ServerPlayer killedPlayer = Player.level().getServer().getPlayerList().getPlayer(removedUUID);
+            String killedName = killedPlayer != null ? killedPlayer.getName().getString() : "Unknown Player";
 
             ClassesSMP.LOGGER.info("{} of class: {} activated Life Steal", Player.getName().getString(), this.getID());
             setCooldown(LIFE_STEAL_ID, LIFE_STEAL_COOLDOWN);
@@ -79,6 +91,8 @@ public class BloodSword extends PlayerClass {
             ItemStackInHand.set(ClassesDataComponents.KILL_COUNTING_SWORD_DATA, newData);
             ClassesNetworking.sendBloodAmount(Player, newData.getKillCount());
 
+            Player.displayClientMessage(Component.literal("Consumed the blood of ").withStyle(ChatFormatting.DARK_RED).append(Component.literal(killedName).withStyle(ChatFormatting.RED)), true);
+
             Player.heal(LIFE_STEAL_HEAL);
             Player.getFoodData().eat(LIFE_STEAL_FOOD, LIFE_STEAL_SATURATION);
             Player.level().playSound(null, Player.getX(), Player.getY(), Player.getZ(), ClassesSounds.BLOOD_SWORD_CONSUME, SoundSource.PLAYERS);
@@ -87,7 +101,6 @@ public class BloodSword extends PlayerClass {
         } else {
             failAbilityBecauseOfHeldItem();
         }
-
     }
 
     private void failAbilityBecauseOfHeldItem() {

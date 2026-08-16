@@ -28,22 +28,24 @@ public class KillCountingSwordData {
         return new KillCountingSwordData(newKills);
     }
 
-    public KillCountingSwordData removeKill() {
+    public RemovedKillResult removeKill() {
         KillCountingSwordData newData = new KillCountingSwordData();
         newData.killedPlayers.addAll(this.killedPlayers);
 
-        if (!newData.killedPlayers.isEmpty()) {
-            Iterator<UUID> it = newData.killedPlayers.iterator();
-            it.next();
-            it.remove();
-        } else {
+        if (newData.killedPlayers.isEmpty()) {
             return null;
         }
 
-        return newData;
+        Iterator<UUID> it = newData.killedPlayers.iterator();
+        UUID removedUUID = it.next();
+        it.remove();
+
+        return new RemovedKillResult(newData, removedUUID);
     }
 
     public Set<UUID> getKilledPlayers() {
         return killedPlayers;
     }
+
+    public record RemovedKillResult(KillCountingSwordData data, UUID playerUUID) {}
 }
