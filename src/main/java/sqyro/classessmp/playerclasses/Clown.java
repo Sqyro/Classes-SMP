@@ -30,7 +30,7 @@ import java.util.Optional;
 
 public class Clown extends PlayerClass {
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "clown_damage");
-    private static final Identifier MOVEMENT_SPEED_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "clown_movement_speed");
+    public static final Identifier MOVEMENT_SPEED_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "clown_movement_speed");
 
     private static final String CIRCUS_CAGE_ID = "circus_cage";
     public static final int CIRCUS_CAGE_COOLDOWN = 600;

@@ -10,9 +10,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.network.ClassesNetworking;
-import sqyro.classessmp.playerclasses.AncientWarden;
-import sqyro.classessmp.playerclasses.Builder;
-import sqyro.classessmp.playerclasses.TheVessel;
+import sqyro.classessmp.playerclasses.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,11 +97,16 @@ public class PlayerClassSavedData extends SavedData {
 
         AttributeInstance damage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
         AttributeInstance health = Player.getAttribute(Attributes.MAX_HEALTH);
+        AttributeInstance movementSpeed = Player.getAttribute(Attributes.MOVEMENT_SPEED);
         if (damage != null) {
             damage.removeModifier(TheVessel.DAMAGE_MODIFIER_ID);
         }
         if (health != null) {
             health.removeModifier(TheVessel.HEALTH_MODIFIER_ID);
+        }
+        if (health != null) {
+            movementSpeed.removeModifier(Clown.MOVEMENT_SPEED_ID);
+            movementSpeed.removeModifier(DeathJester.SPEED_MODIFIER_ID);
         }
 
         Player.getAbilities().setFlyingSpeed(Builder.DEFAULT_FLYING_SPEED);
