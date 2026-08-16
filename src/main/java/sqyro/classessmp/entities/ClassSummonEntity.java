@@ -52,9 +52,13 @@ public class ClassSummonEntity extends TamableAnimal {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!this.level().isClientSide() && player.isShiftKeyDown() && this.isOwnedBy(player) && stack.getItem() instanceof SpawnerItem spawnerItem && spawnerItem.isFor(this.getType())) {
-            this.clearAttackTarget();
+        if (!this.level().isClientSide() && this.isOwnedBy(player)) {
+            if (player.isShiftKeyDown() && stack.getItem() instanceof SpawnerItem spawnerItem && spawnerItem.isFor(this.getType())) {
+                this.clearAttackTarget();
+                return InteractionResult.SUCCESS;
+            }
 
+            this.setOrderedToSit(!this.isOrderedToSit());
             return InteractionResult.SUCCESS;
         }
 

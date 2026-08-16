@@ -1,6 +1,5 @@
 package sqyro.classessmp.entities;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,12 +11,9 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
 import sqyro.classessmp.entities.goal.HostileTargetGoal;
-
-import java.util.UUID;
 
 public class ElephantEntity extends ClassSummonEntity {
     public final AnimationState idleAnimationState = new AnimationState();
@@ -86,15 +82,5 @@ public class ElephantEntity extends ClassSummonEntity {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.RAVAGER_DEATH;
-    }
-
-    @Override
-    public boolean isFood(ItemStack itemStack) {
-        return false;
-    }
-
-    @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return null;
     }
 }
