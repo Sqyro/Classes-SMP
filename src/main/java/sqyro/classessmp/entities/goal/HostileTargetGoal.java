@@ -1,7 +1,6 @@
 package sqyro.classessmp.entities.goal;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.phys.AABB;
