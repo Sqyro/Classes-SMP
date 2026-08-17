@@ -107,6 +107,7 @@ public class ClientClasses {
                         DeathJester.CARNIVAL_FRENZY_COOLDOWN
                 )
         )));
+        CLASSES.put("sans", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {

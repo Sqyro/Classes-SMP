@@ -1,6 +1,7 @@
 package sqyro.classessmp.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -30,6 +31,10 @@ public class AbilityIndicatorHud {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (minecraft.player == null) {
+            return;
+        }
+
+        if (minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON) {
             return;
         }
 

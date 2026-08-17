@@ -18,7 +18,7 @@ public class Builder extends PlayerClass {
 
     private Vec3 lastPosition;
 
-    public static final float BUILDER_FLYING_SPEED = 0.025f;
+    public static final float BUILDER_FLYING_SPEED = 0.04f;
     public static final float DEFAULT_FLYING_SPEED = 0.05f;
 
     public Builder(ServerPlayer Player) {
