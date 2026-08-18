@@ -54,6 +54,11 @@ public class BloodSword extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
         if (isOnCooldown(LIFE_STEAL_ID)) {
             ClassesSMP.LOGGER.info("{} of class: {} tried to activate Life Steal, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(LIFE_STEAL_ID));

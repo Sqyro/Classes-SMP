@@ -88,6 +88,11 @@ public class AncientWarden extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
         if (isOnCooldown(NOISE_METER_ID)) {
             ClassesSMP.LOGGER.info("{} of class: {} tried to activate Noise Meter, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(NOISE_METER_ID));

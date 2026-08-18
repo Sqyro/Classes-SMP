@@ -131,10 +131,7 @@ public class ClassesEvents {
             }
 
             PlayerClass playerClass = ((PlayerClassHolder) Player).getPlayerClass();
-
-            if (playerClass instanceof Gambler gambler) {
-                gambler.onKill();
-            }
+            playerClass.onKill(entity);
 
             if (source.getWeaponItem() == null) {
                 return;

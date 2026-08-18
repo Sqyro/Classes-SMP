@@ -78,7 +78,7 @@ public class Gambler extends PlayerClass {
         return highRoll;
     }
 
-    public void onKill() {
+    public void onKill(Entity Target) {
         if (bonusLevel < MAX_BONUS_DAMAGE_LEVEL) {
             setBonusLevel(bonusLevel + 1);
             ClassesSMP.LOGGER.info("{} of class {} leveled up bonus damage (Level {} -> {})", Player.getName().getString(), this.getID(), bonusLevel - 1, bonusLevel);

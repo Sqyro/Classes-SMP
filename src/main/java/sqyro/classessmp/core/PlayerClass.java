@@ -21,6 +21,7 @@ public abstract class PlayerClass {
 
     public abstract void onTick();
     public abstract void onRespawn();
+    public abstract void onKill(Entity Target);
     public abstract void onKeybind1();
     public abstract void onKeybind2();
     public abstract void onKeybind3();

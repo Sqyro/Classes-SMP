@@ -65,6 +65,11 @@ public class TheVessel extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
 
     }

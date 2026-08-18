@@ -25,6 +25,11 @@ public class Terrorist extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
 
     }

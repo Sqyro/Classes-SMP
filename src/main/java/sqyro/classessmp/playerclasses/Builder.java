@@ -81,6 +81,11 @@ public class Builder extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
 
     }

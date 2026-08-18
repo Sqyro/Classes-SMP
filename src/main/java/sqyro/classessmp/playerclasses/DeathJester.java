@@ -14,11 +14,13 @@ import sqyro.classessmp.core.PlayerClass;
 public class DeathJester extends PlayerClass {
     public static final Identifier SPEED_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "death_jester_speed");
 
+    public static final int KILL_EFFECT_COOLDOWN = 200;
+
     public static final int SPEED_HIT_TIMER = 80;
 
     public static final String CARNIVAL_FRENZY_ID = "carnival_frenzy";
     public static final int CARNIVAL_FRENZY_COOLDOWN = 1200;
-    public static final int CARNIVAL_FRENZY_DURATION = 240;
+    public static final int CARNIVAL_FRENZY_DURATION = 140;
 
     private int combo;
     private int hit_timer;
@@ -57,6 +59,12 @@ public class DeathJester extends PlayerClass {
     @Override
     public void onRespawn() {
 
+    }
+
+    @Override
+    public void onKill(Entity Target) {
+        Player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, KILL_EFFECT_COOLDOWN, 1));
+        Player.addEffect(new MobEffectInstance(MobEffects.SPEED, KILL_EFFECT_COOLDOWN, 1));
     }
 
     @Override

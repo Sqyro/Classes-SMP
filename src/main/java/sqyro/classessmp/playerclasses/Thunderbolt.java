@@ -87,6 +87,19 @@ public class Thunderbolt extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+        LightningBolt Lightning = EntityType.LIGHTNING_BOLT.create(Player.level(), EntitySpawnReason.TRIGGERED);
+
+        if (Lightning != null) {
+            Lightning.moveOrInterpolateTo(Target.position());
+            Lightning.setCause(Player);
+            Lightning.setVisualOnly(true);
+
+            Player.level().addFreshEntity(Lightning);
+        }
+    }
+
+    @Override
     public void onKeybind1() {
         if (isOnCooldown(THUNDERSTORM_ID)) {
             ClassesSMP.LOGGER.info("{} of class: {} tried to activate Thunder Storm, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(THUNDERSTORM_ID));

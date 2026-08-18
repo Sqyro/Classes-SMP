@@ -39,6 +39,11 @@ public class Pickpocket extends PlayerClass {
     }
 
     @Override
+    public void onKill(Entity Target) {
+
+    }
+
+    @Override
     public void onKeybind1() {
         if (isOnCooldown(STEAL_ID)) {
             ClassesSMP.LOGGER.info("{} of class: {} tried to activate Steal, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(STEAL_ID));
