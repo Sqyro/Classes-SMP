@@ -98,15 +98,19 @@ public class PlayerClassSavedData extends SavedData {
         AttributeInstance damage = Player.getAttribute(Attributes.ATTACK_DAMAGE);
         AttributeInstance health = Player.getAttribute(Attributes.MAX_HEALTH);
         AttributeInstance movementSpeed = Player.getAttribute(Attributes.MOVEMENT_SPEED);
+        AttributeInstance size = Player.getAttribute(Attributes.SCALE);
         if (damage != null) {
             damage.removeModifier(TheVessel.DAMAGE_MODIFIER_ID);
         }
         if (health != null) {
             health.removeModifier(TheVessel.HEALTH_MODIFIER_ID);
         }
-        if (health != null) {
+        if (movementSpeed != null) {
             movementSpeed.removeModifier(Clown.MOVEMENT_SPEED_ID);
             movementSpeed.removeModifier(DeathJester.SPEED_MODIFIER_ID);
+        }
+        if (size != null) {
+            size.removeModifier(Midget.SIZE_MODIFIER_ID);
         }
 
         Player.getAbilities().setFlyingSpeed(Builder.DEFAULT_FLYING_SPEED);

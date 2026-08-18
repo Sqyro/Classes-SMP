@@ -108,6 +108,7 @@ public class ClientClasses {
                 )
         )));
         CLASSES.put("sans", new ClientClassData(List.of()));
+        CLASSES.put("midget", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {

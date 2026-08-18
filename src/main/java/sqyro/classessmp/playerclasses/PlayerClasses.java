@@ -25,6 +25,7 @@ public class PlayerClasses {
         CLASSES.put("sigeon_pex", SigeonPex::new);
         CLASSES.put("death_jester", DeathJester::new);
         CLASSES.put("sans", Sans::new);
+        CLASSES.put("midget", Midget::new);
     }
 
     public static PlayerClass create(String ID, ServerPlayer Player) {
