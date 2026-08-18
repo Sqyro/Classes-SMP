@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -29,7 +30,8 @@ public class Thunderbolt extends PlayerClass {
     public static final int THUNDERSTORM_COOLDOWN = 1200;
     public static final int THUNDERSTORM_DURATION = 200;
     public static final int THUNDERSTORM_RADIUS = 50;
-    public static final float THUNDERSTORM_DAMAGE = 4f;
+    public static final float THUNDERSTORM_DAMAGE = 15f;
+    public static final int THUNDERSTORM_BURN_TICKS = 100;
     public static final int THUNDERSTORM_HIT_PLAYER_CHANCE = 50;
 
     private int thunderstormTicks = 0;
@@ -199,7 +201,7 @@ public class Thunderbolt extends PlayerClass {
     }
 
     private void spawnLightning() {
-        DamageSource fireDamage = Player.damageSources().inFire();
+        DamageSource fireDamage = Player.damageSources().lightningBolt();
 
         boolean hitTracked = stormTarget != null && stormTarget.isAlive() && Player.getRandom().nextInt(0, 100) <= THUNDERSTORM_HIT_PLAYER_CHANCE;
 
@@ -225,18 +227,26 @@ public class Thunderbolt extends PlayerClass {
         if (Lightning != null) {
             Lightning.moveOrInterpolateTo(Pos);
             Lightning.setCause(Player);
-            Level.addFreshEntity(Lightning);
-        }
+            Lightning.setVisualOnly(true);
 
-        if (directTarget != null) {
-            directTarget.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
-            return;
+            Level.addFreshEntity(Lightning);
         }
 
         AABB Area = new AABB(Pos, Pos).inflate(2);
 
         for (LivingEntity Entity : Level.getEntitiesOfClass(LivingEntity.class, Area, entity -> entity != Player)) {
-            Entity.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
+            if (Entity == Player) {
+                continue;
+            } else if (Entity instanceof Animal) {
+                Entity.hurtServer(Level, Damage, 1);
+            } else {
+                Entity.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
+                Entity.igniteForTicks(THUNDERSTORM_BURN_TICKS);
+            }
+        }
+
+        if (directTarget != null && directTarget != Player && !Area.contains(directTarget.position())) {
+            directTarget.hurtServer(Level, Damage, THUNDERSTORM_DAMAGE);
         }
     }
 

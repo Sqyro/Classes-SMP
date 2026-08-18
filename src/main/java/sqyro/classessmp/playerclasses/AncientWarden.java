@@ -48,9 +48,9 @@ public class AncientWarden extends PlayerClass {
     private static final String SONIC_BOOM_ID = "sonic_boom";
     public static final int SONIC_BOOM_COOLDOWN = 800;
     public static final int SONIC_BOOM_FOOD_CONSUMPTION = 6;
-    public static final int SONIC_BOOM_NOISE_CONSUMPTION = 64;
+    public static final int SONIC_BOOM_NOISE_CONSUMPTION = 56;
     public static final int SONIC_BOOM_RANGE = 15;
-    public static final int SONIC_BOOM_DAMAGE = 10;
+    public static final int SONIC_BOOM_DAMAGE = 8;
     public static final float SONIC_BOOM_KNOCKBACK = 1.5f;
 
     public AncientWarden(ServerPlayer Player) {
