@@ -70,10 +70,10 @@ public class Gambler extends PlayerClass {
         int Roll = Player.getRandom().nextInt(0, 100);
 
         if (Roll < LOW_ROLL_PERCENTAGE) {
-            return Player.getRandom().nextInt(getMinModifier(), Math.min(8, getMaxModifier()));
+            return Player.getRandom().nextInt(getMinModifier(), Math.min(10, getMaxModifier()));
         }
 
-        int highRoll = Player.getRandom().nextInt(8, getMaxModifier() + 1);
+        int highRoll = Player.getRandom().nextInt(10, getMaxModifier() + 1);
 
         return highRoll;
     }
@@ -107,9 +107,9 @@ public class Gambler extends PlayerClass {
 
     private int getMaxModifier() {
         if (bonusLevel > 0) {
-            return 16 + bonusLevel;
+            return 18 + bonusLevel;
         } else {
-            return 16;
+            return 18;
         }
     }
 

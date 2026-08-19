@@ -36,6 +36,7 @@ public class Thunderbolt extends PlayerClass {
 
     private int thunderstormTicks = 0;
     private LivingEntity stormTarget = null;
+    private boolean dashFallImmunity = false;
 
     public static final String LIGHTNING_DASH_ID = "lightning_dash";
     public static final int LIGHTNING_DASH_COOLDOWN = 100;
@@ -60,6 +61,14 @@ public class Thunderbolt extends PlayerClass {
     @Override
     public void onTick() {
         tickCooldowns();
+
+        if (dashFallImmunity) {
+            Player.resetFallDistance();
+
+            if (Player.onGround()) {
+                dashFallImmunity = false;
+            }
+        }
 
         if (thunderstormTicks <= 0) {
             return;
@@ -130,6 +139,7 @@ public class Thunderbolt extends PlayerClass {
         Player.level().sendParticles(ClassesParticles.LIGHTNING_PARTICLE, Player.getX(), Player.getY(), Player.getZ(), 50, 0.5, 0.5, 0.5, 0.1);
 
         Player.hurtMarked = true;
+        this.dashFallImmunity = true;
     }
 
     @Override
