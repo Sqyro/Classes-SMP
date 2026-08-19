@@ -31,6 +31,8 @@ public class ClassesNetworking {
 
         PayloadTypeRegistry.playS2C().register(NoiseMeterPacket.ID, NoiseMeterPacket.CODEC);
 
+        PayloadTypeRegistry.playS2C().register(ButItRefusedSoundPacket.TYPE, ButItRefusedSoundPacket.CODEC);
+
         ServerPlayNetworking.registerGlobalReceiver(Keybind1Packet.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ServerPlayer Player = context.player();
@@ -127,5 +129,31 @@ public class ClassesNetworking {
 
     public static void sendNoiseMeter(ServerPlayer Player, int Value) {
         ServerPlayNetworking.send(Player, new NoiseMeterPacket(Value));
+    }
+
+    public static void sendButItRefusedStart(ServerPlayer sans) {
+        ButItRefusedSoundPacket packet =
+                new ButItRefusedSoundPacket(sans.getUUID(), true);
+
+        double radius = 32.0;
+
+        for (ServerPlayer player : sans.level().players()) {
+            if (player.distanceToSqr(sans) <= radius * radius) {
+                ServerPlayNetworking.send(player, packet);
+            }
+        }
+    }
+
+    public static void sendButItRefusedStop(ServerPlayer sans) {
+        ButItRefusedSoundPacket packet =
+                new ButItRefusedSoundPacket(sans.getUUID(), false);
+
+        double radius = 32.0;
+
+        for (ServerPlayer player : sans.level().players()) {
+            if (player.distanceToSqr(sans) <= radius * radius) {
+                ServerPlayNetworking.send(player, packet);
+            }
+        }
     }
 }

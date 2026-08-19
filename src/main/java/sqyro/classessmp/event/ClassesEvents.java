@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.command.ChoseClassCommand;
@@ -21,6 +22,7 @@ import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.playerclasses.AncientWarden;
 import sqyro.classessmp.playerclasses.Gambler;
 import sqyro.classessmp.playerclasses.PlayerClasses;
+import sqyro.classessmp.playerclasses.Sans;
 
 public class ClassesEvents {
     public static int ABILITY_COOLDOWN_SYNC_INTERVAL = 100;
@@ -30,6 +32,7 @@ public class ClassesEvents {
         registerPlayerJoinEvent();
         registerPlayerRespawnEvent();
         registerDeathEvent();
+        registerDamageEvent();
         registerCommandsEvent();
     }
 
@@ -148,6 +151,34 @@ public class ClassesEvents {
             }
 
             killCountingSword.onKill(Player, entity, Weapon);
+        });
+    }
+
+    private static void registerDamageEvent() {
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+            if (!(entity instanceof ServerPlayer player)) {
+                return true;
+            }
+
+            if (player.getRandom().nextInt(0, 100) >= Sans.BUT_IT_REFUSED_CHANCE) {
+                return true;
+            }
+
+            PlayerClass playerClass = ((PlayerClassHolder) player).getPlayerClass();
+
+            if (playerClass == null) {
+                return true;
+            }
+
+            if (playerClass instanceof Sans sans) {
+                if (sans.isDodging) {
+                    sans.dodgeAttack(source);
+
+                    return false;
+                }
+            }
+
+            return true;
         });
     }
 

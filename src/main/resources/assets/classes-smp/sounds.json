@@ -63,5 +63,18 @@
     "sounds": [
       "classes-smp:bossminer2000_squish"
     ]
+  },
+  "sans_dodge": {
+    "sounds": [
+      "classes-smp:sans_dodge"
+    ]
+  },
+  "the_slaughter_continues": {
+    "sounds": [
+      {
+        "name": "classes-smp:the_slaughter_continues-remastered",
+        "stream": true
+      }
+    ]
   }
 }

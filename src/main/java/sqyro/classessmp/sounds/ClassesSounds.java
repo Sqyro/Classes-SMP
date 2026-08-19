@@ -26,6 +26,9 @@ public class ClassesSounds {
 
     public static final SoundEvent BOSSMINER2000_SQUISH = register("bossminer2000_squish");
 
+    public static final SoundEvent SANS_DODGE = register("sans_dodge");
+    public static final SoundEvent THE_SLAUGHTER_CONTINUES = register("the_slaughter_continues");
+
     private static SoundEvent register(String SoundName) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, SoundName);
 

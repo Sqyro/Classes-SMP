@@ -1,7 +1,10 @@
 package sqyro.classessmp.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 import sqyro.classessmp.network.*;
+import sqyro.classessmp.sounds.SansClientSounds;
 
 public class ClassesClientNetworking {
     public static void register() {
@@ -56,6 +59,27 @@ public class ClassesClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(NoiseMeterPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClientPlayerData.setNoiseMeter(payload.Value());
+            });
+        });
+        ClientPlayNetworking.registerGlobalReceiver(ButItRefusedSoundPacket.TYPE, (payload, context) -> {
+            context.client().execute(() -> {
+                Minecraft minecraft = context.client();
+
+                if (minecraft.level == null) {
+                    return;
+                }
+
+                Player player = minecraft.level.getPlayerByUUID(payload.playerUUID());
+
+                if (player == null) {
+                    return;
+                }
+
+                if (payload.playing()) {
+                    SansClientSounds.startButItRefused(player);
+                } else {
+                    SansClientSounds.stopButItRefused(player);
+                }
             });
         });
     }

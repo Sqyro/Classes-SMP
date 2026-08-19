@@ -104,6 +104,7 @@ public class PlayerClassSavedData extends SavedData {
         }
         if (health != null) {
             health.removeModifier(TheVessel.HEALTH_MODIFIER_ID);
+            health.removeModifier(Sans.HEALTH_MODIFIER_ID);
         }
         if (movementSpeed != null) {
             movementSpeed.removeModifier(Clown.MOVEMENT_SPEED_ID);

@@ -107,7 +107,18 @@ public class ClientClasses {
                         DeathJester.CARNIVAL_FRENZY_COOLDOWN
                 )
         )));
-        CLASSES.put("sans", new ClientClassData(List.of()));
+        CLASSES.put("sans", new ClientClassData(List.of(
+                new ClientAbility("but_it_refused",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/but_it_refused_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/but_it_refused_color.png"),
+                        Sans.BUT_IT_REFUSED_COOLDOWN
+                ),
+                new ClientAbility("sans_dash",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sans_dash_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sans_dash_color.png"),
+                        Sans.SANS_DASH_COOLDOWN
+                )
+        )));
         CLASSES.put("midget", new ClientClassData(List.of()));
     }
 
