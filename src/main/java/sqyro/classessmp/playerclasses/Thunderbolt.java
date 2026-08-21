@@ -30,7 +30,7 @@ public class Thunderbolt extends PlayerClass {
     public static final int THUNDERSTORM_COOLDOWN = 1200;
     public static final int THUNDERSTORM_DURATION = 200;
     public static final int THUNDERSTORM_RADIUS = 50;
-    public static final float THUNDERSTORM_DAMAGE = 15f;
+    public static final float THUNDERSTORM_DAMAGE = 10f;
     public static final int THUNDERSTORM_BURN_TICKS = 100;
     public static final int THUNDERSTORM_HIT_PLAYER_CHANCE = 50;
 
