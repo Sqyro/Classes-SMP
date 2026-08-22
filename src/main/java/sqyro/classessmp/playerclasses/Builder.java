@@ -36,6 +36,7 @@ public class Builder extends PlayerClass {
         boolean hasFeatherArmor = Player.getItemBySlot(EquipmentSlot.HEAD).is(ClassesItems.FEATHER_HELMET) && Player.getItemBySlot(EquipmentSlot.CHEST).is(ClassesItems.FEATHER_CHESTPLATE) && Player.getItemBySlot(EquipmentSlot.LEGS).is(ClassesItems.FEATHER_LEGGINGS) && Player.getItemBySlot(EquipmentSlot.FEET).is(ClassesItems.FEATHER_BOOTS);
 
         if (hasFeatherArmor) {
+            Player.resetFallDistance();
             Player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, 2, false, false));
             Player.getAbilities().setFlyingSpeed(BUILDER_FLYING_SPEED);
             if (flyingEnergy > 0) {

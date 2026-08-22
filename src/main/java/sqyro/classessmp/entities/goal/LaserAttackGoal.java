@@ -32,7 +32,7 @@ public class LaserAttackGoal extends Goal {
     public boolean canContinueToUse() {
         LivingEntity target = this.chicken.getTarget();
 
-        return target != null && target.isAlive() && this.chicken.shouldAttackTarget(target);
+        return target != null && target.isAlive() && this.chicken.shouldAttackTarget(target) && this.chicken.distanceToSqr(target) > LASER_RANGE;
     }
 
     @Override

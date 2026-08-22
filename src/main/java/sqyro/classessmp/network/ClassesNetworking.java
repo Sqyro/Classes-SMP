@@ -132,8 +132,7 @@ public class ClassesNetworking {
     }
 
     public static void sendButItRefusedStart(ServerPlayer sans) {
-        ButItRefusedSoundPacket packet =
-                new ButItRefusedSoundPacket(sans.getUUID(), true);
+        ButItRefusedSoundPacket packet = new ButItRefusedSoundPacket(sans.getUUID(), true);
 
         double radius = 32.0;
 
