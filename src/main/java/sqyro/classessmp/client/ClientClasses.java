@@ -120,6 +120,13 @@ public class ClientClasses {
                 )
         )));
         CLASSES.put("midget", new ClientClassData(List.of()));
+        CLASSES.put("capitalist", new ClientClassData(List.of(
+                new ClientAbility("sacrifice",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sacrifice_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/sacrifice_color.png"),
+                        Capitalist.SACRIFICE_COOLDOWN
+                )
+        )));
     }
 
     public static ClientClassData get(String ID) {
