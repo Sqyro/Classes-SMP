@@ -42,9 +42,9 @@ public class ElephantEntity extends ClassSummonEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 100.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.ATTACK_DAMAGE, 4.0D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D);
     }

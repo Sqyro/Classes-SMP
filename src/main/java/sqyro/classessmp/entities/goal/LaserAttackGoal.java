@@ -9,7 +9,7 @@ import java.util.EnumSet;
 
 public class LaserAttackGoal extends Goal {
     public static final double LASER_RANGE = 16.0D;
-    public static final float LASER_DAMAGE = 8.0F;
+    public static final float LASER_DAMAGE = 12.0F;
 
     private final LaserChickenEntity chicken;
 
