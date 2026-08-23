@@ -45,14 +45,17 @@ public class Capitalist extends PlayerClass {
             return;
         }
 
+        Item itemInHand = Player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
+
+        if (getEffectForItem(itemInHand) == null) {
+            return;
+        }
+
         ClassesSMP.LOGGER.info("{} of class {} activated Sacrifice", Player.getName().getString(), this.getID());
         setCooldown(SACRIFICE_ID, SACRIFICE_COOLDOWN);
 
-        Item itemInHand = Player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
-
-        if (getEffectForItem(itemInHand) != null) {
-            Player.addEffect(getEffectForItem(itemInHand));
-        }
+        Player.getItemInHand(InteractionHand.MAIN_HAND).shrink(1);
+        Player.addEffect(getEffectForItem(itemInHand));
     }
 
     private MobEffectInstance getEffectForItem(Item itemInHand) {
