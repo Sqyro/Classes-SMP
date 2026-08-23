@@ -66,6 +66,8 @@ public class CaseBlockEntity extends BlockEntity implements ExtendedScreenHandle
         if (key.isEmpty()) {
             player.displayClientMessage(Component.literal("You need a key!").withStyle(ChatFormatting.RED), true);
 
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.BLOCKS);
+
             return false;
         }
 
