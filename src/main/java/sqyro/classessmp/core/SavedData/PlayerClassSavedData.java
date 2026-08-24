@@ -99,6 +99,7 @@ public class PlayerClassSavedData extends SavedData {
         AttributeInstance health = Player.getAttribute(Attributes.MAX_HEALTH);
         AttributeInstance movementSpeed = Player.getAttribute(Attributes.MOVEMENT_SPEED);
         AttributeInstance size = Player.getAttribute(Attributes.SCALE);
+        AttributeInstance blockInteractionRange = Player.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
         if (damage != null) {
             damage.removeModifier(TheVessel.DAMAGE_MODIFIER_ID);
         }
@@ -112,6 +113,9 @@ public class PlayerClassSavedData extends SavedData {
         }
         if (size != null) {
             size.removeModifier(Midget.SIZE_MODIFIER_ID);
+        }
+        if (blockInteractionRange != null) {
+            blockInteractionRange.removeModifier(Builder.BLOCK_INTERACTION_RANGE_MODIFIER_ID);
         }
 
         Player.getAbilities().setFlyingSpeed(Builder.DEFAULT_FLYING_SPEED);

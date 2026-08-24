@@ -2,16 +2,24 @@ package sqyro.classessmp.playerclasses;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
+import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.items.ClassesItems;
 
 public class Builder extends PlayerClass {
+    public static final Identifier BLOCK_INTERACTION_RANGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "builder_block_interaction_range");
+    public static final int BLOCK_INTERACTION_RANGE_BONUS = 4;
+
     private static final float MIN_FLYING_SPEED_FOR_ENERGY_CONSUMPTION = 0.1f;
     private final int MAX_FLYING_ENERGY = 200;
     private int flyingEnergy;
@@ -33,11 +41,18 @@ public class Builder extends PlayerClass {
 
     @Override
     public void onTick() {
+        AttributeInstance blockInteractionRange = Player.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
+
+        if (blockInteractionRange != null && blockInteractionRange.getModifier(BLOCK_INTERACTION_RANGE_MODIFIER_ID) == null) {
+            blockInteractionRange.addPermanentModifier(new AttributeModifier(BLOCK_INTERACTION_RANGE_MODIFIER_ID, BLOCK_INTERACTION_RANGE_BONUS, AttributeModifier.Operation.ADD_VALUE));
+        }
+
+        Player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, 2, false, false));
+
         boolean hasFeatherArmor = Player.getItemBySlot(EquipmentSlot.HEAD).is(ClassesItems.FEATHER_HELMET) && Player.getItemBySlot(EquipmentSlot.CHEST).is(ClassesItems.FEATHER_CHESTPLATE) && Player.getItemBySlot(EquipmentSlot.LEGS).is(ClassesItems.FEATHER_LEGGINGS) && Player.getItemBySlot(EquipmentSlot.FEET).is(ClassesItems.FEATHER_BOOTS);
 
         if (hasFeatherArmor) {
             Player.resetFallDistance();
-            Player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, 2, false, false));
             Player.getAbilities().setFlyingSpeed(BUILDER_FLYING_SPEED);
             if (flyingEnergy > 0) {
                 if (!Player.getAbilities().mayfly) {
