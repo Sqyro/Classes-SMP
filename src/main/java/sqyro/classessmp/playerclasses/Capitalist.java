@@ -67,7 +67,7 @@ public class Capitalist extends PlayerClass {
             ItemEffect = new MobEffectInstance(MobEffects.SPEED, 200, 1, false, false);
         } else if (itemInHand == Items.GOLD_INGOT) {
             ItemEffect = new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0, false, false);
-        } else if (itemInHand == Items.EMERALD) {
+        } else if (itemInHand == Items.AMETHYST_SHARD || itemInHand == Items.AMETHYST_BLOCK) {
             ItemEffect = new MobEffectInstance(MobEffects.STRENGTH, 200, 1, false, false);
         } else if (itemInHand == Items.DIAMOND) {
             ItemEffect = new MobEffectInstance(MobEffects.RESISTANCE, 80, 2, false, false);
