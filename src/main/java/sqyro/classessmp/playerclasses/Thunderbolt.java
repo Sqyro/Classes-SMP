@@ -28,10 +28,10 @@ import java.util.Optional;
 public class Thunderbolt extends PlayerClass {
     public static final String THUNDERSTORM_ID = "thunderstorm";
     public static final int THUNDERSTORM_COOLDOWN = 1200;
-    public static final int THUNDERSTORM_DURATION = 200;
+    public static final int THUNDERSTORM_DURATION = 180;
     public static final int THUNDERSTORM_RADIUS = 50;
-    public static final float THUNDERSTORM_DAMAGE = 13f;
-    public static final int THUNDERSTORM_BURN_TICKS = 100;
+    public static final float THUNDERSTORM_DAMAGE = 12f;
+    public static final int THUNDERSTORM_BURN_TICKS = 70;
     public static final int THUNDERSTORM_HIT_PLAYER_CHANCE = 50;
 
     private int thunderstormTicks = 0;
