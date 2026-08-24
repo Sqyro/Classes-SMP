@@ -12,7 +12,7 @@ import sqyro.classessmp.core.PlayerClass;
 
 public class Capitalist extends PlayerClass {
     private static final String SACRIFICE_ID = "sacrifice";
-    public static final int SACRIFICE_COOLDOWN = 20;
+    public static final int SACRIFICE_COOLDOWN = 400;
 
     public Capitalist(ServerPlayer Player) {
         super(Player);
