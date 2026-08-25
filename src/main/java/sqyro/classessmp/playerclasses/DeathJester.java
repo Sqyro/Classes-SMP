@@ -20,7 +20,7 @@ public class DeathJester extends PlayerClass {
 
     public static final String CARNIVAL_FRENZY_ID = "carnival_frenzy";
     public static final int CARNIVAL_FRENZY_COOLDOWN = 1200;
-    public static final int CARNIVAL_FRENZY_DURATION = 140;
+    public static final int CARNIVAL_FRENZY_DURATION = 300;
 
     private int combo;
     private int hit_timer;
