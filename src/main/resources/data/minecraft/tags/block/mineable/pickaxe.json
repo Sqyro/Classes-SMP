@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "classes-smp:white_keypad"
+    "classes-smp:white_keypad",
+    "classes-smp:case_block"
   ]
 }
