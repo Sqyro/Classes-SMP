@@ -127,6 +127,17 @@ public class ClientClasses {
                         Capitalist.SACRIFICE_COOLDOWN
                 )
         )));
+        CLASSES.put("superfishninja", new ClientClassData(List.of(
+                new ClientAbility("ninja_invisibility",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_invisibility_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_invisibility_color.png"),
+                        SuperFishNinja.NINJA_INVISIBILITY_COOLDOWN
+                ),
+                new ClientAbility("ninja_teleport",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_teleport_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_teleport_color.png"),
+                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                ))));
     }
 
     public static ClientClassData get(String ID) {
