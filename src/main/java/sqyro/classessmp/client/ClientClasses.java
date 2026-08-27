@@ -138,6 +138,7 @@ public class ClientClasses {
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_teleport_color.png"),
                         SuperFishNinja.NINJA_TELEPORT_COOLDOWN
                 ))));
+        CLASSES.put("lunaris", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {
