@@ -139,6 +139,22 @@ public class ClientClasses {
                         SuperFishNinja.NINJA_TELEPORT_COOLDOWN
                 ))));
         CLASSES.put("lunaris", new ClientClassData(List.of()));
+        CLASSES.put("phoenix", new ClientClassData(List.of(
+                new ClientAbility("blazing_breath",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_color.png"),
+                        SuperFishNinja.NINJA_INVISIBILITY_COOLDOWN
+                ),
+                new ClientAbility("wings_of_fire",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_color.png"),
+                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                ),
+                new ClientAbility("infernal",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_color.png"),
+                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                ))));
     }
 
     public static ClientClassData get(String ID) {
