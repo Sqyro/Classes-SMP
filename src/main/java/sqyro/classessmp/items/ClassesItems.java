@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ToolMaterial;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.entities.ClassesEntities;
+import sqyro.classessmp.sounds.ClassesSounds;
 
 import java.util.function.Function;
 
@@ -39,6 +41,12 @@ public class ClassesItems {
     private static Item registerItem(String name, Item.Properties properties) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, name);
         return Registry.register(BuiltInRegistries.ITEM, ID, new Item(properties.setId(ResourceKey.create(Registries.ITEM, ID))));
+    }
+
+    public static final TagKey<Item> KNIVES = registerItemTag("knives");
+
+    private static TagKey<Item> registerItemTag(String path) {
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, path));
     }
 
     public static void register() {
