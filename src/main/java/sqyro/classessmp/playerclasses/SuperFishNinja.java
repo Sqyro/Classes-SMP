@@ -20,7 +20,7 @@ public class SuperFishNinja extends PlayerClass {
     public static final int KNIFE_EXTRA_DAMAGE = 3;
 
     public static final String NINJA_INVISIBILITY_ID = "invisibility";
-    public static final int NINJA_INVISIBILITY_COOLDOWN = 100;
+    public static final int NINJA_INVISIBILITY_COOLDOWN = 2000;
 
     public static final String NINJA_TELEPORT_ID = "ninja_teleport";
     public static final int NINJA_TELEPORT_COOLDOWN = 100;
