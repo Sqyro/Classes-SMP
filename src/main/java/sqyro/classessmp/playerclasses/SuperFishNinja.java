@@ -5,6 +5,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -33,7 +35,7 @@ public class SuperFishNinja extends PlayerClass {
 
     @Override
     public void onTick() {
-
+        Player.addEffect(new MobEffectInstance(MobEffects.SPEED, 40, 1, false, false));
     }
 
     @Override
