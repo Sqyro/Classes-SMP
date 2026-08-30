@@ -138,17 +138,17 @@ public class ClientClasses {
                 new ClientAbility("blazing_breath",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_color.png"),
-                        SuperFishNinja.NINJA_PULL_COOLDOWN
+                        Phoenix.BLAZING_BREATH_COOLDOWN
                 ),
                 new ClientAbility("wings_of_fire",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_color.png"),
-                        SuperFishNinja.NINJA_PULL_COOLDOWN
+                        Phoenix.WINGS_OF_FIRE_COOLDOWN
                 ),
                 new ClientAbility("infernal",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_color.png"),
-                        SuperFishNinja.NINJA_PULL_COOLDOWN
+                        Phoenix.INFERNAL_COOLDOWN
                 ))));
     }
 
