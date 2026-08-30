@@ -128,32 +128,27 @@ public class ClientClasses {
                 )
         )));
         CLASSES.put("superfishninja", new ClientClassData(List.of(
-                new ClientAbility("ninja_invisibility",
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_invisibility_bg.png"),
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_invisibility_color.png"),
-                        SuperFishNinja.NINJA_INVISIBILITY_COOLDOWN
-                ),
-                new ClientAbility("ninja_teleport",
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_teleport_bg.png"),
-                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_teleport_color.png"),
-                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                new ClientAbility("ninja_pull",
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_pull_bg.png"),
+                        Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/ninja_pull_color.png"),
+                        SuperFishNinja.NINJA_PULL_COOLDOWN
                 ))));
         CLASSES.put("lunaris", new ClientClassData(List.of()));
         CLASSES.put("phoenix", new ClientClassData(List.of(
                 new ClientAbility("blazing_breath",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/blazing_breath_color.png"),
-                        SuperFishNinja.NINJA_INVISIBILITY_COOLDOWN
+                        SuperFishNinja.NINJA_PULL_COOLDOWN
                 ),
                 new ClientAbility("wings_of_fire",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/wings_of_fire_color.png"),
-                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                        SuperFishNinja.NINJA_PULL_COOLDOWN
                 ),
                 new ClientAbility("infernal",
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_bg.png"),
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_color.png"),
-                        SuperFishNinja.NINJA_TELEPORT_COOLDOWN
+                        SuperFishNinja.NINJA_PULL_COOLDOWN
                 ))));
     }
 
