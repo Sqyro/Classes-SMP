@@ -1,6 +1,8 @@
 package sqyro.classessmp.playerclasses;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import sqyro.classessmp.core.PlayerClass;
 
@@ -25,7 +27,7 @@ public class Phoenix extends PlayerClass {
 
     @Override
     public void onTick() {
-
+        Player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 40, 0, false, false));
     }
 
     @Override
