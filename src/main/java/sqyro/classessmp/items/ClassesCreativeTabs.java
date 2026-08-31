@@ -16,6 +16,7 @@ public class ClassesCreativeTabs {
             .displayItems((context, entries) -> {
                 entries.accept(ClassesItems.BLOODSWORD);
                 entries.accept(ClassesItems.CLOWNSWORD);
+                entries.accept(ClassesItems.LUNARIS_SWORD);
                 entries.accept(ClassesItems.C4);
                 entries.accept(ClassesBlocks.WHITE_KEYPAD);
                 entries.accept(ClassesBlocks.BOSSMINER2000);
