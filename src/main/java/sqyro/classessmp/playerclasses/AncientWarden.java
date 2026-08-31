@@ -210,9 +210,9 @@ public class AncientWarden extends PlayerClass {
         int currentNoise = PlayerClassSavedDataGetter.get(Player.level()).getNoiseMeter(Player.getUUID());
 
         if (currentNoise >= NOISE_METER_MAX_VALUE * 0.75f) {
-            return 6;
+            return 4;
         } else if (currentNoise >= NOISE_METER_MAX_VALUE * 0.5f) {
-            return 3;
+            return 2;
         } else if (currentNoise >= NOISE_METER_MAX_VALUE * 0.25f) {
             return 1;
         } else {
