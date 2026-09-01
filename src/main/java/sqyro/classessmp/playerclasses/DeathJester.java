@@ -16,7 +16,7 @@ public class DeathJester extends PlayerClass {
 
     public static final int KILL_EFFECT_COOLDOWN = 200;
 
-    public static final int SPEED_HIT_TIMER = 80;
+    public static final int SPEED_HIT_TIMER = 50;
 
     public static final String CARNIVAL_FRENZY_ID = "carnival_frenzy";
     public static final int CARNIVAL_FRENZY_COOLDOWN = 1200;
@@ -51,7 +51,7 @@ public class DeathJester extends PlayerClass {
 
         if (combo > 0) {
             if (speed != null && speed.getModifier(SPEED_MODIFIER_ID) == null) {
-                speed.addPermanentModifier(new AttributeModifier(SPEED_MODIFIER_ID, Math.clamp( 0.01 * combo, 0, 0.09), AttributeModifier.Operation.ADD_VALUE));
+                speed.addPermanentModifier(new AttributeModifier(SPEED_MODIFIER_ID, Math.clamp( 0.01 * combo, 0, 0.07), AttributeModifier.Operation.ADD_VALUE));
             }
         }
     }
