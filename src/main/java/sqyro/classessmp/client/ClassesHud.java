@@ -182,9 +182,9 @@ public class ClassesHud {
         int extraDamage;
 
         if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.75f) {
-            extraDamage = 4;
+            extraDamage = 5;
         } else if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.5f) {
-            extraDamage = 2;
+            extraDamage = 3;
         } else if (ClientPlayerData.getNoiseMeter() >= AncientWarden.NOISE_METER_MAX_VALUE * 0.25f) {
             extraDamage = 1;
         } else {
