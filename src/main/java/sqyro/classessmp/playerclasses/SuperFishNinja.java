@@ -69,9 +69,9 @@ public class SuperFishNinja extends PlayerClass {
         BlockHitResult hit = Player.level().clip(new ClipContext(startPos, endPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, Player));
 
         if (hit.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = hit.getBlockPos();
+            //BlockPos blockPos = hit.getBlockPos();
 
-
+            Player.push(endPos);
         }
     }
 
