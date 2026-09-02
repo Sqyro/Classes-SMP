@@ -100,6 +100,7 @@ public class PlayerClassSavedData extends SavedData {
         AttributeInstance movementSpeed = Player.getAttribute(Attributes.MOVEMENT_SPEED);
         AttributeInstance size = Player.getAttribute(Attributes.SCALE);
         AttributeInstance blockInteractionRange = Player.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
+        AttributeInstance attackSpeed = Player.getAttribute(Attributes.BLOCK_BREAK_SPEED);
         if (damage != null) {
             damage.removeModifier(TheVessel.DAMAGE_MODIFIER_ID);
         }
@@ -116,6 +117,9 @@ public class PlayerClassSavedData extends SavedData {
         }
         if (blockInteractionRange != null) {
             blockInteractionRange.removeModifier(Builder.BLOCK_INTERACTION_RANGE_MODIFIER_ID);
+        }
+        if (attackSpeed != null) {
+            attackSpeed.removeModifier(Builder.BLOCK_BREAK_SPEED_MODIFIER_ID);
         }
 
         Player.getAbilities().setFlyingSpeed(Builder.DEFAULT_FLYING_SPEED);

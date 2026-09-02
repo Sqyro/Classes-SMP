@@ -17,6 +17,8 @@ import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.items.ClassesItems;
 
 public class Builder extends PlayerClass {
+    public static final Identifier BLOCK_BREAK_SPEED_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "builder_block_break_speed");
+    public static final float BLOCK_BREAK_SPEED_BONUS = 0.7f;
     public static final Identifier BLOCK_INTERACTION_RANGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "builder_block_interaction_range");
     public static final int BLOCK_INTERACTION_RANGE_BONUS = 4;
 
@@ -41,13 +43,16 @@ public class Builder extends PlayerClass {
 
     @Override
     public void onTick() {
+        AttributeInstance blockBreakSpeed = Player.getAttribute(Attributes.BLOCK_BREAK_SPEED);
         AttributeInstance blockInteractionRange = Player.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
 
         if (blockInteractionRange != null && blockInteractionRange.getModifier(BLOCK_INTERACTION_RANGE_MODIFIER_ID) == null) {
             blockInteractionRange.addPermanentModifier(new AttributeModifier(BLOCK_INTERACTION_RANGE_MODIFIER_ID, BLOCK_INTERACTION_RANGE_BONUS, AttributeModifier.Operation.ADD_VALUE));
         }
 
-        Player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, 2, false, false));
+        if (blockBreakSpeed != null && blockBreakSpeed.getModifier(BLOCK_BREAK_SPEED_MODIFIER_ID) == null) {
+            blockBreakSpeed.addPermanentModifier(new AttributeModifier(BLOCK_BREAK_SPEED_MODIFIER_ID, BLOCK_BREAK_SPEED_BONUS, AttributeModifier.Operation.ADD_VALUE));
+        }
 
         boolean hasFeatherArmor = Player.getItemBySlot(EquipmentSlot.HEAD).is(ClassesItems.FEATHER_HELMET) && Player.getItemBySlot(EquipmentSlot.CHEST).is(ClassesItems.FEATHER_CHESTPLATE) && Player.getItemBySlot(EquipmentSlot.LEGS).is(ClassesItems.FEATHER_LEGGINGS) && Player.getItemBySlot(EquipmentSlot.FEET).is(ClassesItems.FEATHER_BOOTS);
 
