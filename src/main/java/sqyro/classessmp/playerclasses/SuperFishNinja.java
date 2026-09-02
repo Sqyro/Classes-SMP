@@ -1,6 +1,7 @@
 package sqyro.classessmp.playerclasses;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +13,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.items.ClassesItems;
@@ -50,7 +55,24 @@ public class SuperFishNinja extends PlayerClass {
 
     @Override
     public void onKeybind1() {
+        if (isOnCooldown(NINJA_PULL_ID)) {
+            ClassesSMP.LOGGER.info("{} of class: {} tried to activate Ninja Pull, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(NINJA_PULL_ID));
+            return;
+        }
 
+        ClassesSMP.LOGGER.info("{} of class {} activated Ninja Pull", Player.getName().getString(), this.getID());
+        setCooldown(NINJA_PULL_ID, NINJA_PULL_COOLDOWN);
+
+        Vec3 startPos = Player.getEyePosition(1.0F);
+        Vec3 endPos = startPos.add(Player.getViewVector(1.0F).scale(12.0D));
+
+        BlockHitResult hit = Player.level().clip(new ClipContext(startPos, endPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, Player));
+
+        if (hit.getType() == HitResult.Type.BLOCK) {
+            BlockPos blockPos = hit.getBlockPos();
+
+
+        }
     }
 
     @Override
