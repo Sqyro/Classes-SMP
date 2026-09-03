@@ -28,6 +28,8 @@ public class SuperFishNinja extends PlayerClass {
 
     public static final String NINJA_PULL_ID = "ninja_pull";
     public static final int NINJA_PULL_COOLDOWN = 200;
+    public static final int NINJA_PULL_RANGE = 30;
+    public static final float NINJA_PULL_STRENGTH = 0.2f;
 
     public SuperFishNinja(ServerPlayer Player) {
         super(Player);
@@ -64,15 +66,18 @@ public class SuperFishNinja extends PlayerClass {
         setCooldown(NINJA_PULL_ID, NINJA_PULL_COOLDOWN);
 
         Vec3 startPos = Player.getEyePosition(1.0F);
-        Vec3 endPos = startPos.add(Player.getViewVector(1.0F).scale(12.0D));
+        Vec3 endPos = startPos.add(Player.getViewVector(1.0F).scale(NINJA_PULL_RANGE));
 
         BlockHitResult hit = Player.level().clip(new ClipContext(startPos, endPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, Player));
 
-        if (hit.getType() == HitResult.Type.BLOCK) {
-            //BlockPos blockPos = hit.getBlockPos();
-
-            Player.push(endPos);
+        if (hit.getType() != HitResult.Type.BLOCK) {
+            return;
         }
+
+        Player.push(Player.getViewVector(1.0F).scale(startPos.distanceTo(endPos) * NINJA_PULL_STRENGTH));
+        Player.hurtMarked = true;
+
+        BlockPos blockPos = hit.getBlockPos();
     }
 
     @Override
