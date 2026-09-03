@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "W": "#minecraft:wool"
+  },
+  "pattern": [
+    "  C",
+    "CWC",
+    "C C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:copper_horse_armor"
+  }
+}
