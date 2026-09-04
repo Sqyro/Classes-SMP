@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:netherite_upgrade_smithing_template",
+  "base": "minecraft:diamond_sword",
+  "addition": "minecraft:amethyst_shard",
+  "result": {
+    "id": "classes-smp:lunaris_sword"
+  }
+}

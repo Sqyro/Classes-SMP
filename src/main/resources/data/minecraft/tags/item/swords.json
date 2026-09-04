@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "classes-smp:bloodsword",
-    "classes-smp:clownsword"
+    "classes-smp:clownsword",
+    "classes-smp:lunaris_sword"
   ]
 }
