@@ -37,7 +37,7 @@ public class AncientWarden extends PlayerClass {
 
     private static final String NOISE_METER_ID = "noise_meter";
     public static final int NOISE_METER_COOLDOWN = 1200;
-    public static final int NOISE_METER_INCREASE = 64;
+    public static final int NOISE_METER_INCREASE = 96;
 
     private static final String BLINDING_ID = "blinding";
     public static final int BLINDING_COOLDOWN = 800;
