@@ -111,6 +111,7 @@ public class PlayerClassSavedData extends SavedData {
         if (movementSpeed != null) {
             movementSpeed.removeModifier(Clown.MOVEMENT_SPEED_ID);
             movementSpeed.removeModifier(DeathJester.SPEED_MODIFIER_ID);
+            movementSpeed.removeModifier(Midget.MOVEMENT_SPEED_ID);
         }
         if (size != null) {
             size.removeModifier(Midget.SIZE_MODIFIER_ID);
