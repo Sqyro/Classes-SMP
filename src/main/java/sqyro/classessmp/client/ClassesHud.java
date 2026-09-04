@@ -43,6 +43,10 @@ public class ClassesHud {
         String classID = ClientPlayerData.getClassID();
         ClientClassData classData = ClientClasses.get(classID);
 
+        if (minecraft.getInstance().options.hideGui) {
+            return;
+        }
+
         if (classData == null) {
             return;
         }

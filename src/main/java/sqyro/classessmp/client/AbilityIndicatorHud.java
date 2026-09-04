@@ -34,6 +34,10 @@ public class AbilityIndicatorHud {
             return;
         }
 
+        if (minecraft.getInstance().options.hideGui) {
+            return;
+        }
+
         if (minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON) {
             return;
         }
