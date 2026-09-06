@@ -150,6 +150,7 @@ public class ClientClasses {
                         Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "textures/gui/ability_cooldowns/infernal_color.png"),
                         Phoenix.INFERNAL_COOLDOWN
                 ))));
+        CLASSES.put("vampire", new ClientClassData(List.of()));
     }
 
     public static ClientClassData get(String ID) {
