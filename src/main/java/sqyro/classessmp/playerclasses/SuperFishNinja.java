@@ -27,9 +27,15 @@ public class SuperFishNinja extends PlayerClass {
     public static final int KNIFE_EXTRA_DAMAGE = 3;
 
     public static final String NINJA_PULL_ID = "ninja_pull";
-    public static final int NINJA_PULL_COOLDOWN = 200;
+    public static final int NINJA_PULL_COOLDOWN = 100;
     public static final int NINJA_PULL_RANGE = 30;
-    public static final float NINJA_PULL_STRENGTH = 0.2f;
+    public static final int NINJA_PULL_DURATION = 80;
+    public static final double NINJA_PULL_STOP_DISTANCE = 2.0D;
+    public static final double NINJA_PULL_ACCELERATION = 0.1D;
+    public static final double NINJA_PULL_MAX_SPEED = 1.5D;
+
+    private Vec3 ninjaPullTarget;
+    private int ninjaPullTicks;
 
     public SuperFishNinja(ServerPlayer Player) {
         super(Player);
@@ -43,6 +49,34 @@ public class SuperFishNinja extends PlayerClass {
     @Override
     public void onTick() {
         Player.addEffect(new MobEffectInstance(MobEffects.SPEED, 40, 1, false, false));
+
+        if (ninjaPullTarget == null || ninjaPullTicks <= 0) {
+            return;
+        }
+
+        Vec3 toTarget = ninjaPullTarget.subtract(Player.position());
+
+        if (toTarget.lengthSqr() <= NINJA_PULL_STOP_DISTANCE * NINJA_PULL_STOP_DISTANCE) {
+            stopNinjaPull();
+            return;
+        }
+
+        Vec3 acceleration = toTarget.normalize().scale(NINJA_PULL_ACCELERATION);
+
+        Vec3 velocity = Player.getDeltaMovement().add(acceleration);
+
+        if (velocity.lengthSqr() > NINJA_PULL_MAX_SPEED * NINJA_PULL_MAX_SPEED) {
+            velocity = velocity.normalize().scale(NINJA_PULL_MAX_SPEED);
+        }
+
+        Player.setDeltaMovement(velocity);
+        Player.hurtMarked = true;
+
+        ninjaPullTicks--;
+
+        if (ninjaPullTicks <= 0) {
+            stopNinjaPull();
+        }
     }
 
     @Override
@@ -57,6 +91,8 @@ public class SuperFishNinja extends PlayerClass {
 
     @Override
     public void onKeybind1() {
+        stopNinjaPull();
+
         if (isOnCooldown(NINJA_PULL_ID)) {
             ClassesSMP.LOGGER.info("{} of class: {} tried to activate Ninja Pull, but it was on cooldown: {}", Player.getName().getString(), this.getID(), this.getCooldownTicks(NINJA_PULL_ID));
             return;
@@ -74,10 +110,17 @@ public class SuperFishNinja extends PlayerClass {
             return;
         }
 
-        Player.push(Player.getViewVector(1.0F).scale(startPos.distanceTo(endPos) * NINJA_PULL_STRENGTH));
-        Player.hurtMarked = true;
+        Vec3 normal = new Vec3(hit.getDirection().getStepX(), hit.getDirection().getStepY(), hit.getDirection().getStepZ());
 
-        BlockPos blockPos = hit.getBlockPos();
+        ninjaPullTarget = hit.getLocation().add(normal.scale(0.6D));
+        ninjaPullTicks = NINJA_PULL_DURATION;
+
+        setCooldown(NINJA_PULL_ID, NINJA_PULL_COOLDOWN);
+    }
+
+    private void stopNinjaPull() {
+        ninjaPullTarget = null;
+        ninjaPullTicks = 0;
     }
 
     @Override
