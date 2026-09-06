@@ -18,7 +18,7 @@ import sqyro.classessmp.items.ClassesItems;
 
 public class Builder extends PlayerClass {
     public static final Identifier BLOCK_BREAK_SPEED_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "builder_block_break_speed");
-    public static final float BLOCK_BREAK_SPEED_BONUS = 0.8f;
+    public static final float BLOCK_BREAK_SPEED_BONUS = 0.9f;
     public static final Identifier BLOCK_INTERACTION_RANGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "builder_block_interaction_range");
     public static final int BLOCK_INTERACTION_RANGE_BONUS = 4;
 
