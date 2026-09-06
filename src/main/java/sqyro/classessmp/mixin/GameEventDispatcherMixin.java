@@ -37,12 +37,16 @@ public class GameEventDispatcherMixin {
 
             int Noise;
 
-            if (gameEvent.is(GameEvent.BLOCK_DESTROY) || gameEvent.is(GameEvent.BLOCK_PLACE) || gameEvent.is(GameEvent.JUKEBOX_PLAY)
+            if (gameEvent.is(GameEvent.ENTITY_DAMAGE) || gameEvent.is(GameEvent.EQUIP) || gameEvent.is(GameEvent.PROJECTILE_LAND)
+                    || gameEvent.is(GameEvent.PROJECTILE_SHOOT) || gameEvent.is(GameEvent.PRIME_FUSE) || gameEvent.is(GameEvent.ENTITY_DIE)
+                    || gameEvent.is(GameEvent.CONTAINER_OPEN) || gameEvent.is(GameEvent.FLUID_PLACE)) {
+                Noise = 5;
+            } else if (gameEvent.is(GameEvent.BLOCK_DESTROY) || gameEvent.is(GameEvent.BLOCK_PLACE) || gameEvent.is(GameEvent.JUKEBOX_PLAY)
                     || gameEvent.is(GameEvent.NOTE_BLOCK_PLAY) || gameEvent.is(GameEvent.BLOCK_OPEN) || gameEvent.is(GameEvent.BLOCK_CLOSE)
                     || gameEvent.is(GameEvent.BLOCK_ACTIVATE) || gameEvent.is(GameEvent.BLOCK_DEACTIVATE)) {
-                Noise = 1;
+                Noise = 10;
             } else if (gameEvent.is(GameEvent.EXPLODE) || gameEvent.is(GameEvent.LIGHTNING_STRIKE) || gameEvent.is(GameEvent.SHRIEK)) {
-                Noise = 5;
+                Noise = 50;
             } else {
                 Noise = 0;
             }

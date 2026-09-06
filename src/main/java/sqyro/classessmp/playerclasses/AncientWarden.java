@@ -30,25 +30,25 @@ public class AncientWarden extends PlayerClass {
     private int noiseDecayTimer = 0;
     private int extraDamage;
 
-    public static final int NOISE_METER_MAX_VALUE = 128;
+    public static final int NOISE_METER_MAX_VALUE = 1280;
     public static final int NOISE_DETECTION_RADIUS = 40;
 
     private static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ancient_warden_damage");
 
     private static final String NOISE_METER_ID = "noise_meter";
     public static final int NOISE_METER_COOLDOWN = 1200;
-    public static final int NOISE_METER_INCREASE = 96;
+    public static final int NOISE_METER_INCREASE = 960;
 
     private static final String BLINDING_ID = "blinding";
     public static final int BLINDING_COOLDOWN = 800;
-    public static final int BLINDING_NOISE_CONSUMPTION = 10;
+    public static final int BLINDING_NOISE_CONSUMPTION = 100;
     public static final int BLINDING_RADIUS = 50;
     public static final int BLINDING_DURATION = 160;
 
     private static final String SONIC_BOOM_ID = "sonic_boom";
     public static final int SONIC_BOOM_COOLDOWN = 800;
     public static final int SONIC_BOOM_FOOD_CONSUMPTION = 8;
-    public static final int SONIC_BOOM_NOISE_CONSUMPTION = 56;
+    public static final int SONIC_BOOM_NOISE_CONSUMPTION = 560;
     public static final int SONIC_BOOM_RANGE = 15;
     public static final int SONIC_BOOM_DAMAGE = 8;
     public static final float SONIC_BOOM_KNOCKBACK = 1.5f;
@@ -72,7 +72,7 @@ public class AncientWarden extends PlayerClass {
             noiseDecayTimer++;
 
             if (noiseDecayTimer >= 20) {
-                data.addNoise(Player, -1);
+                data.addNoise(Player, -10);
                 noiseDecayTimer = 0;
             }
         } else {
