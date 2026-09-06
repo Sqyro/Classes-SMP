@@ -8,8 +8,9 @@ import sqyro.classessmp.core.PlayerClass;
 
 public class Lunaris extends PlayerClass {
     public static final int HEALING_AMOUNT = 4;
-    public static final int HEAL_CHANCE = 10;
+    public static final int HEAL_CHANCE = 20;
     public static final int MAX_HEAL_COOLDOWN = 10;
+
     private int swordHealingCooldown = 0;
 
     public Lunaris(ServerPlayer Player) {
@@ -65,7 +66,7 @@ public class Lunaris extends PlayerClass {
 
     @Override
     public void beginAttack(Entity Target) {
-        if (swordHealingCooldown == MAX_HEAL_COOLDOWN) {
+        if (swordHealingCooldown >= MAX_HEAL_COOLDOWN) {
             if (Target.getRandom().nextInt(0, 100) < HEAL_CHANCE) {
                 Player.heal(HEALING_AMOUNT);
             }
