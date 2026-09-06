@@ -20,6 +20,8 @@
   "item.classes-smp.case_block": "Case",
   "item.classes-smp.case_key": "Case Key",
   "item.classes-smp.remove_class_item": "Remove Class Item",
+  "item.classes-smp.heavy_ingot": "Heavy Ingot",
+  "item.classes-smp.heavy_upgrade_smithing_template": "Heavy Upgrade",
 
   "block.classes-smp.white_keypad": "White Keypad",
   "block.classes-smp.bossminer2000": "Bossminer 2000",

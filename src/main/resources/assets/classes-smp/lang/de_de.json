@@ -19,7 +19,9 @@
   "item.classes-smp.laser_chicken_spawner": "Laser Hühnchen Spawner",
   "item.classes-smp.case_block": "Kiste",
   "item.classes-smp.case_key": "Kisten Schlüssel",
-  "item.classes-smp.remove_class_item": "Klassen Entfernen",
+  "item.classes-smp.remove_class_item": "Klasse Entfernen",
+  "item.classes-smp.heavy_ingot": "Schwerer Barren",
+  "item.classes-smp.heavy_upgrade_smithing_template": "Schwere Aufwertung",
 
   "block.classes-smp.white_keypad": "Weißes Tastenschloss",
   "block.classes-smp.bossminer2000": "Bossminer 2000",

@@ -29,7 +29,8 @@ public class ClassesCreativeTabs {
                 entries.accept(ClassesBlocks.CASE_BLOCK);
                 entries.accept(ClassesItems.CASE_KEY);
                 entries.accept(ClassesItems.REMOVE_CLASS_ITEM);
-
+                entries.accept(ClassesItems.HEAVY_INGOT);
+                entries.accept(ClassesItems.HEAVY_UPGRADE_SMITHING_TEMPLATE);
             }).build();
 
     public static void register() {

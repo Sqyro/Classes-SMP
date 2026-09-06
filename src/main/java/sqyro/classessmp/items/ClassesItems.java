@@ -33,6 +33,9 @@ public class ClassesItems {
     public static final Item CASE_KEY = registerItem("case_key", settings -> new Item(settings.rarity(Rarity.UNCOMMON)));
     public static final Item REMOVE_CLASS_ITEM = registerItem("remove_class_item", settings -> new RemoveClassItem(settings.rarity(Rarity.EPIC).fireResistant()));
 
+    public static final Item HEAVY_INGOT = registerItem("heavy_ingot", settings -> new Item(settings));
+    public static final Item HEAVY_UPGRADE_SMITHING_TEMPLATE = registerItem("heavy_upgrade_smithing_template", settings -> new Item(settings.rarity(Rarity.UNCOMMON)));
+
     private static Item registerItem(String Name, Function<Item.Properties, Item> Function) {
         Identifier ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, Name);
         return Registry.register(BuiltInRegistries.ITEM, ID, Function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ID))));
