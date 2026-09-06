@@ -6,20 +6,25 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import sqyro.classessmp.ClassesSMP;
 import sqyro.classessmp.core.PlayerClass;
 import sqyro.classessmp.items.ClassesItems;
+
+import java.util.List;
 
 public class SuperFishNinja extends PlayerClass {
     public static final Identifier DAMAGE_MODIFIER_ID = Identifier.fromNamespaceAndPath(ClassesSMP.MOD_ID, "ninja_damage");
@@ -33,6 +38,8 @@ public class SuperFishNinja extends PlayerClass {
     public static final double NINJA_PULL_STOP_DISTANCE = 2.0D;
     public static final double NINJA_PULL_ACCELERATION = 0.1D;
     public static final double NINJA_PULL_MAX_SPEED = 1.5D;
+    public static final double NINJA_PULL_IMPACT_RADIUS = 5D;
+    public static final float NINJA_PULL_IMPACT_DAMAGE = 6F;
 
     private Vec3 ninjaPullTarget;
     private int ninjaPullTicks;
@@ -57,7 +64,7 @@ public class SuperFishNinja extends PlayerClass {
         Vec3 toTarget = ninjaPullTarget.subtract(Player.position());
 
         if (toTarget.lengthSqr() <= NINJA_PULL_STOP_DISTANCE * NINJA_PULL_STOP_DISTANCE) {
-            stopNinjaPull();
+            ninjaPullImpact();
             return;
         }
 
@@ -121,6 +128,20 @@ public class SuperFishNinja extends PlayerClass {
     private void stopNinjaPull() {
         ninjaPullTarget = null;
         ninjaPullTicks = 0;
+    }
+
+    private void ninjaPullImpact() {
+        Vec3 impactPosition = ninjaPullTarget != null ? ninjaPullTarget : Player.position();
+        AABB impactBox = new AABB(impactPosition.x, impactPosition.y, impactPosition.z, impactPosition.x, impactPosition.y, impactPosition.z).inflate(NINJA_PULL_IMPACT_RADIUS);
+
+        List<LivingEntity> targets = Player.level().getEntitiesOfClass(LivingEntity.class, impactBox, target -> target != Player && target.isAlive() && !target.isSpectator());
+        DamageSource damageSource = Player.damageSources().playerAttack(Player);
+
+        for (LivingEntity target : targets) {
+            target.hurt(damageSource, NINJA_PULL_IMPACT_DAMAGE);
+        }
+
+        stopNinjaPull();
     }
 
     @Override
