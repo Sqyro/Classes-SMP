@@ -21,6 +21,7 @@ import sqyro.classessmp.core.ClassesDataComponents;
 import sqyro.classessmp.effect.ClassesEffects;
 import sqyro.classessmp.event.ClassesEvents;
 import sqyro.classessmp.items.ClassesItems;
+import sqyro.classessmp.items.ClassesLootTables;
 import sqyro.classessmp.network.ClassesNetworking;
 import sqyro.classessmp.network.cases.CaseNetworking;
 import sqyro.classessmp.particle.ClassesParticles;
@@ -41,6 +42,7 @@ public class ClassesSMP implements ModInitializer {
 		ClassesBlocks.register();
 		ClassesBlockEntities.register();
 		ClassesCreativeTabs.register();
+		ClassesLootTables.register();
 
 		ClassesEntities.register();
 		FabricDefaultAttributeRegistry.register(ClassesEntities.ELEPHANT, ElephantEntity.createAttributes());
