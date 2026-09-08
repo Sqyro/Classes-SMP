@@ -1,10 +1,12 @@
 package sqyro.classessmp.playerclasses;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -36,8 +38,8 @@ public class SuperFishNinja extends PlayerClass {
     public static final int NINJA_PULL_RANGE = 30;
     public static final int NINJA_PULL_DURATION = 80;
     public static final double NINJA_PULL_STOP_DISTANCE = 2.0D;
-    public static final double NINJA_PULL_ACCELERATION = 0.1D;
-    public static final double NINJA_PULL_MAX_SPEED = 1.5D;
+    public static final double NINJA_PULL_ACCELERATION = 0.3D;
+    public static final double NINJA_PULL_MAX_SPEED = 4D;
     public static final double NINJA_PULL_IMPACT_RADIUS = 5D;
     public static final float NINJA_PULL_IMPACT_DAMAGE = 6F;
 
@@ -136,6 +138,9 @@ public class SuperFishNinja extends PlayerClass {
 
         List<LivingEntity> targets = Player.level().getEntitiesOfClass(LivingEntity.class, impactBox, target -> target != Player && target.isAlive() && !target.isSpectator());
         DamageSource damageSource = Player.damageSources().playerAttack(Player);
+
+        Player.level().sendParticles(ParticleTypes.EXPLOSION, Player.getX(), Player.getY(), Player.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
+        Player.level().playSound(null, Player.getX(), Player.getY(), Player.getZ(), SoundEvents.MACE_SMASH_GROUND, SoundSource.PLAYERS);
 
         for (LivingEntity target : targets) {
             target.hurt(damageSource, NINJA_PULL_IMPACT_DAMAGE);
