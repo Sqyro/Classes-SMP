@@ -41,7 +41,7 @@ public class SuperFishNinja extends PlayerClass {
     public static final double NINJA_PULL_ACCELERATION = 0.3D;
     public static final double NINJA_PULL_MAX_SPEED = 4D;
     public static final double NINJA_PULL_IMPACT_RADIUS = 5D;
-    public static final float NINJA_PULL_IMPACT_DAMAGE = 6F;
+    public static final float NINJA_PULL_IMPACT_DAMAGE = 10F;
 
     private Vec3 ninjaPullTarget;
     private int ninjaPullTicks;

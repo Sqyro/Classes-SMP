@@ -18,7 +18,6 @@ public class ClassesLootTables {
                 return;
             }
 
-
             if (!key.identifier().equals(VAULT)) {
                 return;
             }
