@@ -81,6 +81,7 @@ public class SuperFishNinja extends PlayerClass {
         Player.setDeltaMovement(velocity);
         Player.hurtMarked = true;
 
+
         ninjaPullTicks--;
 
         if (ninjaPullTicks <= 0) {
@@ -124,12 +125,15 @@ public class SuperFishNinja extends PlayerClass {
         ninjaPullTarget = hit.getLocation().add(normal.scale(0.6D));
         ninjaPullTicks = NINJA_PULL_DURATION;
 
+        Player.setNoGravity(true);
+
         setCooldown(NINJA_PULL_ID, NINJA_PULL_COOLDOWN);
     }
 
     private void stopNinjaPull() {
         ninjaPullTarget = null;
         ninjaPullTicks = 0;
+        Player.setNoGravity(false);
     }
 
     private void ninjaPullImpact() {
